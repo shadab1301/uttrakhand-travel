@@ -125,6 +125,181 @@ const Footer = () =>{
         </div>
     </div>
 </footer>
+
+
+{/*  */}
+
+
+<div className="copyright">
+    <div className="container">
+        <div className="row">
+            <div className="col-lg-4 col-md-12 col-sm-12 col-12">
+                <small className="copyright-txt" >© 2020 <strong>Demo Agency</strong>.
+                    All Rights Reserved.</small>
+            </div>
+            <div className="col-lg-4 col-md-12 col-sm-12 col-12">
+                <small className="copyright-txt cpy-moble"   style={{fontSize:"14px"}}>
+                    Powered by <a href="">
+                    <span style={{color:"#0b74c4"}}>Sandeep</span>
+                    <span style={{color:"#fb5a2d"}}>Negi</span></a></small>
+            </div>
+            <div className="col-lg-4 col-md-12 col-sm-12 col-12 text-center">
+                <ul className="ft-btn-list">
+                    <li> <a className="btn callIcon" href="tel:+91 9811192312">
+                        <i className="fa fa-phone" aria-hidden="true"></i>   Call Us</a>
+                    </li>
+                    <li> <a className="btn enquiry-Icon"  data-toggle="modal" data-target="#Enquire">
+                        <i className="fa fa-file-text-o"></i>  Send Enquiry</a>
+                    </li>
+                    <li><a className="btn wtsapp-icon " href="#">
+                        <i className="fa fa-whatsapp" aria-hidden="true"></i>
+                        Whatsapp</a>
+                    </li>
+                    <li><a className="btn filter-icon" href="#">
+                        <i className="fa fa-filter" aria-hidden="true"></i>Filter</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div className="login-box">
+            <div className="modal fade" id="Enquire">
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <div className="modal-title text-white">Check Rate & Send Enquiry for Hotel Bhagyalaxmi 4 Star Stay</div>
+                            <button type="button" className="close enquiryclose" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="row">
+                                <div className="col-md-12 col-xs-12 col-sm-12">
+                                    <div className="rigister">
+                                        <form className="rgister-form" action="">
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <select className="form-control" id="Salutation" name="Salutation">
+                                                        <option>Mr.</option>
+                                                        <option>Mrs.</option>
+                                                        <option>Miss</option>
+                                                    </select>
+                                                </div>
+                                                <div className="col-md-5">
+                                                    <input type="text" name="" id="Enquire_F_name" className="form-control" placeholder="First Name"/>
+                                                </div>
+                                                <div className="col-md-5">
+                                                    <input type="text" name="" id="Enquire_L_name" className="form-control" placeholder="Last Name"/>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <select className="form-control" id="enquire-mobile" name="enquire-mobile">
+                                                        <option>+91</option>
+                                                        <option>+92</option>
+                                                        <option>+1684</option>
+                                                    </select>
+                                                </div>
+                                                <div className="col-md-5">
+                                                    <input type="number" name="" id="mobile-num" className="form-control" placeholder="Mobile"/>
+                                                </div>
+                                                <div className="col-md-5">
+                                                    <input type="text" name="" id="Enquire_Emailid" className="form-control" placeholder="Email Id"/>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-7">
+                                                    <div className="form-group date-parent">
+                                                    <input className="form-control" type="text" name="" placeholder="Enquiry Date" id="enquiry-dob"/>
+                                                        <i className="fa fa-calendar date-icon"></i>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div className="room-box">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <p className="sign-txt">Room 1</p>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-md-3">
+                                                        <select className="form-control" id="Adults" name="enquire-mobile">
+                                                            <option value="">Adults (+12Yrs)</option>
+                                                            <option>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="col-md-3">
+                                                        <select className="form-control" id="Kids" name="enquire-mobile">
+                                                            <option value="">Kids (2 - 12Yrs)</option>
+                                                            <option>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="col-md-3">
+                                                        <select className="form-control" id="Infant" name="enquire-mobile">
+                                                            <option value="">Infant (0 - 2Yrs)</option>
+                                                            <option>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="room-box alert alert-dismissible">
+                                                <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <p className="sign-txt">Room2</p>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-md-3 col-sm-12 col-xs-12">
+                                                        <select className="form-control" id="Adults2" name="enquire-mobile">
+                                                            <option value="">Adults (+12Yrs)</option>
+                                                            <option>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="col-md-3 col-sm-12 col-xs-12">
+                                                        <select className="form-control" id="Kids2" name="enquire-mobile">
+                                                            <option value="">Kids(2 - 12Yrs)</option>
+                                                            <option>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="col-md-3 col-sm-12 col-xs-12">
+                                                        <select className="form-control" id="Infant2" name="enquire-mobile">
+                                                            <option value="">Infant (0 - 2Yrs)</option>
+                                                            <option>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="addroom">
+                                        <a href="">Add Room</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button className="enquiry-btn form-control">View Offers & Send Enquiry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     </>);
 }
 export default Footer;

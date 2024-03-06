@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.css'
 import Header from './Components/Menu/Header';
 import Footer from './Components/Menu/Footer';
@@ -10,9 +9,14 @@ function App() {
 
   return (
     <>
-    <Header/>
-    <Home/>
-    <Footer/>
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
+
     </>
   )
 }
