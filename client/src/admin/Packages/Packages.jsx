@@ -1,8 +1,13 @@
 import React from 'react'
+import Table from '../../Table/Table'
 
 const Packages = () => {
   return (
-    <div>Packages</div>
+    <>
+    <Table
+    name={"packagesTable"}
+    />
+    </>
   )
 }
 

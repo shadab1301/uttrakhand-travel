@@ -82,7 +82,7 @@ export default function AdminLayout() {
      setOpen(!open);
    };
   return (
-    <Box sx={{ display: "flex", width:"100vw"}}>
+    <Box sx={{ display: "flex", width:"98vw"}}>
       <Navbar handleDrawerClose={handleDrawerClose} />
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -120,7 +120,7 @@ export default function AdminLayout() {
         </List>
        
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, background: "#ECEFF1", height:"100vh",width:"100%" }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, background: "#ECEFF1", height:"auto",width:"100%" }}>
         <Box sx={{ mt:10,flexGrow: 1, p: 3, background: "white" }}>
          <Outlet/>
         </Box>
