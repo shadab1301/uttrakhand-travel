@@ -1,11 +1,13 @@
 import { Link, Navigate, Outlet } from "react-router-dom";
-
+import Header from '../../Components/Layout/Header';
+import Footer from '../../Components/Layout//Footer';
 export const UserLayout = () => {
 
   return (
     <>
-      <h1>User layout</h1>
+        <Header />
       <Outlet />
+      <Footer />
     </>
   );
 };

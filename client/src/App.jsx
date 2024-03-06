@@ -7,7 +7,8 @@ import { AuthProvider } from './utils/hook/useAuth.jsx';
 import Login from './admin/Login.jsx';
 import AdminDashboard from './admin/Dashboard/AdminDashboard.jsx';
 import Packages from './admin/Packages/Packages.jsx';
-
+import Home from './Components/Home/Home';
+import { Contact } from './Components/Contact/Contact';
 function App() {
 
   return (
@@ -15,7 +16,8 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route element={<UserLayout />}>
-            <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
