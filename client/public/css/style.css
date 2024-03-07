@@ -3607,3 +3607,17 @@ a.flightsubmit:active:focus, .flightsubmit:active:focus {color: #fff; background
 #car_local, #car_transfer {
     display: none;
 }
+
+
+/* added by sandeep negi  */
+.enquiry-form{
+background-color:#f4f4f4;
+}
+.Contact-enquiry-header {
+    background: #ed771d;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-align: center;
+}

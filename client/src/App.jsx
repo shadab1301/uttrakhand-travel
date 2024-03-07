@@ -9,6 +9,7 @@ import AdminDashboard from './admin/Dashboard/AdminDashboard.jsx';
 import Packages from './admin/Packages/Packages.jsx';
 import Home from './Components/Home/Home';
 import { Contact } from './Components/Contact/Contact';
+import { About } from './Components/Contact/About.jsx';
 function App() {
 
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path='/about' element={<About/>}/>
             <Route path="/login" element={<Login />} />
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
