@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const Header = () => {
     return (
         <>
@@ -13,7 +13,7 @@ const Header = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
+                            <li className="nav-item">
                                 <NavLink className="nav-link" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item dropdown">
@@ -22,84 +22,52 @@ const Header = () => {
                                 <div className="shadow dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="offset-1 col-md-2 offsetcls1">
+                                            <div className="col-md-3">
                                                 <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">North India</div>
+                                                    <div className="title wow zoomIn" data-wow-duration="3s">RISHIKESH</div>
                                                     <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Jaipur</NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Guwahati</NavLink>
-                                                        </li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-3">
                                                 <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">North India</div>
+                                                    <div className="title wow zoomIn" data-wow-duration="3s">RISHIKESH</div>
                                                     <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Jaipur</NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Guwahati</NavLink>
-                                                        </li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-3">
                                                 <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">West India</div>
+                                                    <div className="title wow zoomIn" data-wow-duration="3s">RISHIKESH</div>
                                                     <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Goa</NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Goa</NavLink>
-                                                        </li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-3">
                                                 <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">Middle East</div>
+                                                    <div className="title wow zoomIn" data-wow-duration="3s">RISHIKESH</div>
                                                     <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Dubai</NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Dubai</NavLink>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-2">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">Central Asia</div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Bangkok
-                                                            </NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Bangkok
-                                                            </NavLink>
-                                                        </li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
+                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     {/* <!--  /.container  --> */}
                                 </div>
@@ -111,83 +79,42 @@ const Header = () => {
                                 <div className="shadow dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="offset-1 col-md-2 offsetcls1">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">North India</div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Jaipur</NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Guwahati</NavLink>
-                                                        </li>
-                                                    </ul>
+                                            <div className="col-md-3">
+                                                <div className="col-ft1 wow zoomIn">
+                                                    <div className="bestplace-img">
+                                                        <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                    </div>
+                                                    <div className="title" data-wow-duration="3s">CHAR DHAM TOUR PACKAGES</div>
+
                                                 </div>
                                             </div>
-                                            <div className="col-md-2">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">North India</div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Jaipur</NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Guwahati</NavLink>
-                                                        </li>
-                                                    </ul>
+                                            <div className="col-md-3">
+                                                <div className="col-ft1 wow zoomIn">
+                                                    <div className="bestplace-img">
+                                                        <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                    </div>
+                                                    <div className="title" data-wow-duration="3s">MUSSOORIE TOUR PACKAGE</div>
+
                                                 </div>
                                             </div>
-                                            <div className="col-md-2">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">West India</div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Goa</NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Goa</NavLink>
-                                                        </li>
-                                                    </ul>
+                                            <div className="col-md-3">
+                                                <div className="col-ft1 wow zoomIn">
+                                                    <div className="bestplace-img">
+                                                        <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                    </div>
+                                                    <div className="title " data-wow-duration="3s">RISHIKESH TOUR PACKAGE</div>
                                                 </div>
                                             </div>
-                                            <div className="col-md-2">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">Middle East</div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Dubai</NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Dubai</NavLink>
-                                                        </li>
-                                                    </ul>
+                                            <div className="col-md-3">
+                                                <div className="col-ft1 wow zoomIn">
+                                                    <div className="bestplace-img">
+                                                        <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                    </div>
+                                                    <div className="title" data-wow-duration="3s">HARIDWAR TOUR PACKAGE</div>
+
                                                 </div>
                                             </div>
-                                            <div className="col-md-2">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">Central Asia</div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Bangkok
-                                                            </NavLink>
-                                                        </li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">
-                                                            <NavLink to="#">
-                                                                Bangkok
-                                                            </NavLink>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                     {/* <!--  /.container  --> */}
@@ -214,7 +141,7 @@ const Header = () => {
                     <NavLink className="nav-link" to="#">Travelogues </NavLink>
                 </li> */}
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="#">Our Gallery</NavLink>
+                                <NavLink className="nav-link" to="/gallery">Our Gallery</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/about">About us</NavLink>
@@ -223,11 +150,11 @@ const Header = () => {
                                 <NavLink className="nav-link" to="contact">Contact</NavLink>
                             </li>
 
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <button type="button" className="btn registerbtn" data-toggle="modal" data-target="#myModal">
                                     Register
                                 </button>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

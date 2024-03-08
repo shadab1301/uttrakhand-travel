@@ -10,6 +10,7 @@ import Packages from './admin/Packages/Packages.jsx';
 import Home from './Components/Home/Home';
 import { Contact } from './Components/Contact/Contact';
 import { About } from './Components/Contact/About.jsx';
+import { Gallery } from './Components/Gallery/Gallery.jsx';
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path='/about' element={<About/>}/>
+          <Route path='/gallery' element={<Gallery/>} />
             <Route path="/login" element={<Login />} />
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
