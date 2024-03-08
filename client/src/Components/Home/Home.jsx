@@ -246,7 +246,7 @@ const Home = () => {
         <div className="row">
             <div className="col-md-12">
                 <div className="title-main">
-                    <h2><strong>Recommended <span>DOMESTIC</span> & best places to visit </strong> </h2>
+                    <h2><strong>Recommended <span>Best Tourist Places</span> in Uttarakhand to visit </strong> </h2>
                 </div>
             </div>
         </div>
@@ -259,16 +259,16 @@ const Home = () => {
                     <div className="theme-content">
                         <ul>
                             <li>
-                                <div className="theme-title">Paris city Tour</div>
+                                <div className="theme-title">Dheradun</div>
                             </li>
                         </ul>
-                        <p>3Days, 4 NIghts </p>
-                        <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p>
+                        {/* <p>3Days, 4 NIghts </p> */}
+                        {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
                         <ul className="rating-sec">
-                            <li>
+                            {/* <li>
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li>
+                            </li> */}
                             <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
@@ -282,19 +282,16 @@ const Home = () => {
                     <div className="theme-content">
                         <ul>
                             <li>
-                                <div className="theme-title">Paris city Tour</div>
+                                <div className="theme-title">Rishikesh</div>
                             </li>
-                            {/* <!--<li className="details" >-->
-                            <!--<p><i className="fa fa-rupee"></i>1180</p>-->
-                            <!--</li>--> */}
                         </ul>
-                        <p>3Days, 4 NIghts </p>
-                        <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p>
+                        {/* <p>3Days, 4 NIghts </p> */}
+                        {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
                         <ul className="rating-sec">
-                            <li>
+                            {/* <li>
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li>
+                            </li> */}
                             <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
@@ -308,16 +305,16 @@ const Home = () => {
                     <div className="theme-content">
                         <ul>
                             <li>
-                                <div className="theme-title">Paris city Tour</div>
+                                <div className="theme-title">Haridwar</div>
                             </li>
                         </ul>
-                        <p>3Days, 4 NIghts</p>
-                        <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p>
+                        {/* <p>3Days, 4 NIghts</p> */}
+                        {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
                         <ul className="rating-sec">
-                            <li>
+                            {/* <li>
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li>
+                            </li> */}
                             <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
@@ -334,13 +331,13 @@ const Home = () => {
                                 <div className="theme-title">Paris city Tour</div>
                             </li>
                         </ul>
-                        <p>3Days, 4 NIghts </p>
-                        <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p>
+                        {/* <p>3Days, 4 NIghts </p> */}
+                        {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
                         <ul className="rating-sec">
-                            <li>
+                            {/* <li>
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li>
+                            </li> */}
                             <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
@@ -358,7 +355,7 @@ const Home = () => {
         <div className="row">
             <div className="col-md-12">
                 <div className="title-main">
-                    <h2>Recommended <span>INTERNATIONAL </span> & best places to visit  </h2>
+                    <h2>Recommended <span>Travel Package </span>in Uttarakhand to visit  </h2>
                 </div>
             </div>
         </div>
@@ -371,7 +368,7 @@ const Home = () => {
                     <div className="theme-content">
                         <ul>
                             <li>
-                                <div className="theme-title">Paris city Tour</div>
+                                <div className="theme-title">Char Dham Yatra Tour Package</div>
                             </li>
                         </ul>
                         <p>3Days, 4 NIghts</p>
@@ -394,7 +391,7 @@ const Home = () => {
                     <div className="theme-content">
                         <ul>
                             <li>
-                                <div className="theme-title">Paris city Tour</div>
+                                <div className="theme-title">Mussoorie - Dhanaulti Tour Package</div>
                             </li>
                         </ul>
                         <p>3Days, 4 NIghts</p>
@@ -417,7 +414,7 @@ const Home = () => {
                     <div className="theme-content">
                         <ul>
                             <li>
-                                <div className="theme-title">Paris city Tour</div>
+                                <div className="theme-title">Complete Haridwar Package</div>
                             </li>
                         </ul>
                         <p>3Days, 4 NIghts</p>
@@ -440,7 +437,7 @@ const Home = () => {
                     <div className="theme-content">
                         <ul>
                             <li>
-                                <div className="theme-title">Paris city Tour</div>
+                                <div className="theme-title">Complete Haridwar Package</div>
                             </li>
                         </ul>
                         <p>3Days, 4 NIghts</p>
