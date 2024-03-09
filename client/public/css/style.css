@@ -1,9 +1,9 @@
 :root {
-    --blue_color: #ed771d ;
-    --green_color:#932e34;
-    --home-tab-icon:#ed771d;
+    --blue_color: #08bd3ded ;
+    --green_color: #10991a;
+    --home-tab-icon:#08bd3ded;
     --black_color:#323232;
-    --home-tab-blue_color: #932e34 ;
+    --home-tab-blue_color:  #10991a ;
     --main-title: #323232;
     --footer-bg:#292929;
     --testimonail_bg: #34425f ;
@@ -252,7 +252,7 @@ li.nav-item.dropdown.show {
     font-weight: 500;
 }
 .theme-color {
-    color: #ed771d;
+    color: #08bd3ded;
     font-weight: 800;
 }
 .owl-carousel.owl-drag .owl-item .item {
@@ -928,7 +928,7 @@ ul.rating-sec {
     font-size: 18px;
 }
 .social-icons li:hover {
-    background: #ed771d;
+    background: #08bd3ded;
 }
 .social-icons {
     padding-left: 0;
@@ -3606,4 +3606,18 @@ a.flightsubmit:active:focus, .flightsubmit:active:focus {color: #fff; background
 
 #car_local, #car_transfer {
     display: none;
+}
+
+
+/* added by sandeep negi  */
+.enquiry-form{
+background-color:#f4f4f4;
+}
+.Contact-enquiry-header {
+    background: #08bd3ded;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-align: center;
 }
