@@ -56,7 +56,7 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+                    {/* <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                     <div className="ft-title mt-5 wow zoomIn" data-wow-duration="3s">
                                 Destinations
                             </div>
@@ -82,7 +82,7 @@ const Footer = () => {
                                 <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <span>Patner-8</span></NavLink></li>
                                 <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <span>Patner-9</span></NavLink></li>
                             </ul>
-                    </div>
+                    </div> */}
                    
                 </div>
                 <div className="go-to-top">
@@ -171,81 +171,7 @@ const Footer = () => {
                                                             <input type="text" name="" id="Enquire_Emailid" className="form-control" placeholder="Email Id" />
                                                         </div>
                                                     </div>
-                                                    <div className="row">
-                                                        <div className="col-md-7">
-                                                            <div className="form-group date-parent">
-                                                                <input className="form-control" type="text" name="" placeholder="Enquiry Date" id="enquiry-dob" />
-                                                                <i className="fa fa-calendar date-icon"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="room-box">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <p className="sign-txt">Room 1</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row">
-                                                            <div className="col-md-3">
-                                                                <select className="form-control" id="Adults" name="enquire-mobile">
-                                                                    <option value="">Adults (+12Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-md-3">
-                                                                <select className="form-control" id="Kids" name="enquire-mobile">
-                                                                    <option value="">Kids (2 - 12Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-md-3">
-                                                                <select className="form-control" id="Infant" name="enquire-mobile">
-                                                                    <option value="">Infant (0 - 2Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="room-box alert alert-dismissible">
-                                                        <NavLink to="#" className="close" data-dismiss="alert" aria-label="close">&times;</NavLink>
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <p className="sign-txt">Room2</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row">
-                                                            <div className="col-md-3 col-sm-12 col-xs-12">
-                                                                <select className="form-control" id="Adults2" name="enquire-mobile">
-                                                                    <option value="">Adults (+12Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-md-3 col-sm-12 col-xs-12">
-                                                                <select className="form-control" id="Kids2" name="enquire-mobile">
-                                                                    <option value="">Kids(2 - 12Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-md-3 col-sm-12 col-xs-12">
-                                                                <select className="form-control" id="Infant2" name="enquire-mobile">
-                                                                    <option value="">Infant (0 - 2Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                   
                                                 </form>
                                             </div>
                                         </div>
