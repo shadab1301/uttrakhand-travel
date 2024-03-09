@@ -43,8 +43,8 @@ const List = () => {
                                                     <span>Destination Covered - <span className="italic">New Delhi, Mussoorie, Haridwar, Rishikesh</span></span>
                                                 </div>
                                                 <div className="detail-right">
-                                                    <div className="dt-1">Starting from</div>
-                                                    <div className="dt-2"><strong><i className="fa fa-rupee"></i>1180</strong></div>
+                                                    <div className="dt-1">On Request</div>
+                                                    {/* <div className="dt-2"><strong><i className="fa fa-rupee"></i>1180</strong></div> */}
                                                     <div className="dt-txt">For Person twin Sharing</div>
                                                 </div>
                                                 <div className="feat-details">
@@ -54,13 +54,8 @@ const List = () => {
                                                     <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
                                                 </div>
                                                 <div className="sharelist">
-                                                    {/* <ul className="social-share">
-                                                        <li><NavLink to=""><i className="fa fa-share-alt" aria-hidden="true"></i></NavLink></li>
-                                                        <li><NavLink to=""><i className="fa fa-phone" aria-hidden="true"></i></NavLink></li>
-                                                        <li><NavLink to=""><i className="fa fa-heart" aria-hidden="true"></i></NavLink></li>
-                                                    </ul> */}
                                                     <ul className="share-btn">
-                                                        <li><NavLink to="details.html" className="view-btn">View Details</NavLink></li>
+                                                        <li><NavLink to="/detail" className="view-btn">View Details</NavLink></li>
                                                         <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
                                                     </ul>
                                                 </div>
@@ -99,14 +94,8 @@ const List = () => {
                                                     <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
                                                 </div>
                                                 <div className="sharelist">
-                                                    {/* <ul className="social-share">
-                                                        <li><NavLink to=""><i className="fa fa-share-alt" aria-hidden="true"></i></NavLink></li>
-                                                        <li><NavLink to=""><i className="fa fa-phone" aria-hidden="true"></i></NavLink></li>
-                                                        <li><NavLink to=""><i className="fa fa-heart" aria-hidden="true"></i></NavLink></li>
-                                                    </ul> */}
                                                     <ul className="share-btn">
-
-                                                        <li><NavLink to="details.html" className="view-btn">View Details</NavLink></li>
+                                                        <li><NavLink to="/detail" className="view-btn">View Details</NavLink></li>
                                                         <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
                                                     </ul>
                                                 </div>
@@ -135,8 +124,7 @@ const List = () => {
                                                     <span>Destination Covered - <span className="italic">New Delhi, Mussoorie, Haridwar, Rishikesh</span></span>
                                                 </div>
                                                 <div className="detail-right">
-                                                    <div className="dt-1">Starting from</div>
-                                                    <div className="dt-2"><strong><i className="fa fa-rupee"></i>1180</strong></div>
+                                                    <div className="dt-1">On Request</div>
                                                     <div className="dt-txt">For Person twin Sharing</div>
                                                 </div>
                                                 <div className="feat-details">
@@ -146,14 +134,8 @@ const List = () => {
                                                     <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
                                                 </div>
                                                 <div className="sharelist">
-                                                    {/* <ul className="social-share">
-                                                        <li><NavLink to=""><i className="fa fa-share-alt" aria-hidden="true"></i></NavLink></li>
-                                                        <li><NavLink to=""><i className="fa fa-phone" aria-hidden="true"></i></NavLink></li>
-                                                        <li><NavLink to=""><i className="fa fa-heart" aria-hidden="true"></i></NavLink></li>
-                                                    </ul> */}
                                                     <ul className="share-btn">
-
-                                                        <li><NavLink to="details.html" className="view-btn">View Details</NavLink></li>
+                                                        <li><NavLink to="/detail" className="view-btn">View Details</NavLink></li>
                                                         <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
                                                     </ul>
                                                 </div>
@@ -193,18 +175,9 @@ const List = () => {
                                                     <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
                                                 </div>
                                                 <div className="sharelist">
-                                                    {/* <ul className="social-share">
-                                                        <li><NavLink to=""><i className="fa fa-share-alt" aria-hidden="true"></i></NavLink></li>
-                                                        <li><NavLink to=""><i className="fa fa-phone" aria-hidden="true"></i></NavLink></li>
-                                                        <li><NavLink to=""><i className="fa fa-heart" aria-hidden="true"></i></NavLink></li>
-                                                    </ul> */}
-
                                                     <ul className="share-btn">
- 
-                                                        <li><NavLink to="details.html" className="view-btn">View Details</NavLink></li>
+                                                        <li><NavLink to="/detail" className="view-btn">View Details</NavLink></li>
                                                         <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
-
-
                                                     </ul>
                                                 </div>
                                             </div>

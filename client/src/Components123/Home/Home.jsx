@@ -148,7 +148,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -171,7 +171,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -194,7 +194,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -217,14 +217,14 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <NavLink className="readmore-right" to="details.html">See All</NavLink>
+    <NavLink className="readmore-right" to="/list">See All</NavLink>
     {/* </div> */}
 </section>
 
@@ -257,7 +257,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li>
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -280,7 +280,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li>
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -303,7 +303,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li>
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -326,7 +326,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li>
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>

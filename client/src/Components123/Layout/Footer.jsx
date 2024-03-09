@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import SErviceData from "../Service/ServiceData.json";
 
 const Footer = () => {
+    const serviceD = SErviceData?.Service;
     return (<>
 
         <footer>
@@ -49,10 +51,9 @@ const Footer = () => {
                             Services
                         </div>
                         <ul className="links pl-0">
-                            <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">Hotel Booking</NavLink></li>
-                            <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">Taxi and Car service</NavLink></li>
-                            <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">Tour Oprator</NavLink></li>
-                            <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">Event Management</NavLink></li>
+                            {serviceD.map((val, ind) => <>
+                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="" key={ind}>{val?.title}</NavLink></li>
+                            </>)}
                         </ul>
                     </div>
 
@@ -83,7 +84,7 @@ const Footer = () => {
                                 <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <span>Patner-9</span></NavLink></li>
                             </ul>
                     </div> */}
-                   
+
                 </div>
                 <div className="go-to-top">
                     <NavLink id="back-to-top" to="#top">
@@ -160,8 +161,6 @@ const Footer = () => {
                                                         <div className="col-md-2">
                                                             <select className="form-control" id="enquire-mobile" name="enquire-mobile">
                                                                 <option>+91</option>
-                                                                <option>+92</option>
-                                                                <option>+1684</option>
                                                             </select>
                                                         </div>
                                                         <div className="col-md-5">
@@ -171,21 +170,14 @@ const Footer = () => {
                                                             <input type="text" name="" id="Enquire_Emailid" className="form-control" placeholder="Email Id" />
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <div className="addroom">
-                                                <NavLink to="">Add Room</NavLink>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button className="enquiry-btn form-control">View Offers & Send Enquiry</button>
+                                    <button className="enquiry-btn form-control">Send Enquiry</button>
                                 </div>
                             </div>
                         </div>

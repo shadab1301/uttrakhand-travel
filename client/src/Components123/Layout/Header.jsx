@@ -1,6 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import SErviceData from "../Service/ServiceData.json";
+
 const Header = () => {
+    const serviceD = SErviceData?.Service;
+
     return (
         <>
             <nav id="top" className="navbar navbar-expand-md bg-dark navbar-dark custom-nav">
@@ -127,10 +131,9 @@ const Header = () => {
                                 <div className="shadow dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div className="">
                                         <ul style={{ listStyle: "none" }}>
-                                            <li>Hotel Booking</li>
-                                            <li>Taxi and Car service</li>
-                                            <li>Tour Oprator</li>
-                                            <li>Event Management</li>
+                                        {serviceD.map((val,ind)=><>
+                                            <li className=" wow zoomIn" data-wow-duration="3s" key={ind}>{val?.title}</li>
+                                            </>)}
                                         </ul>
                                     </div>
                                     {/* <!--  /.container  --> */}

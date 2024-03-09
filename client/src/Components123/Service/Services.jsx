@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import SErviceData from "./ServiceData.json";
 const Services = () => {
-    console.log(SErviceData?.Service);
     const serviceD = SErviceData?.Service;
     // const[serviceD,setService] = useState(SErviceData?.Service);
     return (
