@@ -27,8 +27,8 @@ const Header = () => {
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-md-3">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">RISHIKESH</div>
+                                                <div className="col-ft1"> 
+                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
                                                     <ul className="ft1-list">
                                                         <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
                                                         <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
@@ -39,7 +39,7 @@ const Header = () => {
                                             </div>
                                             <div className="col-md-3">
                                                 <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">RISHIKESH</div>
+                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
                                                     <ul className="ft1-list">
                                                         <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
                                                         <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
@@ -50,7 +50,7 @@ const Header = () => {
                                             </div>
                                             <div className="col-md-3">
                                                 <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">RISHIKESH</div>
+                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
                                                     <ul className="ft1-list">
                                                         <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
                                                         <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
@@ -61,7 +61,7 @@ const Header = () => {
                                             </div>
                                             <div className="col-md-3">
                                                 <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s">RISHIKESH</div>
+                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
                                                     <ul className="ft1-list">
                                                         <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
                                                         <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
@@ -86,35 +86,35 @@ const Header = () => {
                                             <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
-                                                        <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                    <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
                                                     </div>
-                                                    <div className="title" data-wow-duration="3s">CHAR DHAM TOUR PACKAGES</div>
+                                                    <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">CHAR DHAM TOUR PACKAGES</NavLink></div>
 
                                                 </div>
                                             </div>
                                             <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
-                                                        <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                    <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
                                                     </div>
-                                                    <div className="title" data-wow-duration="3s">MUSSOORIE TOUR PACKAGE</div>
+                                                    <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">MUSSOORIE TOUR PACKAGE </NavLink></div>
 
                                                 </div>
                                             </div>
                                             <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
-                                                        <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                    <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
                                                     </div>
-                                                    <div className="title " data-wow-duration="3s">RISHIKESH TOUR PACKAGE</div>
+                                                    <div className="title " data-wow-duration="3s"><NavLink to="/detail/1">RISHIKESH TOUR PACKAGE</NavLink></div>
                                                 </div>
                                             </div>
                                             <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
-                                                        <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                    <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
                                                     </div>
-                                                    <div className="title" data-wow-duration="3s">HARIDWAR TOUR PACKAGE</div>
+                                                    <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">HARIDWAR TOUR PACKAGE </NavLink></div>
 
                                                 </div>
                                             </div>

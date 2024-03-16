@@ -29,8 +29,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/gallery" element={<Gallery />} />
-            <Route path="/list" element={<List />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route path="/list/:desti" element={<List />} />
+            <Route path="/detail/:id" element={<Detail />} />
             <Route path="/login" element={<Login />} />
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
