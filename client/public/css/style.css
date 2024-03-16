@@ -305,29 +305,6 @@ li.nav-item.dropdown.show {
 }
 
 
-/*Datepicker css start*/
-
-/*.ui-widget-header {*/
-/*border: 1px solid var(--green_color);*/
-/*background: var(--green_color);*/
-/*color: #fff;*/
-/*}*/
-/*.ui-state-default, .ui-widget-content .ui-state-default {*/
-/*border: 1px solid lightgray !important;*/
-/*background: #fff !important;*/
-/*color: var(--blue_color) !important;*/
-/*}*/
-/*.ui-state-highlight, .ui-widget-content .ui-state-highlight {*/
-/*border: 1px solid var(--green_color) !important;*/
-/*background: var(--green_color) !important;*/
-/*color: #fff !important;*/
-/*}*/
-
-/*Datepicker css Ends*/
-
-/*Search box start*/
-
-
 .hot-deals {
     margin: -106px 0 0 0;
     padding-top:0 !important;
@@ -1575,7 +1552,17 @@ footer {
     font-weight: 500;text-transform: capitalize;
     font-weight: 500;
 }
-
+/* estimate-btn {
+    background: var(--blue_color);
+    color: #fff;
+    border: 2px solid var(--blue_color);
+    border-radius: 25px;
+    padding: 7px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+    font-weight: 500;
+} */
 .share-btn {
     padding-left: 0;
     list-style-type: none;

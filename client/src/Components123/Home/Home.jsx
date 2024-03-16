@@ -1,18 +1,19 @@
 import React from "react";
 import { NavLink} from "react-router-dom";
 import Testimonial from "./Testimonial";
+import Services from "../Service/Services";
 const Home = () => {
     return (
         <>
             <section id="bannerslider">
                 <div className="owl-carousel owl-theme">
                     <div className="item">
-                        <NavLink to="list.html">
+                        <NavLink to="/list">
                             <div className="banner-txt zoomIn" data-wow-duration="3s">Hot <span className="theme-color">Deals</span> this week</div>
                             <img src="images/slide1.jpg" alt="slide2" title="" border="0" /></NavLink>
                     </div>
                     <div className="item">
-                        <NavLink to="list.html">
+                        <NavLink to="/list">
                             <div className="banner-txt zoomIn" data-wow-duration="3s">Hot <span className="theme-color">Deals</span> this week</div>
                             <img src="images/slide2.jpg" alt="slide2" title="" border="0" /></NavLink>
                     </div>
@@ -20,7 +21,7 @@ const Home = () => {
             </section>
 
 
-            <section className="hot-deals">
+            {/* <section className="hot-deals">
 
                 <section className="search-form-box">
                
@@ -117,129 +118,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-</section >
-
-
-<section className="proj-themes">
-    <div className="container">
-        <div className="row">
-            <div className="col-md-12">
-                <div className="title-main">
-                    <h2 className=" wow zoomIn" data-wow-duration="3s"><strong>POPULAR</strong> <span>THEMES</span> </h2>
-                </div>
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-md-2 col-sm-6">
-                <div className="theme-box wow zoomIn"  data-wow-duration="3s">
-                    <div className="th-1">
-                        <NavLink to="list.html">   <img className="img-fluid theme-img" src="images/hotdeals1.jpeg" alt="" title="" border="0"/></NavLink>
-                    </div>
-                    <div className="theme-content">
-                        <NavLink to="list.html">
-                            <div className="theme-title2">Honeymoon</div>
-                        </NavLink>
-                        <NavLink to="list.html">  <span className="add-icon">
-                        <i className="fa fa-plus" aria-hidden="true"></i>
-                        </span>
-                        </NavLink>
-                        <ul>
-                            <li>
-                                <p>Starting from <span className="st-price bt-txt"><i className="fa fa-rupee"></i> 10,000</span></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className="col-md-2 col-sm-6">
-                <div className="theme-box wow zoomIn"  data-wow-duration="3s">
-                    <div className="th-1">
-                        <NavLink to="list.html">    <img className="img-fluid theme-img" src="images/hotdeals2.jpeg" alt="" title="" border="0"/></NavLink>
-                    </div>
-                    <div className="theme-content">
-                        <NavLink to="list.html">
-                            <div className="theme-title2">Adventure</div>
-                        </NavLink>
-                        <NavLink to="list.html">  <span className="add-icon">
-                        <i className="fa fa-plus" aria-hidden="true"></i>
-                        </span>
-                        </NavLink>
-                        <ul>
-                            <li>
-                                <p>Starting from <span className="st-price bt-txt"><i className="fa fa-rupee"></i>12,000</span></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className="col-md-2 col-sm-6">
-                <div className="theme-box wow zoomIn"  data-wow-duration="3s">
-                    <div className="th-1">
-                        <NavLink to="list.html">    <img className="img-fluid theme-img" src="images/hotdeals3.jpeg" alt="" title="" border="0"/></NavLink>
-                    </div>
-                    <div className="theme-content">
-                        <NavLink to="list.html">
-                            <div className="theme-title2">Sports</div>
-                        </NavLink>
-                        <NavLink to="list.html">  <span className="add-icon">
-                        <i className="fa fa-plus" aria-hidden="true"></i>
-                        </span>
-                        </NavLink>
-                        <ul>
-                            <li>
-                                <p>Starting from <span className="st-price bt-txt"><i className="fa fa-rupee"></i>15,000</span></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className="col-md-2 col-sm-6">
-                <div className="theme-box wow zoomIn"  data-wow-duration="3s">
-                    <div className="th-1">
-                        <NavLink to="list.html">    <img className="img-fluid theme-img" src="images/hotdeals1.jpeg" alt="" title="" border="0"/></NavLink>
-                    </div>
-                    <div className="theme-content">
-                        <NavLink to="list.html">
-                            <div className="theme-title2">Beach</div>
-                        </NavLink>
-                        <NavLink to="list.html">  <span className="add-icon">
-                        <i className="fa fa-plus" aria-hidden="true"></i>
-                        </span>
-                        </NavLink>
-                        <ul>
-                            <li>
-                                <p>Starting from <span className="st-price bt-txt"><i className="fa fa-rupee"></i>10,000</span></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className="col-md-2 col-sm-6">
-                <div className="theme-box wow zoomIn"  data-wow-duration="3s">
-                    <div className="th-1">
-                        <NavLink to="list.html">    <img className="img-fluid theme-img" src="images/hotdeals2.jpeg" alt="" title="" border="0"/></NavLink>
-                    </div>
-                    <div className="theme-content">
-                        <NavLink to="list.html">
-                            <div className="theme-title2">Family</div>
-                        </NavLink>
-                        <NavLink to="list.html">  <span className="add-icon">
-                        <i className="fa fa-plus" aria-hidden="true"></i>
-                        </span>
-                        </NavLink>
-                        <ul>
-                            <li>
-                                <p>Starting from <span className="st-price bt-txt"><i className="fa fa-rupee"></i>12,000</span></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <NavLink className="readmore-right wow zoomIn" to="list.html"  data-wow-duration="3s">See All</NavLink>
-    </div>
-</section>
-
+</section > */}
 
 <section className="best-places">
     <div className="container">
@@ -269,7 +148,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -292,7 +171,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -315,7 +194,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -338,14 +217,14 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <NavLink className="readmore-right" to="details.html">See All</NavLink>
     </div>
+    <NavLink className="readmore-right" to="/list">See All</NavLink>
     {/* </div> */}
 </section>
 
@@ -355,7 +234,7 @@ const Home = () => {
         <div className="row">
             <div className="col-md-12">
                 <div className="title-main">
-                    <h2>Recommended <span>Travel Package </span>in Uttarakhand to visit  </h2>
+                    <h2><span>Top</span> Recommended <span>Travel Package </span>in Uttarakhand to visit  </h2>
                 </div>
             </div>
         </div>
@@ -378,7 +257,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li>
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -401,7 +280,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li>
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -424,7 +303,7 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li>
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -447,17 +326,18 @@ const Home = () => {
                                 <span className="st-txt">Starting from</span>
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li>
-                            <li><NavLink to="details.html" className="dt-view">VIEW MORE</NavLink></li>
+                            <li><NavLink to="/detail" className="dt-view">VIEW MORE</NavLink></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <NavLink className="readmore-right" to="details.html">See All</NavLink>
+        <NavLink className="readmore-right" to="/list">See All</NavLink>
     </div>
     {/* </div> */}
 </section>
 
+<Services/>
 <Testimonial/>
     </>
 );

@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import SErviceData from "../Service/ServiceData.json";
 
 const Footer = () => {
+    const serviceD = SErviceData?.Service;
     return (<>
 
         <footer>
@@ -49,14 +51,13 @@ const Footer = () => {
                             Services
                         </div>
                         <ul className="links pl-0">
-                            <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">Hotel Booking</NavLink></li>
-                            <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">Taxi and Car service</NavLink></li>
-                            <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">Tour Oprator</NavLink></li>
-                            <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">Event Management</NavLink></li>
+                            {serviceD.map((val, ind) => <>
+                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="" key={ind}>{val?.title}</NavLink></li>
+                            </>)}
                         </ul>
                     </div>
 
-                    <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+                    {/* <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                     <div className="ft-title mt-5 wow zoomIn" data-wow-duration="3s">
                                 Destinations
                             </div>
@@ -82,8 +83,8 @@ const Footer = () => {
                                 <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <span>Patner-8</span></NavLink></li>
                                 <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <span>Patner-9</span></NavLink></li>
                             </ul>
-                    </div>
-                   
+                    </div> */}
+
                 </div>
                 <div className="go-to-top">
                     <NavLink id="back-to-top" to="#top">
@@ -160,8 +161,6 @@ const Footer = () => {
                                                         <div className="col-md-2">
                                                             <select className="form-control" id="enquire-mobile" name="enquire-mobile">
                                                                 <option>+91</option>
-                                                                <option>+92</option>
-                                                                <option>+1684</option>
                                                             </select>
                                                         </div>
                                                         <div className="col-md-5">
@@ -171,95 +170,14 @@ const Footer = () => {
                                                             <input type="text" name="" id="Enquire_Emailid" className="form-control" placeholder="Email Id" />
                                                         </div>
                                                     </div>
-                                                    <div className="row">
-                                                        <div className="col-md-7">
-                                                            <div className="form-group date-parent">
-                                                                <input className="form-control" type="text" name="" placeholder="Enquiry Date" id="enquiry-dob" />
-                                                                <i className="fa fa-calendar date-icon"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="room-box">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <p className="sign-txt">Room 1</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row">
-                                                            <div className="col-md-3">
-                                                                <select className="form-control" id="Adults" name="enquire-mobile">
-                                                                    <option value="">Adults (+12Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-md-3">
-                                                                <select className="form-control" id="Kids" name="enquire-mobile">
-                                                                    <option value="">Kids (2 - 12Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-md-3">
-                                                                <select className="form-control" id="Infant" name="enquire-mobile">
-                                                                    <option value="">Infant (0 - 2Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="room-box alert alert-dismissible">
-                                                        <NavLink to="#" className="close" data-dismiss="alert" aria-label="close">&times;</NavLink>
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <p className="sign-txt">Room2</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row">
-                                                            <div className="col-md-3 col-sm-12 col-xs-12">
-                                                                <select className="form-control" id="Adults2" name="enquire-mobile">
-                                                                    <option value="">Adults (+12Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-md-3 col-sm-12 col-xs-12">
-                                                                <select className="form-control" id="Kids2" name="enquire-mobile">
-                                                                    <option value="">Kids(2 - 12Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-md-3 col-sm-12 col-xs-12">
-                                                                <select className="form-control" id="Infant2" name="enquire-mobile">
-                                                                    <option value="">Infant (0 - 2Yrs)</option>
-                                                                    <option>0</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
                                                 </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <div className="addroom">
-                                                <NavLink to="">Add Room</NavLink>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button className="enquiry-btn form-control">View Offers & Send Enquiry</button>
+                                    <button className="enquiry-btn form-control">Send Enquiry</button>
                                 </div>
                             </div>
                         </div>
