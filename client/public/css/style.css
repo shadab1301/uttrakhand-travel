@@ -214,7 +214,7 @@ li.nav-item.dropdown.show {
     padding-left: 20px;
 }
 
-.navbar-nav li .active:before {
+/* .navbar-nav li .active:before {
     content: "";
     position: absolute;
     width: 60px;
@@ -223,7 +223,7 @@ li.nav-item.dropdown.show {
     background: #0d58be;
     right: 0;
     transform: translate(-50%, 0);
-}
+} */
 
 .navbar-toggler {
     padding: 2px 5px;
@@ -303,6 +303,29 @@ li.nav-item.dropdown.show {
 .hot-deals .owl-dots {
     display: none;
 }
+
+
+/*Datepicker css start*/
+
+/*.ui-widget-header {*/
+/*border: 1px solid var(--green_color);*/
+/*background: var(--green_color);*/
+/*color: #fff;*/
+/*}*/
+/*.ui-state-default, .ui-widget-content .ui-state-default {*/
+/*border: 1px solid lightgray !important;*/
+/*background: #fff !important;*/
+/*color: var(--blue_color) !important;*/
+/*}*/
+/*.ui-state-highlight, .ui-widget-content .ui-state-highlight {*/
+/*border: 1px solid var(--green_color) !important;*/
+/*background: var(--green_color) !important;*/
+/*color: #fff !important;*/
+/*}*/
+
+/*Datepicker css Ends*/
+
+/*Search box start*/
 
 
 .hot-deals {
@@ -1552,17 +1575,7 @@ footer {
     font-weight: 500;text-transform: capitalize;
     font-weight: 500;
 }
-/* estimate-btn {
-    background: var(--blue_color);
-    color: #fff;
-    border: 2px solid var(--blue_color);
-    border-radius: 25px;
-    padding: 7px 20px;
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: capitalize;
-    font-weight: 500;
-} */
+
 .share-btn {
     padding-left: 0;
     list-style-type: none;
