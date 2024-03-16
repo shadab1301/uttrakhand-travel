@@ -81,8 +81,20 @@ export default function AdminLayout() {
    const handleDrawerClose = () => {
      setOpen(!open);
    };
+   const sideBarMenu = [
+     { id: 0, name: "Dashboard", icon: "", path: "dashboard" },
+     { id: 1, name: "Packages", icon: "", path: "packages" },
+     { id: 2, name: "Enquiry", icon: "", path: "enquiry" },
+     { id: 3, name: "Destination", icon: "", path: "destination" },
+     { id: 4, name: "Gallery", icon: "", path: "gallery" },
+     { id: 5, name: "Address", icon: "", path: "address" },
+     { id: 6, name: "Testimonial", icon: "", path: "testimonial" },
+   ];
+
+
+
   return (
-    <Box sx={{ display: "flex", width:"98vw"}}>
+    <Box sx={{ display: "flex", width: "98vw" }}>
       <Navbar handleDrawerClose={handleDrawerClose} />
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -95,8 +107,13 @@ export default function AdminLayout() {
           </IconButton>
         </DrawerHeader>
         <List>
-          {["Dashboard", "Packages",].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }} onClick={()=>navigate(text.toLowerCase())}>
+          {sideBarMenu.map((menu, index) => (
+            <ListItem
+              key={index}
+              disablePadding
+              sx={{ display: "block" }}
+              onClick={() => navigate(menu.path)}
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -113,16 +130,27 @@ export default function AdminLayout() {
                 >
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={menu.name}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-       
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, background: "#ECEFF1", height:"auto",width:"100%" }}>
-        <Box sx={{ mt:10,flexGrow: 1, p: 3, background: "white" }}>
-         <Outlet/>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          background: "#ECEFF1",
+          height: "auto",
+          width: "100%",
+        }}
+      >
+        <Box sx={{ mt: 10, flexGrow: 1, p: 3, background: "white" }}>
+          <Outlet />
         </Box>
       </Box>
     </Box>
