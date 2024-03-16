@@ -18,6 +18,11 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
+import { MdDashboard } from "react-icons/md";
+import { FiPackage } from "react-icons/fi";
+import { GrGallery } from "react-icons/gr";
+import { TbAddressBook } from "react-icons/tb";
+import { FaRegNoteSticky } from "react-icons/fa6";
 
 const drawerWidth = 240;
 
@@ -82,14 +87,20 @@ export default function AdminLayout() {
      setOpen(!open);
    };
    const sideBarMenu = [
-     { id: 0, name: "Dashboard", icon: "", path: "dashboard" },
-     { id: 1, name: "Packages", icon: "", path: "packages" },
-     { id: 2, name: "Enquiry", icon: "", path: "enquiry" },
-     { id: 3, name: "Destination", icon: "", path: "destination" },
-     { id: 4, name: "Gallery", icon: "", path: "gallery" },
-     { id: 5, name: "Address", icon: "", path: "address" },
-     { id: 6, name: "Testimonial", icon: "", path: "testimonial" },
+     { id: 0, name: "Dashboard", icon: <MdDashboard />, path: "dashboard" },
+     { id: 1, name: "Packages", icon: <FiPackage />, path: "packages" },
+     { id: 2, name: "Enquiry", icon: <FiPackage />, path: "enquiry" },
+     { id: 3, name: "Destination", icon: <FiPackage />, path: "destination" },
+     { id: 4, name: "Gallery", icon: <GrGallery />, path: "gallery" },
+     { id: 5, name: "Address", icon: <TbAddressBook />, path: "address" },
+     {
+       id: 6,
+       name: "Testimonial",
+       icon: <FaRegNoteSticky />,
+       path: "testimonial",
+     },
    ];
+
 
 
 
@@ -128,7 +139,8 @@ export default function AdminLayout() {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  {menu.icon}
                 </ListItemIcon>
                 <ListItemText
                   primary={menu.name}
