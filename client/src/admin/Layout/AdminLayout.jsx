@@ -140,7 +140,7 @@ export default function AdminLayout() {
                   }}
                 >
                   {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                  {menu.icon}
+                   {menu.icon}
                 </ListItemIcon>
                 <ListItemText
                   primary={menu.name}
