@@ -1,8 +1,12 @@
 import React from 'react'
+import TestimonialTable from '../../Table/TestimonialTable'
 
 const Testimonial = () => {
   return (
-    <div>Testimonial</div>
+    <>
+    
+  <TestimonialTable/>
+    </>
   )
 }
 

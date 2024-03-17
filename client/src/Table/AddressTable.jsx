@@ -22,6 +22,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button, Stack } from "@mui/material";
+import AddDestination from "../Modal/AddDestination";
+import AddGallery from "../Modal/AddGallery";
 
 function createData(id, name, calories, fat, carbs, protein) {
   return {
@@ -179,6 +181,16 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    console.log({ handleOpen });
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -190,16 +202,29 @@ function EnhancedTableToolbar() {
         p={2}
       >
         <Typography
-        //   sx={{ flex: "1 1 100%" }}
+          //   sx={{ flex: "1 1 100%" }}
           variant="h6"
           id="tableTitle"
           component="div"
         >
-          Packages
+          Address
         </Typography>
 
-        <Button variant="contained" style={{width:"auto"}}  >Add Package</Button>
+        <Button
+          variant="contained"
+          style={{ width: "auto" }}
+          onClick={handleOpen}
+          isOpen={open}
+        >
+          Add Address
+        </Button>
       </Stack>
+      <AddGallery
+        isOpen={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        size={"md"}
+      />
     </>
   );
 }
@@ -208,7 +233,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function Table() {
+export default function AddressTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -313,7 +338,7 @@ export default function Table() {
                     sx={{ cursor: "pointer" }}
                   >
                     {/* <TableCell padding="checkbox"> */}
-                      {/* <Checkbox
+                    {/* <Checkbox
                         color="primary"
                         checked={isItemSelected}
                         inputProps={{
@@ -325,7 +350,7 @@ export default function Table() {
                       component="th"
                       id={labelId}
                       scope="row"
-                    //   padding="none"
+                      //   padding="none"
                       padding="0px 0px 0px  20px"
                     >
                       {row.name}
@@ -359,7 +384,6 @@ export default function Table() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-     
     </Box>
   );
 }

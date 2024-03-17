@@ -1,8 +1,11 @@
 import React from 'react'
+import AddressTable from '../../Table/AddressTable'
 
 const Address = () => {
   return (
-    <div>Address</div>
+    <>
+    <AddressTable/>
+    </>
   )
 }
 
