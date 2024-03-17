@@ -1,23 +1,12 @@
 import React from "react";
 import { NavLink,useParams } from "react-router-dom";
+import detailImg from "../../../../public/images/details-banner.jpg";
 const Detail = () => {
     const { id } = useParams();
     console.log(`This is  detail pkg id : ${id}`);
     return (
         <>
-            <div className="bannercls">
-                <img className="img-fluid" src="images/details-banner.jpg" alt="" title="" border="0" />
-                <div className="container-fluid">
-                    <div className="banner-content">
-                        <h2 className="banner-title text-white wow bounceInLeft">Mussoorie - Dhanaulti Tour Package
-                        </h2>
-                        <div className="banner-sub-title text-white wow bounceInLeft">
-                            Mussoorie 2N, Dhanaulti 1N
-                        </div>
-                        <div className="banner-smalltxt text-white wow bounceInLeft">Tour and Travel Solutions</div>
-                    </div>
-                </div>
-            </div>
+           
             <section className="detail-sec">
                 <div className="container-fluid">
                     <nav aria-label="breadcrumb" className=" breadcrumb-items">
@@ -40,7 +29,7 @@ const Detail = () => {
                                                 <div className="row">
                                                     <div className="col-md-4">
                                                         <div className="dt-img ">
-                                                            <img className="img-fluid" src="images/details-banner.jpg" alt="" title="" border="0" />
+                                                            <img className="img-fluid" src={detailImg} alt="" title="" border="0" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-8">

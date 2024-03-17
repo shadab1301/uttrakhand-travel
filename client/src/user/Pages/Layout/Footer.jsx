@@ -134,7 +134,7 @@ const Footer = () => {
                         <div className="modal-dialog modal-lg">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <div className="modal-title text-white">Check Rate & Send Enquiry for Hotel Bhagyalaxmi 4 Star Stay</div>
+                                    <div className="modal-title text-white">Send Enquiry</div>
                                     <button type="button" className="close enquiryclose" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div className="modal-body">

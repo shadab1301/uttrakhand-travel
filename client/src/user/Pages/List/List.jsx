@@ -1,18 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+
+import slide1 from "../../../../public/images/slide1.jpg";
+import slide2 from "../../../../public/images/slide2.jpg";
+import hotdeals1 from "../../../../public/images/hotdeals1.jpeg";
+import hotdeals3 from "../../../../public/images/hotdeals3.jpeg";
 const List = () => {
     return (
         <>
-            <div className="bannercls">
-                <img className="img-fluid" src="images/listing-banner.jpg" alt="" title="" border="0" />
-                <div className="container-fluid">
-                    <div className="banner-content">
-                        <h2 className="banner-title text-white wow bounceInLeft" data-wow-duration="3s">Uttrakhand</h2>
-                        <div className="banner-sub-title text-white wow bounceInLeft" data-wow-duration="3s"><NavLink className="banner-title text-white wow bounceInLeft" to="/">Home</NavLink> - Uttrakhand Packages</div>
-                        <div className="banner-smalltxt text-white wow bounceInLeft" data-wow-duration="3s">Tour and Travel Solutions</div>
-                    </div>
-                </div>
-            </div>
+
             <section className="listing-box">
                 <div className="container-fluid">
                     <nav aria-label="breadcrumb" className=" breadcrumb-items">
@@ -28,7 +24,7 @@ const List = () => {
                                     <div className="row">
                                         <div className="col-md-4">
                                             <div className="fl-img">
-                                                <img className="img-fluid" src="images/slide1.jpg" alt="" title="" border="0" />
+                                                <img className="img-fluid" src={slide1} alt="" title="" border="0" />
                                             </div>
                                         </div>
                                         <div className="col-md-8">
@@ -69,7 +65,7 @@ const List = () => {
                                     <div className="row">
                                         <div className="col-md-4">
                                             <div className="fl-img">
-                                                <img className="img-fluid" src="images/slide2.jpg" alt="" title="" border="0" />
+                                                <img className="img-fluid" src={slide2} alt="" title="" border="0" />
                                             </div>
                                         </div>
                                         <div className="col-md-8">
@@ -109,7 +105,7 @@ const List = () => {
                                     <div className="row">
                                         <div className="col-md-4">
                                             <div className="fl-img">
-                                                <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" />
+                                                <img className="img-fluid" src={hotdeals1} alt="" title="" border="0" />
                                             </div>
                                         </div>
                                         <div className="col-md-8">
@@ -149,7 +145,7 @@ const List = () => {
                                     <div className="row">
                                         <div className="col-md-4">
                                             <div className="fl-img">
-                                                <img className="img-fluid" src="images/hotdeals3.jpeg" alt="" title="" border="0" />
+                                                <img className="img-fluid" src={hotdeals3} alt="" title="" border="0" />
                                             </div>
                                         </div>
                                         <div className="col-md-8">

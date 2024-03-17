@@ -18,7 +18,7 @@ export const Contact = () => {
                     <div className="offset-1 col-md-10">
                         <div className="bt-left">
                             <div className="fl-title text-center">
-                               <h3>Contact Us Devbhoomi tour</h3>
+                               <h3>Contact Us {JSON.stringify(import.meta.env.VITE_REACT_WEBNAME)}</h3>
                             </div>
                             <div className="fl-title blacktxt text-center">
                                 We provide first class tour and travel services in Uttrakhand:

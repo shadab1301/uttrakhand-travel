@@ -1,15 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, json } from "react-router-dom";
 export const Gallery = () => {
     return (<>
-        <div className="bannercls">
-            <img className="img-fluid" src="images/listing-banner.jpg" alt="" title="" border="0" />
-            <div className="container-fluid">
-                <div className="banner-content">
-                    <h2 className="banner-title text-white wow bounceInLeft" data-wow-duration="3s"><NavLink className="banner-title text-white wow bounceInLeft" to="/">Home</NavLink>/Our Gallery</h2>
-                </div>
-            </div>
-        </div>
+       
 
         <section className="bt-place">
             <div className="container-fluid">
@@ -17,7 +10,7 @@ export const Gallery = () => {
                     <div className="offset-1 col-md-10">
                         <div className="bt-left">
                             <div className="fl-title text-center">
-                                <h3>Our  Gallery</h3>
+                                <h3>Our  Gallery {JSON.stringify(import.meta.env.VITE_REACT_WEBNAME)}</h3>
                             </div>
 
 

@@ -2,13 +2,17 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Testimonial from "./Testimonial";
 import Services from "../Service/Services";
+import { Banner } from "../../Layout/Banner";
 const Home = () => {
   return (
     <>
+     {/* <Banner/> */}
+
       <section className="hot-deals">
         <section className="search-form-box"></section>
         <div className="container">
-          <div className="row">
+         
+          {/* <div className="row">
             <div className="col-md-12">
               <div className="main-title">
                 <h1 className="text-center wow zoomIn" data-wow-duration="3s">
@@ -19,8 +23,8 @@ const Home = () => {
                 </h1>
               </div>
             </div>
-          </div>
-          <section id="demos">
+          </div> */}
+          {/* <section id="demos">
             <div className="">
               <div className="loop owl-carousel owl-theme">
                 <div className="item wow zoomIn" data-wow-duration="3s">
@@ -140,7 +144,8 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
+
           <div className="row">
             <div className="col-md-12">
               <NavLink
@@ -152,6 +157,7 @@ const Home = () => {
               </NavLink>
             </div>
           </div>
+          
         </div>
       </section>
 
