@@ -55,7 +55,7 @@ const List = () => {
                                                 </div>
                                                 <div className="sharelist">
                                                     <ul className="share-btn">
-                                                        <li><NavLink to="/detail" className="view-btn">View Details</NavLink></li>
+                                                        <li><NavLink to="/detail/1" className="view-btn">View Details</NavLink></li>
                                                         <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
                                                     </ul>
                                                 </div>
@@ -95,7 +95,7 @@ const List = () => {
                                                 </div>
                                                 <div className="sharelist">
                                                     <ul className="share-btn">
-                                                        <li><NavLink to="/detail" className="view-btn">View Details</NavLink></li>
+                                                        <li><NavLink to="/detail/1" className="view-btn">View Details</NavLink></li>
                                                         <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
                                                     </ul>
                                                 </div>
@@ -135,7 +135,7 @@ const List = () => {
                                                 </div>
                                                 <div className="sharelist">
                                                     <ul className="share-btn">
-                                                        <li><NavLink to="/detail" className="view-btn">View Details</NavLink></li>
+                                                        <li><NavLink to="/detail/1" className="view-btn">View Details</NavLink></li>
                                                         <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
                                                     </ul>
                                                 </div>
@@ -176,7 +176,7 @@ const List = () => {
                                                 </div>
                                                 <div className="sharelist">
                                                     <ul className="share-btn">
-                                                        <li><NavLink to="/detail" className="view-btn">View Details</NavLink></li>
+                                                        <li><NavLink to="/detail/1" className="view-btn">View Details</NavLink></li>
                                                         <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
                                                     </ul>
                                                 </div>

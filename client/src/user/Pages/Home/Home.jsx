@@ -195,7 +195,7 @@ const Home = () => {
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
                     <li>
-                      <NavLink to="/detail" className="dt-view">
+                      <NavLink to="/list/Dheradun" className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -228,7 +228,7 @@ const Home = () => {
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
                     <li>
-                      <NavLink to="/detail" className="dt-view">
+                      <NavLink to="/list/Rishikesh" className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -261,7 +261,7 @@ const Home = () => {
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
                     <li>
-                      <NavLink to="/detail" className="dt-view">
+                      <NavLink to="/list/Haridwar" className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -294,7 +294,7 @@ const Home = () => {
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
                     <li>
-                      <NavLink to="/detail" className="dt-view">
+                      <NavLink to="/list/paries" className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -304,7 +304,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <NavLink className="readmore-right" to="/list">
+        <NavLink className="readmore-right" to="/list/all">
           See All
         </NavLink>
         {/* </div> */}
@@ -357,7 +357,7 @@ const Home = () => {
                       </span>
                     </li>
                     <li>
-                      <NavLink to="/detail" className="dt-view">
+                      <NavLink to="/detail/1" className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -399,7 +399,7 @@ const Home = () => {
                       </span>
                     </li>
                     <li>
-                      <NavLink to="/detail" className="dt-view">
+                      <NavLink to="/detail/1" className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -441,7 +441,7 @@ const Home = () => {
                       </span>
                     </li>
                     <li>
-                      <NavLink to="/detail" className="dt-view">
+                      <NavLink to="/detail/1" className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -483,7 +483,7 @@ const Home = () => {
                       </span>
                     </li>
                     <li>
-                      <NavLink to="/detail" className="dt-view">
+                      <NavLink to="/detail/1" className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -492,7 +492,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <NavLink className="readmore-right" to="/list">
+          <NavLink className="readmore-right" to="/list/all">
             See All
           </NavLink>
         </div>

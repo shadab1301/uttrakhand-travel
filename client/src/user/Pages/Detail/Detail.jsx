@@ -1,6 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,useParams } from "react-router-dom";
 const Detail = () => {
+    const { id } = useParams();
+    console.log(`This is  detail pkg id : ${id}`);
     return (
         <>
             <div className="bannercls">
