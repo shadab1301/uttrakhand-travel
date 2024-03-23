@@ -131,9 +131,9 @@ const Header = () => {
                                 <div className="shadow dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div className="" key={100}>
                                         <ul style={{ listStyle: "none" }}>
-                                        {serviceD.map((val,ind)=><>
+                                        {serviceD.map((val,ind)=>
                                             <li className=" wow zoomIn" data-wow-duration="3s" key={ind}>{val?.title}</li>
-                                            </>)}
+                                            )}
                                         </ul>
                                     </div>
                                     {/* <!--  /.container  --> */}
