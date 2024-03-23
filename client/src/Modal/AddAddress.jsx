@@ -12,10 +12,12 @@ import { RxCrossCircled } from "react-icons/rx";
 
 const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    address:"",
+    map_iframe:"",
+    website_url:"",
+    email:"",
+    alternateNumber:"",
+    primaryNumber:"",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,28 +80,48 @@ const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
                 margin="normal"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
+                id="address"
+                label="Address"
+                name="address"
+                value={formData.address}
                 onChange={handleChange}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
+              <Stack
+                direction="row"
+                width={"100%"}
+                spacing={1}
+                justifyContent={"space-between"}
+              >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="primaryNumber"
+                  label="Primary Number"
+                  name="primaryNumber"
+                  type="number"
+                  value={formData.primaryNumber}
+                  onChange={handleChange}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="alternateNumber"
+                  label="Alternate Number"
+                  name="alternateNumber"
+                  type="number"
+                  value={formData.alternateNumber}
+                  onChange={handleChange}
+                />
+              </Stack>
+
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email"
                 name="email"
                 type="email"
                 value={formData.email}
@@ -109,11 +131,22 @@ const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
                 margin="normal"
                 required
                 fullWidth
-                id="password"
-                label="Password"
-                name="password"
-                type="password"
-                value={formData.password}
+                id="website_url"
+                label="Website Url"
+                name="website_url"
+                type="text"
+                value={formData.website_url}
+                onChange={handleChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="map"
+                label="Map (Iframe)"
+                name="map_iframe"
+                type="text"
+                value={formData.map_iframe}
                 onChange={handleChange}
               />
               <Button
@@ -122,7 +155,7 @@ const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Register
+                Add
               </Button>
             </Box>
           </Box>

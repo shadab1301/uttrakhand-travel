@@ -69,7 +69,7 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size }) => {
               <Typography variant="h5" gutterBottom>
                 Add Packages
               </Typography>
-              <Typography sx={{cursor:"pointer"}}>
+              <Typography sx={{ cursor: "pointer" }}>
                 <RxCrossCircled size={32} onClick={handleClose} />
               </Typography>
             </Stack>
@@ -79,42 +79,53 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size }) => {
                 margin="normal"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
+                id="title"
+                label="Title"
+                name="title"
+                value={formData.title}
                 onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
+                id="sub_title"
+                label="Sub Title"
+                name="sub_title"
+                value={formData.sub_title}
                 onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                type="email"
-                value={formData.email}
+                id="noOfDay"
+                label="No OfDay"
+                name="noOfDay"
+                type="text"
+                value={formData.noOfDay}
                 onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="password"
-                label="Password"
-                name="password"
-                type="password"
-                value={formData.password}
+                id="includes"
+                label="Includes"
+                name="includes"
+                type="text"
+                value={formData.includes}
+                onChange={handleChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="description"
+                label="Description"
+                name="description"
+                type="text"
+                value={formData.description}
                 onChange={handleChange}
               />
               <Button
