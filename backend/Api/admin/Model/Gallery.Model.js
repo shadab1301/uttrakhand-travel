@@ -8,7 +8,7 @@ const gallerySchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: [true, "description shoud not be empty"],
+      required: false,
     },
     image: {
       type: String,
