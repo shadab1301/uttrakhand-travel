@@ -171,6 +171,16 @@ const Footer = () => {
                                                         </div>
                                                     </div>
 
+                                                    <div className="row">
+                                                    <div className="col-md-2"></div>
+                                                    <div className="col-md-8">
+                                                    <textarea type="text" name="" id="Enquire_L_name" className="form-control" placeholder="message" rows={10}/>
+
+                                                    </div>
+                                                    <div className="col-md-2"></div>
+
+                                                        </div>
+
                                                 </form>
                                             </div>
                                         </div>
