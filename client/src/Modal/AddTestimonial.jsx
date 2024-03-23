@@ -122,7 +122,7 @@ const AddTestimonial = ({ handleOpen, handleClose, isOpen, size }) => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Submit
+                Submit 
               </Button>
             </Box>
           </Box>
