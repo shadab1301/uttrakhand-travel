@@ -22,34 +22,40 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button, Stack } from "@mui/material";
-import AddDestination from "../Modal/AddDestination";
-import AddGallery from "../Modal/AddGallery";
+import AddAddress from "../Modal/AddAddress";
 
-function createData(id, name, calories, fat, carbs, protein) {
+function createData(
+  address,
+  map_iframe,
+  website_url,
+  email,
+  primaryNumber,
+  alternateNumber
+) {
   return {
-    id,
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    address,
+    map_iframe,
+    website_url,
+    email,
+    primaryNumber,
+    alternateNumber,
   };
 }
 
 const rows = [
-  createData(1, "Cupcake", 305, 3.7, 67, 4.3),
-  createData(2, "Donut", 452, 25.0, 51, 4.9),
-  createData(3, "Eclair", 262, 16.0, 24, 6.0),
-  createData(4, "Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData(5, "Gingerbread", 356, 16.0, 49, 3.9),
-  createData(6, "Honeycomb", 408, 3.2, 87, 6.5),
-  createData(7, "Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData(8, "Jelly Bean", 375, 0.0, 94, 0.0),
-  createData(9, "KitKat", 518, 26.0, 65, 7.0),
-  createData(10, "Lollipop", 392, 0.2, 98, 0.0),
-  createData(11, "Marshmallow", 318, 0, 81, 2.0),
-  createData(12, "Nougat", 360, 19.0, 9, 37.0),
-  createData(13, "Oreo", 437, 18.0, 63, 4.0),
+  createData("Cupcake", "string", 3.7, 67, 4.3,8851576516),
+  createData("Donut", "string", 25.0, 51, 4.9,8851576516),
+  createData("Eclair", "string", 16.0, 24, 6.0,8851576516),
+  createData("Frozen yoghurt", "string", 6.0, 24, 4.0,8851576516),
+  createData("Gingerbread", "string", 16.0, 49, 3.9,8851576516),
+  createData("Honeycomb", "string", 3.2, 87, 6.5,8851576516),
+  createData("Ice cream sandwich", "string", 9.0, 37, 4.3,8851576516),
+  createData("Jelly Bean", "string", 0.0, 94, 0.0,8851576516),
+  createData("KitKat", "string", 26.0, 65, 7.0,8851576516),
+  createData( "Lollipop", "string", 0.2, 98, 0.0,8851576516),
+  createData( "Marshmallow", "string", 0, 81, 2.0,8851576516),
+  createData( "Nougat", "string", 19.0, 9, 37.0,8851576516),
+  createData( "Oreo", "string", 18.0, 63, 4.0,8851576516),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -83,37 +89,42 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
 const headCells = [
   {
-    id: "name",
+    id: "address",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)",
+    label: "Address",
   },
   {
-    id: "calories",
-    numeric: true,
+    id: "map_iframe",
+    numeric: false,
     disablePadding: false,
-    label: "Calories",
+    label: "Map (Iframe)",
   },
   {
-    id: "fat",
+    id: "website_url",
     numeric: true,
     disablePadding: false,
-    label: "Fat (g)",
+    label: "Website Url",
   },
   {
-    id: "carbs",
+    id: "email",
     numeric: true,
     disablePadding: false,
-    label: "Carbs (g)",
+    label: "Email",
   },
   {
-    id: "protein",
+    id: "primaryNumber",
     numeric: true,
     disablePadding: false,
-    label: "Protein (g)",
+    label: "Primary Number",
+  },
+  {
+    id: "alternateNumber",
+    numeric: true,
+    disablePadding: false,
+    label: "Alternate Number",
   },
 ];
 
@@ -219,7 +230,7 @@ function EnhancedTableToolbar() {
           Add Address
         </Button>
       </Stack>
-      <AddGallery
+      <AddAddress
         isOpen={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
@@ -353,12 +364,13 @@ export default function AddressTable() {
                       //   padding="none"
                       padding="0px 0px 0px  20px"
                     >
-                      {row.name}
+                      {row.address}
                     </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    <TableCell align="left">{row.map_iframe}</TableCell>
+                    <TableCell align="left">{row.website_url}</TableCell>
+                    <TableCell align="left">{row.email}</TableCell>
+                    <TableCell align="left">{row.primaryNumber}</TableCell>
+                    <TableCell align="left">{row.alternateNumber}</TableCell>
                   </TableRow>
                 );
               })}
