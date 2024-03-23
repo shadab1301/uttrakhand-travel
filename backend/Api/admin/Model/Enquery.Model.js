@@ -42,6 +42,10 @@ const Enquery = new mongoose.Schema({
         enum: [0, 1, 2],  //0  for pending, 1 for in progress,  2 for completed
         default: 0,
         required: true,
+    },
+    message:{
+        type:String,
+        required:true
     }
 },
     {
