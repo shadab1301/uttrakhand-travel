@@ -176,7 +176,7 @@ const Footer = () => {
                 <ul className="ft-btn-list">
                   <li>
                     {" "}
-                    <NavLink className="btn callIcon" to="tel:+91 9811192312">
+                    <NavLink className="btn callIcon" to="tel:+91 8178918115">
                       <i className="fa fa-phone" aria-hidden="true"></i> Call Us
                     </NavLink>
                   </li>
