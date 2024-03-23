@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { RxCrossCircled } from "react-icons/rx";
 
-
 const AddPackages = ({ handleOpen, handleClose, isOpen, size }) => {
   const [formData, setFormData] = useState({
     firstName: "",

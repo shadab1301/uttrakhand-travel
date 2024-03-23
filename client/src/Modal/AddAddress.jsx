@@ -12,12 +12,12 @@ import { RxCrossCircled } from "react-icons/rx";
 
 const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
   const [formData, setFormData] = useState({
-    address:"",
-    map_iframe:"",
-    website_url:"",
-    email:"",
-    alternateNumber:"",
-    primaryNumber:"",
+    address: "",
+    map_iframe: "",
+    website_url: "",
+    email: "",
+    alternateNumber: "",
+    primaryNumber: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
