@@ -12,10 +12,9 @@ exports.SignUp = async (req, res, next) => {
     try {
         let validationError = validationResult(req);
         // console.log(validationError);
-        debugger;
         if (validationError.errors.length > 0) {
             return res.status(409).json({
-                status: 400,
+                status: 409,
                 data: validationError.errors.map((errorData) => {
                     return {
                         'input': errorData.path,
