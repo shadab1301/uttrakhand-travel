@@ -283,6 +283,21 @@ const Footer = () => {
                                   />
                                 </div>
                               </div>
+
+                              <div className="row">
+                              <div className="col-md-2"></div>
+                              <div className="col-md-8">
+                              <textarea
+                                    type="text"
+                                    name=""
+                                    id="message"
+                                    className="form-control"
+                                    placeholder="Message"
+                                  />
+                              </div>
+                              <div className="col-md-2"></div>
+
+                              </div>
                             </form>
                           </div>
                         </div>

@@ -1,7 +1,7 @@
 const {check} = require("express-validator");
 
 exports.signupValidation = [
-    check('username', 'Username is requied').not().isEmpty(),
+    check('username', 'Username is required').not().isEmpty(),
     check('email', 'Please provide a valid email').isEmail().normalizeEmail({ gmail_remove_dots: true }),
     check('password', 'Password must be 8 or more characters').isLength({ min: 8 }),
     // check('mobile', "mobile number must be numeric.").isNumeric(),
