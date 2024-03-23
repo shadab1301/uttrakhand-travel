@@ -10,6 +10,12 @@ const destinationSchema = new mongoose.Schema(
       type: String,
       required: [true, "cityImage should not be empty"],
     },
+    isIncludeInNavbar: {
+      type: Boolean,
+      required: [true, "isIncludeInNavbar should not be empty"],
+      enum: [true, false],
+      default: false,
+    },
   },
   { timestamps: true }
 );
