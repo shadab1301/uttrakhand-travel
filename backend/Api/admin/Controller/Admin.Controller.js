@@ -8,9 +8,6 @@ const { validationResult } = require('express-validator');
 const Admin = require("../Model/Admin.Model");
 
 exports.SignUp = async (req, res, next) => {
-    console.log(req.files)
-    return false
-
     try {
         let validationError = validationResult(req);
         // console.log(validationError);
