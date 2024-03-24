@@ -5,13 +5,13 @@ const {signupValidation,LoginValidation} = require("../../../Services/Validation
 const {TestimonialValidation} = require("../../../Services/Validation/Common.Validator");
 const {SignUp,Login} = require("../Controller/Admin.Controller");
 const { AddTestimonial, TestimonialList, DeleteTestimonial } = require("../Controller/Testimonial.Controller");
-const {upload1} =require("../../../Services/Common.Services");
+const {UploadFiles} =require("../../../Services/Common.Services");
 
 
 routes.post('/register',signupValidation,SignUp);
 routes.post('/login',LoginValidation,Login);
 
-routes.post('/testimonial',upload1('testimonial').single('image'),TestimonialValidation,AddTestimonial);
+routes.post('/testimonial',UploadFiles('testimonial').single('image'),TestimonialValidation,AddTestimonial);
 routes.get('/testimonial',TestimonialList);
 routes.delete('/testimonial/:id',DeleteTestimonial);
 module.exports = routes;
