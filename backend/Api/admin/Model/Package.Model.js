@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const packageModel = new mongoose.Schema(
+const packageSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -26,6 +26,9 @@ const packageModel = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Package = new mongoose.Model("Package", packageModel);
 
-export default Package
+
+const Package = new mongoose.model("Package", packageSchema);
+
+module.exports = Package;
+
