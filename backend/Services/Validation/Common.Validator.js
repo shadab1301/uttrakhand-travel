@@ -18,3 +18,7 @@ exports.EnqueryValidator = [
     check("message").not().isEmpty().withMessage("Message can not  be blank."),
 
 ];
+
+exports.AddresValidator =[
+    
+];
