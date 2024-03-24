@@ -1,17 +1,43 @@
 const express = require("express");
 const routes = express.Router();
-const {checkTcken} = require("../auth.middleware");
-const {UploadFiles} =require("../../../Services/Common.Services");
+const {checkTcken} = require("../Middleware/auth.middleware");
 const {signupValidation,LoginValidation} = require("../../../Services/Validation/Auth.Validator");
 const {TestimonialValidation,AddressValidator} = require("../../../Services/Validation/Common.Validator");
 const {SignUp,Login} = require("../Controller/Admin.Controller");
-const { AddTestimonial, TestimonialList, DeleteTestimonial } = require("../Controller/Testimonial.Controller");
-const{AddressList,EditAddress} = require("../Controller/Address.Controller");
+const { uploadFile } = require("../../../Services/CommonServices");
 
-routes.post('/register',signupValidation,SignUp);
+const {   fetchGallery, deleteGallery, updateGallery, createGallery } = require("../Controller/Gallery.Controller");
+const { createPackage, fetchPackages, updatePackage, deletePackage } = require("../Controller/Packages.Controller");
+const {AddTestimonial,TestimonialList,DeleteTestimonial} = require("../Controller/Testimonial.Controller");
+const {EditAddress,AddressList} = require("../Controller/Address.Controller");
+routes.post(
+  "/register",
+  uploadFile("destination").single("cityImage"),
+  signupValidation,
+  SignUp
+);
 routes.post('/login',LoginValidation,Login);
 
-routes.post('/testimonial',UploadFiles('testimonial').single('image'),TestimonialValidation,AddTestimonial);
+
+// Gallery
+routes.post("/gallery", uploadFile("gallery").single("image"), createGallery);
+routes.get("/gallery", fetchGallery);
+routes.get("/gallery/:id", fetchGallery);
+routes.put("/gallery", updateGallery);
+routes.delete("/gallery/:id", deleteGallery);
+
+// Packages
+routes.post(
+  "/package",
+  uploadFile("packages").single("pkgImage"),
+  createPackage
+);
+routes.get("/package", fetchPackages);
+routes.get("/package/:id", fetchPackages);
+routes.put("/package", updatePackage);
+routes.delete("/package/:id", deletePackage);
+
+routes.post('/testimonial',uploadFile('testimonial').single('image'),TestimonialValidation,AddTestimonial);
 routes.get('/testimonial',TestimonialList);
 routes.delete('/testimonial/:id',DeleteTestimonial);
 
