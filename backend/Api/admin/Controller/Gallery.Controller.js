@@ -2,7 +2,7 @@ const ApiError = require("../../../utils/ApiError");
 const ApiResponse=require("../../../utils/ApiResponse")
 const Gallery = require("../Model/Gallery.Model");
 
-exports.addGallery = async (req, res, next) => {
+exports.createGallery = async (req, res, next) => {
   try {
     const { title, description } = req.body;
     if (!title) {
