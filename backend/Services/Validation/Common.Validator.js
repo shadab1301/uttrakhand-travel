@@ -19,6 +19,6 @@ exports.EnqueryValidator = [
 
 ];
 
-exports.AddresValidator =[
-    
+exports.AddressValidator =[
+check('address','Address can not be empty.').not().isEmpty(),
 ];
