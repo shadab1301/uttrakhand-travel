@@ -1,4 +1,5 @@
 const ApiError = require("../../../utils/ApiError");
+const Destination = require("../Model/Destination.Model");
 
 exports.createDestination = async (req, res, next) => {
   try {
@@ -6,9 +7,18 @@ exports.createDestination = async (req, res, next) => {
     if(!cityName){
       throw new ApiError(400,"cityName should not be empty")
     }
-    console.log(req)
-    return false
-    //  const filePath = `${process.env.IMAGE_BASE_PATH}/destination/${req.file.filename}`;
+     const filePath = `${process.env.IMAGE_BASE_PATH}/destination/${req.file.filename}`;
+     const destination = {
+       cityName,
+       isIncludeInNavbar,
+       isTopVisitPlace,
+       cityImage: filePath,
+     };
+     const createdDestination = await Destination.create(destination);
+     if(!createdDestination){
+      throw new ApiError(500,"Something went wrong while creating destination")
+     }
+     return res.status(200).json(201,createdDestination,"Destination created successfully")
   } catch (err) {
     return res.status(500).json({
       status: 500,
@@ -20,6 +30,11 @@ exports.createDestination = async (req, res, next) => {
 
 exports.fetchDestination = async (req, res, next) => {
   try {
+    const destinations=await Destination.find()
+    if (!destinations) {
+      throw new ApiError(500,"Something went wrong while fetching destinations")
+    }
+    return res.status(200).json(201,destinations,"Data fetched successfully")
   } catch (err) {
     return res.status(500).json({
       status: 500,
@@ -42,6 +57,22 @@ exports.updateDestination = async (req, res, next) => {
 
 exports.deleteDestination = async (req, res, next) => {
   try {
+     const id = req.params.id;
+     const existedDestination = await Destination.findOne({ _id: id });
+     if (!existedDestination) {
+       throw new ApiError("404", "Package not exist");
+     }
+     const deletedDestination = await Destination.deleteOne({ _id: id });
+     if (!deletedDestination) {
+       throw new ApiError(
+         500,
+         "Something went wrong while deleting Destination"
+       );
+     }
+     return res
+       .status(200)
+       .json(new ApiResponse(201, {}, "Package deleted successfully"));
+
   } catch (err) {
     return res.status(500).json({
       status: 500,
