@@ -12,7 +12,11 @@ const destinationSchema = new mongoose.Schema(
     },
     isIncludeInNavbar: {
       type: Boolean,
-      required: [true, "isIncludeInNavbar should not be empty"],
+      enum: [true, false],
+      default: false,
+    },
+    isTopVisitPlace: {
+      type: Boolean,
       enum: [true, false],
       default: false,
     },
