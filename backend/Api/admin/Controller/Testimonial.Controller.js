@@ -29,9 +29,9 @@ exports.AddTestimonial = async (req, res, next) => {
                 description: req?.body?.description,
                 image: req?.file?.filename
             };
-            console.log(obj);
+            // console.log(obj);
             const testimonial_res = await Testimonial.create(obj);
-            console.log(testimonial_res);
+            // console.log(testimonial_res);
             if (testimonial_res) {
                 return res.status(201).json({
                     status: 201,

@@ -2,7 +2,7 @@ const express = require("express");
 const routes = express.Router();
 const {checkTcken} = require("../Middleware/auth.middleware");
 const {signupValidation,LoginValidation} = require("../../../Services/Validation/Auth.Validator");
-const {TestimonialValidation,AddressValidator} = require("../../../Services/Validation/Common.Validator");
+const {TestimonialValidation,AddressValidator,EnqueryValidator} = require("../../../Services/Validation/Common.Validator");
 const {SignUp,Login} = require("../Controller/Admin.Controller");
 const { uploadFile } = require("../../../Services/CommonServices");
 
@@ -10,6 +10,7 @@ const {   fetchGallery, deleteGallery, updateGallery, createGallery } = require(
 const { createPackage, fetchPackages, updatePackage, deletePackage } = require("../Controller/Packages.Controller");
 const {AddTestimonial,TestimonialList,DeleteTestimonial} = require("../Controller/Testimonial.Controller");
 const {EditAddress,AddressList} = require("../Controller/Address.Controller");
+const { AddEnquery, EnqueryList, ChangeEnqueryStatus } = require("../Controller/Enquery.Controller");
 routes.post(
   "/register",
   uploadFile("destination").single("cityImage"),
@@ -43,4 +44,10 @@ routes.delete('/testimonial/:id',DeleteTestimonial);
 
 routes.get('/address',AddressList);
 routes.put("/address/:id",AddressValidator, EditAddress);
+
+routes.post('/enquery',EnqueryValidator,AddEnquery);
+routes.get('/enquery',EnqueryList);
+routes.put('/enquery/:id',ChangeEnqueryStatus);
+
+
 module.exports = routes;
