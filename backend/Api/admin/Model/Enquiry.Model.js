@@ -27,7 +27,7 @@ const Enquery = new mongoose.Schema({
     email: {
         type: String, require: true, trim: true,
         lowercase: true,
-        unique: true,
+        // unique: true,
         required: 'Email address is required',
         validate: [validateEmail, 'Please provide a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email address']

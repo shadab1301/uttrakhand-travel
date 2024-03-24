@@ -6,7 +6,6 @@ const morgan =  require("morgan");
 const mongoose = require("./Connection/db");
 const Route = require("./Api/admin/Routes/routes");
 
-
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*" );
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

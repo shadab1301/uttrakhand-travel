@@ -83,7 +83,7 @@ exports.TestimonialList = async (req, res, next) => {
 
     }
     catch (err) {
-        return res.status(500).json({ status: 500, Error: error, message: 'Internal server Error !.' });
+        return res.status(500).json({ status: 500, Error: err, message: 'Internal server Error !.' });
 
     }
 }
@@ -112,7 +112,7 @@ exports.DeleteTestimonial = async (req, res, next) => {
 
     }
     catch (err) {
-        return res.status(500).json({ status: 500, Error: error, message: 'Internal server Error !.' });
+        return res.status(500).json({ status: 500, Error: err, message: 'Internal server Error !.' });
 
     }
 
