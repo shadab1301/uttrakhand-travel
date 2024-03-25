@@ -11,15 +11,10 @@ const { createPackage, fetchPackages, updatePackage, deletePackage } = require("
 const {AddTestimonial,TestimonialList,DeleteTestimonial} = require("../Controller/Testimonial.Controller");
 const {EditAddress,AddressList} = require("../Controller/Address.Controller");
 const { AddEnquery, EnqueryList, ChangeEnqueryStatus } = require("../Controller/Enquery.Controller");
-routes.post(
-  "/register",
-  uploadFile("destination").single("cityImage"),
-  signupValidation,
-  SignUp
-);
+const { fetchDestination, updateDestination, deleteDestination, createDestination } = require("../Controller/Destination.Controller");
+//===============================ADMIN LOGIN
+routes.post("/register",uploadFile("destination").single("cityImage"),signupValidation,SignUp);
 routes.post('/login',LoginValidation,Login);
-
-
 // Gallery
 routes.post("/gallery", uploadFile("gallery").single("image"), createGallery);
 routes.get("/gallery", fetchGallery);
@@ -41,6 +36,13 @@ routes.delete("/package/:id", deletePackage);
 routes.post('/testimonial',uploadFile('testimonial').single('image'),TestimonialValidation,AddTestimonial);
 routes.get('/testimonial',TestimonialList);
 routes.delete('/testimonial/:id',DeleteTestimonial);
+
+
+routes.post("/destination",uploadFile("destination").single("cityImage"),createDestination);
+routes.get("/destination", fetchDestination);
+routes.get("/destination/:id", fetchDestination);
+routes.put("/destination", updateDestination);
+routes.delete("/destination/:id", deleteDestination);
 
 routes.get('/address',AddressList);
 routes.put("/address/:id",AddressValidator, EditAddress);
