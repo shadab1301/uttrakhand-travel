@@ -176,7 +176,7 @@ const Footer = () => {
                 <ul className="ft-btn-list">
                   <li>
                     {" "}
-                    <NavLink className="btn callIcon" to="tel:+91 9811192312">
+                    <NavLink className="btn callIcon" to="tel:+91 8178918115">
                       <i className="fa fa-phone" aria-hidden="true"></i> Call Us
                     </NavLink>
                   </li>
@@ -191,7 +191,8 @@ const Footer = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="btn wtsapp-icon " to="#">
+                    <NavLink className="btn wtsapp-icon "
+                     to="https://wa.me/918178918115?text=Hii i want to  know about your services." target="_blank">
                       <i className="fa fa-whatsapp" aria-hidden="true"></i>
                       Whatsapp
                     </NavLink>
