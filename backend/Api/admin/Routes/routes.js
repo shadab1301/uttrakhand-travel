@@ -12,7 +12,8 @@ const {AddTestimonial,TestimonialList,DeleteTestimonial} = require("../Controlle
 const {EditAddress,AddressList} = require("../Controller/Address.Controller");
 const { AddEnquery, EnqueryList, ChangeEnqueryStatus } = require("../Controller/Enquery.Controller");
 const { fetchDestination, updateDestination, deleteDestination, createDestination } = require("../Controller/Destination.Controller");
-//===============================ADMIN LOGIN
+
+
 routes.post("/register",uploadFile("destination").single("cityImage"),signupValidation,SignUp);
 routes.post('/login',LoginValidation,Login);
 // Gallery
