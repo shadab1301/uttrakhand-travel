@@ -5,6 +5,7 @@ const {signupValidation,LoginValidation} = require("../../../Services/Validation
 const {TestimonialValidation,AddressValidator,EnqueryValidator} = require("../../../Services/Validation/Common.Validator");
 const {SignUp,Login} = require("../Controller/Admin.Controller");
 const { uploadFile } = require("../../../Services/CommonServices");
+const {UploadFiles} = require("../../../Services/Common.Services");
 
 const {   fetchGallery, deleteGallery, updateGallery, createGallery } = require("../Controller/Gallery.Controller");
 const { createPackage, fetchPackages, updatePackage, deletePackage } = require("../Controller/Packages.Controller");
@@ -34,7 +35,7 @@ routes.get("/package/:id", fetchPackages);
 routes.put("/package", updatePackage);
 routes.delete("/package/:id", deletePackage);
 
-routes.post('/testimonial',uploadFile('testimonial').single('image'),TestimonialValidation,AddTestimonial);
+routes.post('/testimonial',UploadFiles('testimonial').single('image'),TestimonialValidation,AddTestimonial);
 routes.get('/testimonial',TestimonialList);
 routes.delete('/testimonial/:id',DeleteTestimonial);
 

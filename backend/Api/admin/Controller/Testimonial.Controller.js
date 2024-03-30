@@ -23,6 +23,8 @@ exports.AddTestimonial = async (req, res, next) => {
             });
         }
         else {
+            // console.log(req?.file);
+            // console.log(req?.file?.filename); return false;
             let obj = {
                 _id: new mongoose.Types.ObjectId(),
                 customer_name: req?.body?.customer_name.trim(),
