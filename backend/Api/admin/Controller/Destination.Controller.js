@@ -1,4 +1,6 @@
 const ApiError = require("../../../utils/ApiError");
+const ApiResponse = require("../../../utils/ApiResponse");
+const { ApiValidationMessage } = require("../../../utils/ApiValidationMessage");
 const Destination = require("../Model/Destination.Model");
 
 exports.createDestination = async (req, res, next) => {
@@ -7,6 +9,12 @@ exports.createDestination = async (req, res, next) => {
     if(!cityName){
       throw new ApiError(400,"cityName should not be empty")
     }
+
+  //  const isValidationError= ApiValidationMessage(req);
+  //  if(isValidationError){
+  //   throw new ApiResponse(409, isValidationError,"Please enter valid details");
+  //  }
+
      const filePath = `${process.env.IMAGE_BASE_PATH}/destination/${req.file.filename}`;
      const destination = {
        cityName,

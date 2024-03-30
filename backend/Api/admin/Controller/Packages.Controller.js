@@ -1,17 +1,26 @@
 const ApiError = require("../../../utils/ApiError");
 const ApiResponse = require("../../../utils/ApiResponse");
+const { ApiValidationMessage } = require("../../../utils/ApiValidationMessage");
 const Package = require("../Model/Package.Model");
 
 exports.createPackage = async (req, res, next) => {
   try {
     const { title, subTitle, numbersOfDay, description } = req.body;
-    if (
-      [title, subTitle, numbersOfDay, description].some(
-        (val) => val?.trim() === ""
-      )
-    ) {
-      throw new ApiError("400", "All field are required.");
-    }
+    // if (
+    //   [title, subTitle, numbersOfDay, description].some(
+    //     (val) => val?.trim() === ""
+    //   )
+    // ) {
+    //   throw new ApiError("400", "All field are required.");
+    // }
+  //  const isValidationError = ApiValidationMessage(req);
+  //   if (isValidationError) {
+  //     throw new ApiResponse(
+  //       409,
+  //       isValidationError,
+  //       "Please enter valid details"
+  //     );
+  //   }
 
 
 

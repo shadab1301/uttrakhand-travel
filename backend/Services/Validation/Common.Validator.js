@@ -31,3 +31,32 @@ exports.AddressValidator = [
     check('map_location', 'map location can not be empty').not().isEmpty(),
 
 ];
+
+exports.DestinationValidator = [
+  check("cityName").not().isEmpty().withMessage("cityName can not be blank."),
+  ,
+];
+
+exports.PackagesValidator = [
+  check("title").not().isEmpty("Title can not be blank."),
+  check("subTitle")
+    .not()
+    .isEmpty()
+    .withMessage("First Name must be alphabetic."),
+  check("numbersOfDay")
+    .not()
+    .isEmpty()
+    .withMessage("numbersOfDay can not  be blank."),
+  check("description")
+    .not()
+    .isEmpty()
+    .withMessage("description can not  be blank."),
+];
+exports.GallleryValidator = [
+  check("title").not().isEmpty("Title can not be blank."),
+  check("description")
+    .not()
+    .isEmpty()
+    .withMessage("description can not  be blank."),
+];
+
