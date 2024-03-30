@@ -1,6 +1,14 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { NavLink } from "react-router-dom";
 export const Contact = () => {
+
+    const HandleChange= (e) =>{
+
+    }
+    onsubmit = (e) =>{
+        e.preventDefault();
+
+    }
     return (<>
         <div className="bannercls">
             <img className="img-fluid" src="images/listing-banner.jpg" alt="" title="" border="0" />
@@ -106,7 +114,17 @@ export const Contact = () => {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-md-12">
+                                <div className="col-md-4">
+                                        <select className="form-control" id="enquery_type" name="enquery_type">
+                                            <option value="">--Enquery type--</option>
+                                            <option value="Just Reach Out">Just Reach Out</option> 
+                                            <option value="Package Booking">Package Booking</option>
+                                            <option value="Hotel Booking" >Hotel Booking</option>
+                                            <option value="Car and Taxi Service">Car & Taxi Service</option>
+                                            <option value="Rafting and Camping">Rafting and Camping</option> 
+                                        </select>
+                                    </div>
+                                    <div className="col-md-8">
                                         <textarea name="" id="" cols="30" rows="5" placeholder="Any Special Request" className="form-control"></textarea>
                                     </div>
                                 </div>
