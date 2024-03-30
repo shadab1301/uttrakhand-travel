@@ -4,7 +4,9 @@ const {checkTcken} = require("../Middleware/auth.middleware");
 const {signupValidation,LoginValidation} = require("../../../Services/Validation/Auth.Validator");
 const {TestimonialValidation,AddressValidator,EnqueryValidator} = require("../../../Services/Validation/Common.Validator");
 const {SignUp,Login} = require("../Controller/Admin.Controller");
-const { uploadFile } = require("../../../Services/CommonServices");
+// const { uploadFile } = require("../../../Services/CommonServices");
+
+const { UploadFiles: uploadFile } = require("../../../Services/Common.Services");
 
 const {   fetchGallery, deleteGallery, updateGallery, createGallery } = require("../Controller/Gallery.Controller");
 const { createPackage, fetchPackages, updatePackage, deletePackage } = require("../Controller/Packages.Controller");
@@ -19,13 +21,15 @@ routes.post('/login',LoginValidation,Login);
 // Gallery
 routes.post(
   "/gallery",
-  GallleryValidator,
+  // GallleryValidator,
   uploadFile("gallery").single("image"),
   createGallery
 );
 routes.get("/gallery", fetchGallery);
 routes.get("/gallery/:id", fetchGallery);
-routes.put("/gallery", GallleryValidator, updateGallery);
+routes.put("/gallery", 
+// GallleryValidator, 
+updateGallery);
 routes.delete("/gallery/:id", deleteGallery);
 
 // Packages

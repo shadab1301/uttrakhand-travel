@@ -26,7 +26,9 @@ function fileFilter(req, file, cb) {
       cb(null, `./public/${folderName}`);
     },
     filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+      // console.log({file:file.originalname})
+      // return false
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9+ '_' + file.replace(/ /g,''));
       cb(null, file.fieldname + "-" + uniqueSuffix);
     },
   });
