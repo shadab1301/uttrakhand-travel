@@ -48,7 +48,7 @@ routes.put(
 );
 routes.delete("/package/:id", deletePackage);
 
-routes.post('/testimonial',uploadFile('testimonial').single('image'),TestimonialValidation,AddTestimonial);
+routes.post('/testimonial',UploadFiles('testimonial').single('image'),TestimonialValidation,AddTestimonial);
 routes.get('/testimonial',TestimonialList);
 routes.delete('/testimonial/:id',DeleteTestimonial);
 

@@ -18,6 +18,7 @@ app.use("*",cors());
 app.use(morgan("dev"));
 app.use("/public", express.static("public"));
 
+app.use('/public/testimonial', express.static("public/testimonial"));
 // api's
 app.use('/api/v1',Route);
 

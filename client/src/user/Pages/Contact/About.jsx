@@ -22,13 +22,15 @@ export const About = () => {
                             <div className="fl-title blacktxt text-center">
                                 We provide first class tour and travel services in Uttrakhand:
                             </div>
-                            <p className="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-                                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                                PageMaker including versions of Lorem Ipsum
+                            <p className="text-center">
+                                <span style={{color:"#1a4d78"}}>Devbhoomi Tours Operators,</span> is the most popular travel agency in Devprayag.
+                                We take you to the most visited places as well as those hidden places which are still untouched and spectacular.
+                                We provide you with a wide list of places and packages that are much lower in budget and good in Experience.
+                                Our team is widely experienced in handling variety of tours due to their extensive knowledge and we are knowledgeable and flexible enough to provide customized tours.
+                                Whether you are alone or with family and children, you can rest assured that you can make your journey more beautiful.
+                                Because it is our responsibility to plan for you. We provide you the best service from the beginning till the end of your journey.
+                                You can be rest assured that you are travelling with one of the most trusted and qualified travel agents in the area.
+
                             </p>
                         </div>
                     </div>
@@ -36,7 +38,7 @@ export const About = () => {
                 </div>
 
                 <div className="row">
-              
+
                 </div>
             </div>
         </section>
