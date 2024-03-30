@@ -2,32 +2,32 @@
     "Service": [
         {
             "serviceId": 1,
-            "title": "Bus Ticket Booking",
+            "title": "Tour operator",
             "icon": "images/hotdeals1.jpeg"
         },
         {
             "serviceId": 2,
-            "title": "Tour Operators",
+            "title": "Car & Taxi Service",
             "icon": "images/hotdeals1.jpeg"
         },
         {
             "serviceId": 3,
-            "title": "Railway Reservation",
+            "title": "Tour Guide Service",
             "icon": "images/hotdeals1.jpeg"
         },
         {
             "serviceId": 4,
-            "title": "Hotel Booking",
+            "title": "Local Sightseeing Tours, Language Guide and Assistant / Representative Service",
             "icon": "images/hotdeals1.jpeg"
         },
         {
             "serviceId": 5,
-            "title": "Camping & Rafting",
+            "title": "Trekking Tours, Village / Tribal Tours, Pilgrimage Tours, Cultural Tours, Adventure Tours, Rafting, Camping, Yoga, Meditation, Chardham Yatra",
             "icon": "images/hotdeals1.jpeg"
         },
         {
             "serviceId": 6,
-            "title": "Taxi & Car Service",
+            "title": "Hotels / Camp / Ashram / Nature Resort / Village Stay Booking",
             "icon": "images/hotdeals1.jpeg"
         }
     ]

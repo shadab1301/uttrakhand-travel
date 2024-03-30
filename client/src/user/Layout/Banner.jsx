@@ -21,7 +21,8 @@ export const Banner = () => {
                         <div className="item">
                             <NavLink to="/list/all">
                                 <div className="banner-txt zoomIn" data-wow-duration="3s">
-                                    Hot <span className="theme-color">Deals</span> this month
+                                  <span className="theme-color"> DEVBHOOMI</span> TOURS OPERATORS
+                                  <h5  className="theme-color">FEEL THE BEAUTY OF HEAVEN</h5>
                                 </div>
                                 <img src="images/slide1.jpg" alt="slide2" title="" border="0" />
                             </NavLink>
@@ -29,7 +30,8 @@ export const Banner = () => {
                         <div className="item">
                             <NavLink to="/list/all">
                                 <div className="banner-txt zoomIn" data-wow-duration="3s">
-                                    Hot <span className="theme-color">Deals</span> this month
+                                <span className="theme-color"> DEVBHOOMI</span> TOURS OPERATORS
+                                <h5  className="theme-color">FEEL THE BEAUTY OF HEAVEN</h5>
                                 </div>
                                 <img src="images/slide2.jpg" alt="slide2" title="" border="0" />
                             </NavLink>
