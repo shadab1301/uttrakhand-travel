@@ -1,13 +1,70 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-export const Contact = () => {
 
-    const HandleChange= (e) =>{
+import { fetchController } from "../../../utils/fetchController/fetchController";
+export const Contact = () => {
+    const [Feminine, SetFeminine] = useState("mr");
+    const [Firstname, SetFirstname] = useState("");
+    const [Lastname, SetLastname] = useState("");
+    const [Email, setEmail] = useState("");
+    const [Message, SetMessage] = useState("");
+    const [Enquerty, setEnquerty] = useState("");
+    const [phone, setPhone] = useState("");
+    const [Msg, setMsg] = useState({ color: "", txt: "" });
+    const HandleChange = (e) => {
+        if (e.target.name === "feminine") {
+            SetFeminine(e.target.value);
+
+        }
+        else if (e.target.name === "FName") {
+            SetFirstname(e.target.value);
+
+        } else if (e.target.name === "LName") {
+            SetLastname(e.target.value);
+        }
+        else if (e.target.name === "mobile") {
+            setPhone(e.target.value);
+        }
+        else if (e.target.name === "email") {
+            setEmail(e.target.value);
+        } else if (e.target.name === "enquery_type") {
+            setEnquerty(e.target.value);
+        }
+        else if (e.target.name === "message") {
+            SetMessage(e.target.value);
+        }
+
 
     }
-    onsubmit = (e) =>{
+    onsubmit = async (e) => {
         e.preventDefault();
+        debugger;
 
+        if (Feminine == '' || Firstname == '' || Lastname == "" || phone == "" || Email == "" || Enquerty == "" || Message == "") {
+            setMsg({ color: "red", txt: "All Fileds are required." });
+        } else {
+            setMsg({ color: '', txt: '' });
+            let obj = {
+                "feminine": Feminine,
+                "first_name": Firstname,
+                "last_name": Lastname,
+                "mobile_number": phone,
+                "email": Email,
+                "enquery_type": Enquerty,
+                "message": Message
+            };
+            console.log(obj);
+            const response = await fetchController('enquery', 'post', obj);
+            console.log(response);
+            if(response?.status ==201) {
+                setMsg({ color: 'green', txt: response?.message  });
+                setTimeout(() => {
+                    setMsg({ color: '', txt: ''});
+                }, 5000);
+            }
+
+        }
+      
     }
     return (<>
         <div className="bannercls">
@@ -15,8 +72,7 @@ export const Contact = () => {
             <div className="container-fluid">
                 <div className="banner-content">
                     <h2 className="banner-title text-white wow bounceInLeft" data-wow-duration="3s"><NavLink className="banner-title text-white wow bounceInLeft" to="/">Home</NavLink>/Contact Us</h2>
-                    {/* <div className="banner-sub-title text-white wow bounceInLeft" data-wow-duration="3s">Home - India Packages</div>
-            <div className="banner-smalltxt text-white wow bounceInLeft" data-wow-duration="3s">Tour and Travel Solutions</div> */}
+
                 </div>
             </div>
         </div>
@@ -26,7 +82,7 @@ export const Contact = () => {
                     <div className="offset-1 col-md-10">
                         <div className="bt-left">
                             <div className="fl-title text-center">
-                               <h3>Contact Us {JSON.stringify(import.meta.env.VITE_REACT_WEBNAME)}</h3>
+                                <h3>Contact Us {JSON.stringify(import.meta.env.VITE_REACT_WEBNAME)}</h3>
                             </div>
                             <div className="fl-title blacktxt text-center">
                                 We provide first class tour and travel services in Uttrakhand:
@@ -85,49 +141,48 @@ export const Contact = () => {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-2">
-                                        <select className="form-control" id="sal" name="sellist1">
-                                            <option>Mr.</option>
-                                            <option>Miss</option>
-                                            <option>Mrs.</option>
+                                        <select className="form-control" id="feminine" name="feminine" onChange={HandleChange}>
+                                            <option value="mr" selected>Mr.</option>
+                                            <option value="miss">Miss</option>
+                                            <option value="mrs">Mrs.</option>
                                         </select>
                                     </div>
                                     <div className="col-md-5">
-                                        <input type="text" name="FName" id="FName" placeholder="First name" className="form-control" />
+                                        <input type="text" name="FName" id="FName" placeholder="First name" className="form-control" onChange={HandleChange} />
                                     </div>
                                     <div className="col-md-5">
-                                        <input type="text" name="LName" id="LName" placeholder="Last name" className="form-control" />
+                                        <input type="text" name="LName" id="LName" placeholder="Last name" className="form-control" onChange={HandleChange} />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-2">
-                                        <select className="form-control" id="cntry-code" name="sellist1">
-                                            <option>+91</option>
-                                            <option>+92</option>
-                                            <option>+1684</option>
+                                        <select className="form-control" id="countryCode" name="countryCode" onChange={HandleChange} disabled>
+                                            <option value="91">91</option>
                                         </select>
                                     </div>
                                     <div className="col-md-5">
-                                        <input type="text" name="FName" id="mobile" placeholder="Mobile Number" className="form-control" />
+                                        <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" className="form-control" onChange={HandleChange} />
                                     </div>
                                     <div className="col-md-5">
-                                        <input type="text" name="LName" id="email" placeholder="E-mail Address" className="form-control" />
+                                        <input type="text" name="email" id="email" placeholder="E-mail Address" className="form-control" onChange={HandleChange} />
                                     </div>
                                 </div>
                                 <div className="row">
-                                <div className="col-md-4">
-                                        <select className="form-control" id="enquery_type" name="enquery_type">
+                                    <div className="col-md-4">
+                                        <select className="form-control" id="enquery_type" name="enquery_type" onChange={HandleChange}>
                                             <option value="">--Enquery type--</option>
-                                            <option value="Just Reach Out">Just Reach Out</option> 
+                                            <option value="Just Reach Out">Just Reach Out</option>
                                             <option value="Package Booking">Package Booking</option>
                                             <option value="Hotel Booking" >Hotel Booking</option>
                                             <option value="Car and Taxi Service">Car & Taxi Service</option>
-                                            <option value="Rafting and Camping">Rafting and Camping</option> 
+                                            <option value="Rafting and Camping">Rafting and Camping</option>
                                         </select>
                                     </div>
                                     <div className="col-md-8">
-                                        <textarea name="" id="" cols="30" rows="5" placeholder="Any Special Request" className="form-control"></textarea>
+                                        <textarea name="message" id="message" cols="30" rows="5" placeholder="Any Special Request" className="form-control" onChange={HandleChange} ></textarea>
                                     </div>
                                 </div>
+                                <span style={{ color: Msg.color }}>{Msg.txt}</span>
                                 <div className="row">
                                     <div className="offset-8 col-lg-4 col-md-4 col-sm 12 col-12">
                                         <button className="reqst-btn float-right" >Request a callback</button>

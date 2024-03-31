@@ -38,12 +38,12 @@ exports.AddEnquery = async (req, res, next) => {
                 return res.status(201).json({
                     status: 201,
                     _id: enquery_res._id,
-                    message: 'Enquery created.'
+                    message: 'Enquery sent, we will get back to you soon!'
                 });
             } else {
                 return res.status(404).json({
                     status: 404,
-                    message: 'Enquery not created.'
+                    message: 'Enquery not sent.'
                 });
             }
 
