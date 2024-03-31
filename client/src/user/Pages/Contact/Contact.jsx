@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { fetchController } from "../../../utils/fetchController/fetchController";
 export const Contact = () => {
+    const [Address,setAddress] = useState([]);
     const [Feminine, SetFeminine] = useState("mr");
     const [Firstname, SetFirstname] = useState("");
     const [Lastname, SetLastname] = useState("");
@@ -11,6 +12,18 @@ export const Contact = () => {
     const [Enquerty, setEnquerty] = useState("");
     const [phone, setPhone] = useState("");
     const [Msg, setMsg] = useState({ color: "", txt: "" });
+
+useEffect(  ()=>{
+    GetAddress();
+},[]);
+
+
+const GetAddress = async() =>{
+    const response = await fetchController('address', 'get');
+    if(response?.status ==200) {
+        setAddress(response?.data);
+    }
+}
     const HandleChange = (e) => {
         if (e.target.name === "feminine") {
             SetFeminine(e.target.value);
@@ -62,10 +75,10 @@ export const Contact = () => {
                     setMsg({ color: '', txt: ''});
                 }, 5000);
             }
-
         }
       
     }
+
     return (<>
         <div className="bannercls">
             <img className="img-fluid" src="images/listing-banner.jpg" alt="" title="" border="0" />
@@ -126,11 +139,11 @@ export const Contact = () => {
                                 <table>
                                     <tr>
                                         <span><i class="fa fa-home" style={{ fontSsize: "36px" }}></i>&nbsp;</span>
-                                        Devprayag- Rishikesh, Uttarakhand - 249192, India
+                                        {Address[0]?.address}
                                     </tr>
-                                    <tr><span><i class="fa fa-phone" style={{ fontSsize: "36px" }}></i>&nbsp;</span> +911234567890, 1234567890</tr>
-                                    <tr><span><i class="fa fa-envelope" style={{ fontSsize: "36px" }}></i>&nbsp;</span>sandeep@gmail.com</tr>
-                                    <tr><span><i class="fa fa-globe" style={{ fontSsize: "36px" }}></i>&nbsp;</span>uttarakhandtourism.co.in</tr>
+                                    <tr><span><i class="fa fa-phone" style={{ fontSsize: "36px" }}></i>&nbsp;</span> {Address[0]?.primary_number}, {Address[0]?.alternate_number}</tr>
+                                    <tr><span><i class="fa fa-envelope" style={{ fontSsize: "36px" }}></i>&nbsp;</span>{Address[0]?.email}</tr>
+                                    <tr><span><i class="fa fa-globe" style={{ fontSsize: "36px" }}></i>&nbsp;</span>{Address[0]?.WebUrl}</tr>
                                 </table>
                             </div>
                         </div>
