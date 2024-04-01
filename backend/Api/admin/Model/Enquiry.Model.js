@@ -9,7 +9,7 @@ const Enquery = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     feminine: {
         type:String,
-        enum:["mr", "mrs"],
+        enum:["mr", "mrs","miss"],
         required: true,
     },
     first_name: {
