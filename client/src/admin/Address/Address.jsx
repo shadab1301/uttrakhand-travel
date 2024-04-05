@@ -24,9 +24,8 @@ const Address = () => {
     setOpen(false);
   };
   const loadData = async () => {
-    // debugger
     try {
-      const res = await fetchController("/package", "GET");
+      const res = await fetchController("/address", "GET");
 
       console.log(res.data);
       const formattedData = res.data.map((val, index) => {
@@ -51,13 +50,28 @@ const Address = () => {
   }, []);
   return (
     <>
-      
-      <AddAddress
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        p={2}
+      >
+        <Typography
+          //   sx={{ flex: "1 1 100%" }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          Address
+        </Typography>
+      </Stack>
+      {/* <AddAddress
         isOpen={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
         size={"md"}
-      />
+      /> */}
       <MasterTable tableData={packagesData} column={column} table="address" />
     </>
   );

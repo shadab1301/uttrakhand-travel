@@ -26,7 +26,7 @@ const Destination = () => {
    const loadData = async () => {
      // debugger
      try {
-       const res = await fetchController("/package", "GET");
+       const res = await fetchController("/destination", "GET");
 
        console.log(res.data);
        const formattedData = res.data.map((val, index) => {
