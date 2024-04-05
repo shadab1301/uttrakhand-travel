@@ -12,10 +12,7 @@ import { RxCrossCircled } from "react-icons/rx";
 
 const AddTestimonial = ({ handleOpen, handleClose, isOpen, size }) => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    customer_name:"", description:"", image:"",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,42 +75,32 @@ const AddTestimonial = ({ handleOpen, handleClose, isOpen, size }) => {
                 margin="normal"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
+                id="customer_name"
+                label="Customer name"
+                name="customer_name"
+                value={formData.customer_name}
                 onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
+                id="description"
+                label="Description"
+                name="description"
+                value={formData.description}
                 onChange={handleChange}
               />
+
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="password"
-                label="Password"
-                name="password"
-                type="password"
-                value={formData.password}
+                id="image"
+                label=""
+                name="image"
+                type="file"
+                value={formData.image}
                 onChange={handleChange}
               />
               <Button
@@ -122,7 +109,7 @@ const AddTestimonial = ({ handleOpen, handleClose, isOpen, size }) => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Submit 
+                Submit
               </Button>
             </Box>
           </Box>

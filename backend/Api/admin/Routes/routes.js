@@ -8,28 +8,22 @@ const {SignUp,Login} = require("../Controller/Admin.Controller");
 
 const { UploadFiles: uploadFile } = require("../../../Services/Common.Services");
 
-const {   fetchGallery, deleteGallery, updateGallery, createGallery } = require("../Controller/Gallery.Controller");
-const { createPackage, fetchPackages, updatePackage, deletePackage } = require("../Controller/Packages.Controller");
+const {fetchGallery, deleteGallery, updateGallery, createGallery } = require("../Controller/Gallery.Controller");
+const {createPackage, fetchPackages, updatePackage, deletePackage } = require("../Controller/Packages.Controller");
 const {AddTestimonial,TestimonialList,DeleteTestimonial} = require("../Controller/Testimonial.Controller");
 const {EditAddress,AddressList} = require("../Controller/Address.Controller");
-const { AddEnquery, EnqueryList, ChangeEnqueryStatus } = require("../Controller/Enquery.Controller");
-const { fetchDestination, updateDestination, deleteDestination, createDestination } = require("../Controller/Destination.Controller");
+const {AddEnquery, EnqueryList, ChangeEnqueryStatus } = require("../Controller/Enquery.Controller");
+const {fetchDestination, updateDestination, deleteDestination, createDestination } = require("../Controller/Destination.Controller");
 
 
 routes.post("/register",uploadFile("destination").single("cityImage"),signupValidation,SignUp);
 routes.post('/login',LoginValidation,Login);
 // Gallery
-routes.post(
-  "/gallery",
-  // GallleryValidator,
-  uploadFile("gallery").single("image"),
-  createGallery
-);
+
+routes.post("/gallery", uploadFile("gallery").single("gallery"), createGallery);
 routes.get("/gallery", fetchGallery);
 routes.get("/gallery/:id", fetchGallery);
-routes.put("/gallery", 
-// GallleryValidator, 
-updateGallery);
+routes.put("/gallery", updateGallery);
 routes.delete("/gallery/:id", deleteGallery);
 
 // Packages

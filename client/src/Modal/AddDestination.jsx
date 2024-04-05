@@ -7,15 +7,17 @@ import {
   Container,
   Typography,
   Stack,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { RxCrossCircled } from "react-icons/rx";
 
 const AddDestination = ({ handleOpen, handleClose, isOpen, size }) => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    cityName:"",
+     cityImage:"",
+     isIncludeInNavbar:"",
+     isTopVisitPlace:"",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,7 +68,7 @@ const AddDestination = ({ handleOpen, handleClose, isOpen, size }) => {
               justifyContent={"space-between"}
             >
               <Typography variant="h5" gutterBottom>
-                Add Packages
+                Add Destination
               </Typography>
               <Typography sx={{ cursor: "pointer" }}>
                 <RxCrossCircled size={32} onClick={handleClose} />
@@ -78,43 +80,44 @@ const AddDestination = ({ handleOpen, handleClose, isOpen, size }) => {
                 margin="normal"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
+                id="cityName"
+                label="cityName"
+                name="cityName"
+                value={formData.cityName}
                 onChange={handleChange}
               />
               <TextField
+                accept="image/*"
                 margin="normal"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
+                id="cityImage"
+                label=""
+                name="cityImage"
+                type="file"
+                value={formData.cityImage}
                 onChange={handleChange}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
+
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    // checked={antoine}
+                    onChange={handleChange}
+                    name="isIncludeInNavbar"
+                  />
+                }
+                label="Is include in navbar"
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="password"
-                label="Password"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    // checked={antoine}
+                    onChange={handleChange}
+                    name="isTopVisitPlace"
+                  />
+                }
+                label="Is top visit place"
               />
               <Button
                 type="submit"
@@ -122,7 +125,7 @@ const AddDestination = ({ handleOpen, handleClose, isOpen, size }) => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Register
+                Add
               </Button>
             </Box>
           </Box>

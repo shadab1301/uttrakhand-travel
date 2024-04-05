@@ -12,10 +12,9 @@ import { RxCrossCircled } from "react-icons/rx";
 
 const AddGallery = ({ handleOpen, handleClose, isOpen, size }) => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    title: "",
+    description: "",
+    image: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,44 +77,34 @@ const AddGallery = ({ handleOpen, handleClose, isOpen, size }) => {
                 margin="normal"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
+                id="title"
+                label="Title"
+                name="title"
+                value={formData.title}
                 onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
+                id="description"
+                label="Description"
+                name="description"
+                value={formData.description}
                 onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                type="email"
-                value={formData.email}
+                id="image"
+                label=""
+                name="image"
+                type="file"
+                value={formData.image}
                 onChange={handleChange}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="password"
-                label="Password"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
+             
               <Button
                 type="submit"
                 fullWidth
