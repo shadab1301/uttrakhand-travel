@@ -50,7 +50,6 @@ const Gallery = () => {
   }, []);
   return (
     <>
-      <>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -82,7 +81,7 @@ const Gallery = () => {
           handleClose={handleClose}
           size={"md"}
         />
-      </>
+ 
       <MasterTable tableData={packagesData} column={column} table="gallery" />
     </>
   );

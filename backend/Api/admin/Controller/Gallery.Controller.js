@@ -8,6 +8,8 @@ exports.createGallery = async (req, res, next) => {
     if (!title) {
       throw new ApiError(400, "title fields is required");
     }
+    console.log(1)
+    console.log(req.file);
     const filePath = `${process.env.IMAGE_BASE_PATH}/gallery/${req.file.filename}`;
     const alreadyExistedTitle = await Gallery.findOne({ title });
     const gallery = {
@@ -15,24 +17,26 @@ exports.createGallery = async (req, res, next) => {
       description: description || "",
       image: filePath,
     };
-
+ console.log(2);
     if (alreadyExistedTitle) {
       throw new ApiError(400, "Title already exist");
     }
     const createdGallery = await Gallery.create(gallery);
-
+ console.log(3);
     if (!createdGallery) {
       throw new ApiError(
         500,
         "Something went wrong while creating the gallery."
       );
     }
+     console.log(4);
     return res
       .status(200)
       .json(
         new ApiResponse(200, createdGallery, "Gallery created successfully.")
       );
   } catch (err) {
+    console.log(err)
     return res.status(500).json({
       status: 500,
       message: "Internal server Error......",
