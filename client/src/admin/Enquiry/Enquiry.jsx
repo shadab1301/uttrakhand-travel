@@ -14,7 +14,7 @@ const Enquiry = () => {
     "Email",
     "Type",
     "Message",
-    "Status",
+    // "Status",
   ]);
 
   const handleOpen = () => {
@@ -26,21 +26,23 @@ const Enquiry = () => {
     setOpen(false);
   };
   const loadData = async () => {
-    // debugger
     try {
-      const res = await fetchController("/package", "GET");
+      const res = await fetchController("/enquery", "GET");
 
       console.log(res.data);
       const formattedData = res.data.map((val, index) => {
         return {
           id: val._id,
           ["SN0"]: index + 1,
-          Title: val.title,
-          Description: val.description,
-          ["No of Days"]: val.numbersOfDay,
-          ["Image"]: val.pkgImage,
+          ["Name"]: val.feminine + " " + val.first_name + " " + val.last_name,
+          ["Mobile no"]: val.mobile_number,
+          ["Email"]: val.email,
+          ["Type"]: val.enquery_type,
+          ["Message"]: val.message,
+          // ["Status"]: val.status,
         };
       });
+      console.log({ formattedData });
       setEnquiryData(formattedData);
     } catch (error) {
       console.log("Error occour while fetching Packages");
@@ -53,7 +55,6 @@ const Enquiry = () => {
   }, []);
   return (
     <>
-      <>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -70,7 +71,6 @@ const Enquiry = () => {
             Enquiry
           </Typography>
         </Stack>
-      </>
       <MasterTable tableData={enquiryData} column={column} table="enquiry" />
     </>
   );

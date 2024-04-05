@@ -109,6 +109,37 @@ export default function MasterTable({ column=[], tableData=[], table="" }) {
                 </TableCell>
               </TableRow>
             ))}
+          {table === "enquiry" &&
+            tableData.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.SN0}
+                </TableCell>
+                <TableCell>{row["Name"]}</TableCell>
+                <TableCell>{row["Mobile no"]}</TableCell>
+                <TableCell>{row["Email"]}</TableCell>
+                <TableCell>{row["Type"]}</TableCell>
+                <TableCell>{row["Message"]}</TableCell>
+
+                <TableCell>
+                  <Stack direction="row" spacing={2}>
+                    <AiTwotoneEdit
+                      style={{
+                        color: "green",
+                      }}
+                    />
+                    <AiOutlineDelete
+                      style={{
+                        color: "red",
+                      }}
+                    />
+                  </Stack>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

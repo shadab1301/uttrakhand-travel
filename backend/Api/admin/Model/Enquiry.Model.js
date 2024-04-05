@@ -4,7 +4,6 @@ var validateEmail = function (email) {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email)
 };
-
 const Enquery = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     feminine: {

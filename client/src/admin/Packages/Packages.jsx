@@ -20,7 +20,6 @@ const Packages = () => {
     setOpen(false);
   };
   const loadData=async()=>{
-    // debugger
    try {
      const res =await fetchController("/package", "GET");
   
