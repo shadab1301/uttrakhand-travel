@@ -7,7 +7,7 @@ const Testimonial = () => {
             const response = await fetchController('/testimonial', 'get');
             if (response?.status == 200) {
                 setTestimonial(response?.data);
-                console.log(response?.data);
+                // console.log(response?.data);
             }
         } catch (err) {
             console.log("Error while loading testimonials.");
