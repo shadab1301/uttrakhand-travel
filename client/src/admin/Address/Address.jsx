@@ -7,7 +7,7 @@ const Address = () => {
   const [open, setOpen] = useState(false);
   const [packagesData, setPachagesData] = useState([{}]);
   const [column, setColumn] = useState([
-    "SN0",
+    "SNo",
     "Primary number",
     "Alternate Number",
     "Email",
