@@ -68,7 +68,7 @@ exports.TestimonialList = async (req, res, next) => {
                         id: data?._id,
                         customer_name: data?.customer_name,
                         description: data?.description,
-                        image: `./public/testimonial/${data?.image}`,
+                        image: `${process.env.IMAGE_BASE_PATH}/testimonial/${data?.image}`,
                     }
                 }),
                 message: 'Testimonial list.'

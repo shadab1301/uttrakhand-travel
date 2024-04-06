@@ -19,7 +19,7 @@ useEffect(  ()=>{
 
 
 const GetAddress = async() =>{
-    const response = await fetchController('address', 'get');
+    const response = await fetchController('/address', 'get');
     if(response?.status ==200) {
         setAddress(response?.data);
     }
@@ -46,13 +46,9 @@ const GetAddress = async() =>{
         else if (e.target.name === "message") {
             SetMessage(e.target.value);
         }
-
-
     }
     onsubmit = async (e) => {
         e.preventDefault();
-        debugger;
-
         if (Feminine == '' || Firstname == '' || Lastname == "" || phone == "" || Email == "" || Enquerty == "" || Message == "") {
             setMsg({ color: "red", txt: "All Fileds are required." });
         } else {
@@ -67,7 +63,7 @@ const GetAddress = async() =>{
                 "message": Message
             };
             console.log(obj);
-            const response = await fetchController('enquery', 'post', obj);
+            const response = await fetchController('/enquery', 'post', obj);
             console.log(response);
             if(response?.status ==201) {
                 setMsg({ color: 'green', txt: response?.message  });
