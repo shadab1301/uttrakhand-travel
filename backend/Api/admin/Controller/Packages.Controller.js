@@ -33,19 +33,26 @@ exports.createPackage = async (req, res, next) => {
     //     );
     //   }
 
-    // console.log({ filedetails: req });
-    // return false
-    const filePath = `${process.env.IMAGE_BASE_PATH}/packages/${req.file.filename}`;
+    
+    const { pkgImage, BannerImage } = req.files;
+ 
+ 
+    const BannerImgPath = `${process.env.IMAGE_BASE_PATH}/packages/${BannerImage[0].filename}`;
+    const pkgImagePath = `${process.env.IMAGE_BASE_PATH}/packages/${pkgImage[0].filename}`;
+
+
+    // BannerImage;
     const package = {
       title: title || "default",
       subTitle: subTitle || "default",
       numbersOfDay: numbersOfDay || "default",
       description: description || "default",
-      isRecommendPackages: isRecommendPackages ,
+      isRecommendPackages: isRecommendPackages,
       isTopPackages: isTopPackages || 0,
       isShowInHeader: isShowInHeader || 0,
       include: include,
-      pkgImage: filePath,
+      pkgImage: pkgImagePath,
+      BannerImage: BannerImgPath,
     };
 
     const createdPackage = await Package.create(package);

@@ -30,7 +30,10 @@ routes.delete("/gallery/:id", deleteGallery);
 routes.post(
   "/package",
   // PackagesValidator,
-  uploadFile("packages").single("pkgImage"),
+  uploadFile("packages").fields([
+    { name: "pkgImage" },
+    { name: "BannerImage" },
+  ]),
   createPackage
 );
 routes.get("/package", fetchPackages);

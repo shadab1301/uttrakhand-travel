@@ -26,6 +26,10 @@ const packageSchema = new mongoose.Schema(
       type: String,
       required: [true, "pkgImage should not be empty"],
     },
+    BannerImage: {
+      type: String,
+      required: [true, "BannerImage should not be empty"],
+    },
     isShowInHeader: {
       type: String,
       enum: [0, 1], //0  for false, 1 for in true
