@@ -13,43 +13,45 @@ import axios from "axios";
 
 const AddPackages = ({ handleOpen, handleClose, isOpen, size }) => {
   const [formData, setFormData] = useState({
-    title:"",
-    subTitle:"",
-    numbersOfDay:"",
-     description:"",
-    pkgImage:"",
-
+    title: "",
+    subTitle: "",
+    numbersOfDay: "",
+    description: "",
   });
+  const [image, setImage] = useState(null);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name === "pkgImage") {
+      setImage(e.target.files[0]);
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = async(e) => {
-      e.preventDefault();
-      const data = new FormData();
-      data.append("file", formData.pkgImage);
-      data.append("title", formData.title);
-      data.append("subTitle", formData.subTitle);
-      data.append("numbersOfDay", formData.numbersOfDay);
-      data.append("description", formData.description);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("pkgImage", image);
+    data.append("title", formData.title);
+    data.append("subTitle", formData.subTitle);
+    data.append("numbersOfDay", formData.numbersOfDay);
+    data.append("description", formData.description);
 
-      console.log({data});
+    console.log({ data });
     const url = "http://localhost:5000/api/v1/package";
-    // const res = await fetch(url, {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    // });
-const res = await axios.post(url, JSON.stringify(data));
 
-    console.log({res});
+    axios.post(url, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
+    // const res = await axios.post(url, JSON.stringify(data));
 
-
-
+    // console.log({res});
   };
 
   return (

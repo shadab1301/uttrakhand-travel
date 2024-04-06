@@ -22,8 +22,8 @@ exports.createPackage = async (req, res, next) => {
   //     );
   //   }
 
-
-
+// console.log({ filedetails: req });
+// return false
     const filePath = `${process.env.IMAGE_BASE_PATH}/packages/${req.file.filename}`;
     const package = {
      title: title || "default",
