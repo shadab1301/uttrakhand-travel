@@ -5,7 +5,18 @@ const Package = require("../Model/Package.Model");
 
 exports.createPackage = async (req, res, next) => {
   try {
-    const { title, subTitle, numbersOfDay, description } = req.body;
+    const {
+      title,
+      subTitle,
+      numbersOfDay,
+      description,
+      isRecommendPackages,
+      isTopPackages,
+      isShowInHeader,
+      include,
+    } = req.body;
+
+    // isRecommendPackages;isTopPackages;isShowInHeader;include
     // if (
     //   [title, subTitle, numbersOfDay, description].some(
     //     (val) => val?.trim() === ""
@@ -13,38 +24,43 @@ exports.createPackage = async (req, res, next) => {
     // ) {
     //   throw new ApiError("400", "All field are required.");
     // }
-  //  const isValidationError = ApiValidationMessage(req);
-  //   if (isValidationError) {
-  //     throw new ApiResponse(
-  //       409,
-  //       isValidationError,
-  //       "Please enter valid details"
-  //     );
-  //   }
+    //  const isValidationError = ApiValidationMessage(req);
+    //   if (isValidationError) {
+    //     throw new ApiResponse(
+    //       409,
+    //       isValidationError,
+    //       "Please enter valid details"
+    //     );
+    //   }
 
-// console.log({ filedetails: req });
-// return false
+    // console.log({ filedetails: req });
+    // return false
     const filePath = `${process.env.IMAGE_BASE_PATH}/packages/${req.file.filename}`;
     const package = {
-     title: title || "default",
-     subTitle: subTitle ||  "default",
-      numbersOfDay: numbersOfDay|| "default",
-      description: description|| "default",
-       pkgImage: filePath,
+      title: title || "default",
+      subTitle: subTitle || "default",
+      numbersOfDay: numbersOfDay || "default",
+      description: description || "default",
+      isRecommendPackages: isRecommendPackages ,
+      isTopPackages: isTopPackages || 0,
+      isShowInHeader: isShowInHeader || 0,
+      include: include,
+      pkgImage: filePath,
     };
-    
-  
+
     const createdPackage = await Package.create(package);
 
-    if(!createdPackage){
-      throw new ApiError(500,"Something went wrong while creating new packages.")
+    if (!createdPackage) {
+      throw new ApiError(
+        500,
+        "Something went wrong while creating new packages."
+      );
     }
-     return res
-       .status(200)
-       .json(
-         new ApiResponse(200, createdPackage, "Package created successfully.")
-       );
-
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, createdPackage, "Package created successfully.")
+      );
   } catch (err) {
     return res.status(500).json({
       status: 500,
