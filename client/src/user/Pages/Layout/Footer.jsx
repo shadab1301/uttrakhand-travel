@@ -113,34 +113,6 @@ const Footer = () => {
                   ))}
                 </ul>
               </div>
-
-              {/* <div className="col-lg-3 col-md-6 col-sm-12 col-12">
-                    <div className="ft-title mt-5 wow zoomIn" data-wow-duration="3s">
-                                Destinations
-                            </div>
-                            <ul className="patners-list d-flex flex-wrap">
-                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">
-                                    <img className="img-fluid" src="images/slide1.jpg" alt="" title="" border="0" />
-                                    <span>Patner-1</span>
-                                </NavLink>
-                                </li>
-                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">
-                                    <img className="img-fluid" src="images/slide1.jpg" alt="" title="" border="0" />
-                                    <span>Patner-2</span>
-                                </NavLink>
-                                </li>
-                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to="">
-                                    <img className="img-fluid" src="images/slide1.jpg" alt="" title="" border="0" />
-                                    <span>Patner-3</span>
-                                </NavLink>
-                                </li>
-                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <img className="img-fluid" src="images/slide1.jpg" alt="" title="" border="0" /></NavLink></li>
-                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <img className="img-fluid" src="images/slide1.jpg" alt="" title="" border="0" /></NavLink></li>
-                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <img className="img-fluid" src="images/slide1.jpg" alt="" title="" border="0" /></NavLink></li>
-                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <span>Patner-8</span></NavLink></li>
-                                <li className=" wow zoomIn" data-wow-duration="3s"><NavLink to=""> <span>Patner-9</span></NavLink></li>
-                            </ul>
-                    </div> */}
             </div>
             <div className="go-to-top">
               <NavLink id="back-to-top" to="#top">
@@ -149,9 +121,6 @@ const Footer = () => {
             </div>
           </div>
         </footer>
-
-        {/*  */}
-
         <div className="copyright">
           <div className="container">
             <div className="row">
@@ -192,7 +161,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <NavLink className="btn wtsapp-icon "
-                     to="https://wa.me/918178918115?text=Hii i want to  know about your services." target="_blank">
+                     to="https://wa.me/8791329036?text=Hii i want to  know about your services." target="_blank">
                       <i className="fa fa-whatsapp" aria-hidden="true"></i>
                       Whatsapp
                     </NavLink>

@@ -20,7 +20,6 @@ const Testimonial = () => {
     return (<>
         <section className="testimonial">
             <h4 className="text-white text-center">Clients Testimonials</h4>
-
             <div className="container">
                 <section id="testimonial">
                     <div className="">
