@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
+import { Route, Routes } from 'react-router-dom';
+import AdminLayout from './admin/Layout/AdminLayout';
+import { UserLayout } from './user/Layout/UserLayout';
+import { AuthProvider } from './utils/hook/useAuth.jsx';
+import Login from './admin/Login.jsx';
+import AdminDashboard from './admin/Dashboard/AdminDashboard.jsx';
+import Packages from './admin/Packages/Packages.jsx';
+
+import Home from './user/Pages/Home/Home.jsx';
+import { Contact } from './user/Pages/Contact/Contact.jsx';
+import { About } from './user/Pages/Contact/About.jsx';
+import { Gallery } from './user/Pages/Gallery/Gallery.jsx';
+import List from './user/Pages/List/List.jsx';
+import Detail from './user/Pages/Detail/Detail.jsx';
+import Testimonial from './admin/Testimonial/Testimonial.jsx';
+import Address from './admin/Address/Address.jsx';
+import Destination from './admin/Destination/Destination.jsx';
+import Enquiry from './admin/Enquiry/Enquiry.jsx';
+import AdminGallery from "./admin/Gallery/AdminGallery.jsx";
+import Muitable from './Table/TestTable.jsx';
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <AuthProvider>
+        <Routes>
+          <Route element={<UserLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/list/:desti" element={<List />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="packages" element={<Packages />} />
+            <Route path="enquiry" element={<Enquiry />} />
+            <Route path="destination" element={<Destination />} />
+            <Route path="gallery" element={<AdminGallery />} />
+            <Route path="address" element={<Address />} />
+            <Route path="testimonial" element={<Testimonial />} />
+            <Route path="muitable" element={<Muitable />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </>
-  )
+  );
 }
 
 export default App
