@@ -23,8 +23,6 @@ exports.AddTestimonial = async (req, res, next) => {
             });
         }
         else {
-            // console.log(req?.file);
-            // console.log(req?.file?.filename); return false;
              const filePath = `${process.env.IMAGE_BASE_PATH}/testimonial/${req.file.filename}`;
             let obj = {
               _id: new mongoose.Types.ObjectId(),
