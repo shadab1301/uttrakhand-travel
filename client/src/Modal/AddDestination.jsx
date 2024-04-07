@@ -10,29 +10,91 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { RxCrossCircled } from "react-icons/rx";
+import { toast, ToastContainer } from "react-toastify";
+import { AddFileController } from "../utils/fetchController/AddFileController";
 
-const AddDestination = ({ handleOpen, handleClose, isOpen, size }) => {
+const AddDestination = ({
+  handleOpen,
+  handleClose,
+  isOpen,
+  size,
+  fetchData,
+}) => {
   const [formData, setFormData] = useState({
-    cityName:"",
-     cityImage:"",
-     isIncludeInNavbar:"",
-     isTopVisitPlace:"",
+    cityName: "",
+    isIncludeInNavbar: "0",
+    isTopVisitPlace: "0",
   });
+  const [IsLoading, setIsLoading] = useState(false);
+  const [cityImage, setCityImage] = useState(null);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    if (name === "cityImage") {
+      setCityImage(e.target.files[0]);
+    } else if (name === "isTopVisitPlace" || name === "isIncludeInNavbar") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: e.target.checked,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
-  };
+    setIsLoading(true);
+    try {
+      const data = new FormData();
+      data.append("cityImage", cityImage);
+      data.append("cityName", formData.cityName);
+      data.append("isIncludeInNavbar", formData.isIncludeInNavbar);
+      data.append("isTopVisitPlace", formData.isTopVisitPlace);
 
+      const res = await AddFileController("/destination", "POST", data);
+      if (res.statusCode === 201) {
+        fetchData();
+        toast.success(res.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        handleClose();
+        setFormData({
+          cityName: "",
+          isIncludeInNavbar: "0",
+          isTopVisitPlace: "0",
+        });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log("Error occour in AddDestination Component");
+      console.log(error);
+      toast.error("Error occour in AddDestination Component", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div>
       <Modal
@@ -92,7 +154,7 @@ const AddDestination = ({ handleOpen, handleClose, isOpen, size }) => {
                 required
                 fullWidth
                 id="cityImage"
-                label=""
+                label="City Image"
                 name="cityImage"
                 type="file"
                 value={formData.cityImage}
@@ -119,14 +181,24 @@ const AddDestination = ({ handleOpen, handleClose, isOpen, size }) => {
                 }
                 label="Is top visit place"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Add
-              </Button>
+              <Box>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={IsLoading}
+                  // onClick={handleSubmit}
+                  startIcon={
+                    IsLoading ? (
+                      <CircularProgress size={20} color="inherit" />
+                    ) : (
+                      ""
+                    )
+                  }
+                >
+                  {IsLoading ? "Submit" : "Submit"}
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>

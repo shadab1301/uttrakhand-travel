@@ -9,6 +9,8 @@ import Paper from "@mui/material/Paper";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
 import { Stack } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const rows = [
   { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
@@ -23,8 +25,11 @@ const rows = [
 ];
 
 export default function MasterTable({ column=[], tableData=[], table="" }) {
+
+console.log({column});
+console.log({ tableData });
   const columnsData = column.map((val, index) => {
-    if (val === "Image") {
+    if (["Image", "City Image"].includes(val)) {
       return {
         field: val,
         headerName: val,
@@ -140,6 +145,102 @@ export default function MasterTable({ column=[], tableData=[], table="" }) {
                 </TableCell>
               </TableRow>
             ))}
+          {table === "destination" &&
+            tableData.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.SN0}
+                </TableCell>
+                <TableCell>{row["City Name"]}</TableCell>
+                <TableCell>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        disabled
+                        defaultChecked={row["is Include in Navbar"]}
+                      />
+                    }
+                    label=""
+                  />
+                </TableCell>
+                <TableCell>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        disabled
+                        defaultChecked={row["is Top Visit Place"]}
+                      />
+                    }
+                    label=""
+                  />
+                </TableCell>
+                <TableCell>
+                  {" "}
+                  <img
+                    src={row["City Image"]}
+                    alt="Image"
+                    style={{ width: "80px", height: "50px" }}
+                  />
+                </TableCell>
+
+                <TableCell>
+                  <Stack direction="row" spacing={2}>
+                    <AiTwotoneEdit
+                      style={{
+                        color: "green",
+                      }}
+                    />
+                    <AiOutlineDelete
+                      style={{
+                        color: "red",
+                      }}
+                    />
+                  </Stack>
+                </TableCell>
+              </TableRow>
+            ))}
+
+          {table === "testimonial" &&
+            tableData.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.SN0}
+                </TableCell>
+                <TableCell>{row["Customer name"]}</TableCell>
+                <TableCell>{row["Description"]}</TableCell>
+
+                <TableCell>
+                  {" "}
+                  <img
+                    src={row.Image}
+                    alt="Image"
+                    style={{ width: "80px", height: "50px" }}
+                  />
+                </TableCell>
+
+                <TableCell>
+                  <Stack direction="row" spacing={2}>
+                    <AiTwotoneEdit
+                      style={{
+                        color: "green",
+                      }}
+                    />
+                    <AiOutlineDelete
+                      style={{
+                        color: "red",
+                      }}
+                    />
+                  </Stack>
+                </TableCell>
+              </TableRow>
+            ))}
+          {/* testimonial */}
         </TableBody>
       </Table>
     </TableContainer>

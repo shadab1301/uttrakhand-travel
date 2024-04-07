@@ -9,20 +9,34 @@ import {
   Stack,
 } from "@mui/material";
 import { RxCrossCircled } from "react-icons/rx";
+import CircularProgress from "@mui/material/CircularProgress";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import axios from "axios";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { AddFileController } from "../utils/fetchController/AddFileController";
+import { toast, ToastContainer } from "react-toastify";
 
-const AddPackages = ({ handleOpen, handleClose, isOpen, size }) => {
+const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
   const [formData, setFormData] = useState({
     title: "",
     subTitle: "",
     numbersOfDay: "",
     description: "",
+    isRecommendPackages: "0",
+    isTopPackages: "0",
+    isShowInHeader: "0",
+    include: "test",
   });
   const [image, setImage] = useState(null);
+  const [BannerImage, setBannerImage] = useState(null);
+  const [IsLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "pkgImage") {
       setImage(e.target.files[0]);
+    } else if (name === "BannerImage") {
+      setBannerImage(e.target.files[0]);
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -33,25 +47,63 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("pkgImage", image);
-    data.append("title", formData.title);
-    data.append("subTitle", formData.subTitle);
-    data.append("numbersOfDay", formData.numbersOfDay);
-    data.append("description", formData.description);
+    setIsLoading(true);
+    try {
+      const data = new FormData();
+      data.append("pkgImage", image);
+      data.append("BannerImage", BannerImage);
+      data.append("title", formData.title);
+      data.append("subTitle", formData.subTitle);
+      data.append("numbersOfDay", formData.numbersOfDay);
+      data.append("description", formData.description);
+      data.append("isRecommendPackages", formData.isRecommendPackages);
+      data.append("isTopPackages", formData.isTopPackages);
+      data.append("isShowInHeader", formData.isShowInHeader);
+      data.append("include", formData.include);
 
-    console.log({ data });
-    const url = "http://localhost:5000/api/v1/package";
-
-    axios.post(url, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    // const res = await axios.post(url, JSON.stringify(data));
-
-    // console.log({res});
+      const res = await AddFileController("/package", "POST", data);
+      if (res.statusCode === 200) {
+        fetchData()
+        toast.success(res.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        handleClose();
+        setFormData({
+          title: "",
+          subTitle: "",
+          numbersOfDay: "",
+          description: "",
+          isRecommendPackages: "0",
+          isTopPackages: "0",
+          isShowInHeader: "0",
+          include: "test",
+        });
+      }
+      console.log({ res });
+    } catch (error) {
+      setIsLoading(false);
+      console.log("Error occour in AddPackages Component");
+      console.log(error);
+      toast.success(res.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -149,7 +201,6 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size }) => {
                 value={formData.description}
                 onChange={handleChange}
               />
-
               {/* pkgImage */}
               {/* <input
                 accept="image/*"
@@ -159,27 +210,52 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size }) => {
                 name="pkgImage"
                 onChange={handleChange}
               /> */}
-              <TextField
-                accept="image/*"
-                margin="normal"
-                required
-                fullWidth
-                id="image"
-                label=""
-                name="pkgImage"
-                type="file"
-                value={formData.image}
-                onChange={handleChange}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onSubmit={handleSubmit}
-              >
-                Add
-              </Button>
+              <FormControl>
+                <TextField
+                  accept="image/*"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="image"
+                  label="pkgImage"
+                  name="pkgImage"
+                  type="file"
+                  value={formData.image}
+                  onChange={handleChange}
+                />
+              </FormControl>
+              <FormControl>
+                <TextField
+                  accept="image/*"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="BannerImage"
+                  label="BannerImage"
+                  name="BannerImage"
+                  type="file"
+                  value={formData.BannerImage}
+                  onChange={handleChange}
+                />
+              </FormControl>
+             
+              <Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={IsLoading}
+                  onClick={handleSubmit}
+                  startIcon={
+                    IsLoading ? (
+                      <CircularProgress size={20} color="inherit" />
+                    ) : (
+                      ""
+                    )
+                  }
+                >
+                  {IsLoading ? "Submit" : "Submit"}
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>

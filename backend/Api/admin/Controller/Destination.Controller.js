@@ -26,7 +26,16 @@ exports.createDestination = async (req, res, next) => {
      if(!createdDestination){
       throw new ApiError(500,"Something went wrong while creating destination")
      }
-     return res.status(200).json(201,createdDestination,"Destination created successfully")
+    //  return res.status(200).json(201,createdDestination,"Destination created successfully")
+      return res
+        .status(200)
+        .json(
+          new ApiResponse(
+            201,
+            createdDestination,
+            "Destination created successfully"
+          )
+        );
   } catch (err) {
     return res.status(500).json({
       status: 500,
@@ -39,10 +48,12 @@ exports.createDestination = async (req, res, next) => {
 exports.fetchDestination = async (req, res, next) => {
   try {
     const destinations=await Destination.find()
+  
     if (!destinations) {
       throw new ApiError(500,"Something went wrong while fetching destinations")
     }
-    return res.status(200).json(201,destinations,"Data fetched successfully")
+    // return res.status(200).json(201,destinations,"Data fetched successfully")
+    return res.status(200).json(new ApiResponse(200,destinations,destinations.length?"Data fetch successfully":"No data found"))
   } catch (err) {
     return res.status(500).json({
       status: 500,

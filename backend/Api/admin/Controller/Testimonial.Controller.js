@@ -25,11 +25,12 @@ exports.AddTestimonial = async (req, res, next) => {
         else {
             // console.log(req?.file);
             // console.log(req?.file?.filename); return false;
+             const filePath = `${process.env.IMAGE_BASE_PATH}/testimonial/${req.file.filename}`;
             let obj = {
-                _id: new mongoose.Types.ObjectId(),
-                customer_name: req?.body?.customer_name.trim(),
-                description: req?.body?.description,
-                image: req?.file?.filename
+              _id: new mongoose.Types.ObjectId(),
+              customer_name: req?.body?.customer_name.trim(),
+              description: req?.body?.description,
+              image: filePath,
             };
             // console.log(obj);
             const testimonial_res = await Testimonial.create(obj);
@@ -65,11 +66,11 @@ exports.TestimonialList = async (req, res, next) => {
                 count: TestimonialRes?.length,
                 data: TestimonialRes.map((data) => {
                     return {
-                        id: data?._id,
-                        customer_name: data?.customer_name,
-                        description: data?.description,
-                        image: `./public/testimonial/${data?.image}`,
-                    }
+                      id: data?._id,
+                      customer_name: data?.customer_name,
+                      description: data?.description,
+                      image: data?.image,
+                    };
                 }),
                 message: 'Testimonial list.'
             });

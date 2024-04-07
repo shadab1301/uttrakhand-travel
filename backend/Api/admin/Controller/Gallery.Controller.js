@@ -8,21 +8,20 @@ exports.createGallery = async (req, res, next) => {
     if (!title) {
       throw new ApiError(400, "title fields is required");
     }
-    console.log(1)
-    console.log(req.file);
+console.log({ file: req.file });
+return false
     const filePath = `${process.env.IMAGE_BASE_PATH}/gallery/${req.file.filename}`;
     const alreadyExistedTitle = await Gallery.findOne({ title });
+     if (alreadyExistedTitle) {
+       throw new ApiError(400, "Title already exist");
+     }
     const gallery = {
       title,
-      description: description || "",
+      description: description || " ",
       image: filePath,
     };
- console.log(2);
-    if (alreadyExistedTitle) {
-      throw new ApiError(400, "Title already exist");
-    }
+   
     const createdGallery = await Gallery.create(gallery);
- console.log(3);
     if (!createdGallery) {
       throw new ApiError(
         500,

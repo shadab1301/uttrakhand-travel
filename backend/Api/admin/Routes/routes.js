@@ -20,7 +20,7 @@ routes.post("/register",uploadFile("destination").single("cityImage"),signupVali
 routes.post('/login',LoginValidation,Login);
 // Gallery
 
-routes.post("/gallery", uploadFile("gallery").single("gallery"), createGallery);
+routes.post("/gallery", uploadFile("gallery").single("image"), createGallery);
 routes.get("/gallery", fetchGallery);
 routes.get("/gallery/:id", fetchGallery);
 routes.put("/gallery", updateGallery);
@@ -60,6 +60,7 @@ routes.put(
 );
 routes.delete("/destination/:id", deleteDestination);
 
+routes.post("/address", AddressList);
 routes.get('/address',AddressList);
 routes.put("/address/:id",AddressValidator, EditAddress);
 

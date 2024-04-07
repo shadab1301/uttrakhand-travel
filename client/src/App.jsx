@@ -19,6 +19,8 @@ import Destination from './admin/Destination/Destination.jsx';
 import Enquiry from './admin/Enquiry/Enquiry.jsx';
 import AdminGallery from "./admin/Gallery/AdminGallery.jsx";
 import Muitable from './Table/TestTable.jsx';
+import { toast, ToastContainer } from "react-toastify";
+ import "react-toastify/dist/ReactToastify.css";
 function App() {
 
   return (
@@ -46,6 +48,8 @@ function App() {
           </Route>
         </Routes>
       </AuthProvider>
+
+      <ToastContainer />
     </>
   );
 }
