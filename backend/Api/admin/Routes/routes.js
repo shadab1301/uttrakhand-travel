@@ -11,7 +11,7 @@ const { UploadFiles: uploadFile } = require("../../../Services/Common.Services")
 const {fetchGallery, deleteGallery, updateGallery, createGallery } = require("../Controller/Gallery.Controller");
 const {createPackage, fetchPackages, updatePackage, deletePackage } = require("../Controller/Packages.Controller");
 const {AddTestimonial,TestimonialList,DeleteTestimonial} = require("../Controller/Testimonial.Controller");
-const {EditAddress,AddressList} = require("../Controller/Address.Controller");
+const {EditAddress,AddressList, AddAddress} = require("../Controller/Address.Controller");
 const {AddEnquery, EnqueryList, ChangeEnqueryStatus } = require("../Controller/Enquery.Controller");
 const {fetchDestination, updateDestination, deleteDestination, createDestination } = require("../Controller/Destination.Controller");
 
@@ -60,7 +60,7 @@ routes.put(
 );
 routes.delete("/destination/:id", deleteDestination);
 
-routes.post("/address", AddressList);
+routes.post("/address", AddAddress);
 routes.get('/address',AddressList);
 routes.put("/address/:id",AddressValidator, EditAddress);
 
