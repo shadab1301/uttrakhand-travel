@@ -6,8 +6,8 @@ const Header = () => {
     const serviceD = SErviceData?.Service;
     // const [state,dispatch] = useContext();
     const { state: packagesDetails, dispatch } = useContext(PackagesContext);
-console.log({packagesDetails});
-
+const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader==1; });
+// console.log("header pkg",HeaderPkgs);
     return (
         <>
             <nav id="top" className="navbar navbar-expand-md bg-dark navbar-dark custom-nav">
@@ -86,16 +86,21 @@ console.log({packagesDetails});
                                 <div className="shadow dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="col-md-3">
+
+                                            {HeaderPkgs?.map((val,index)=>(<>
+                                                <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
-                                                    <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
+                                                    <NavLink to={"/detail/"+val?._id}> <img className="img-fluid" src={val?.pkgImage} alt="" title="" border="0" /></NavLink>
                                                     </div>
-                                                    <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">CHAR DHAM TOUR PACKAGES</NavLink></div>
+                                                    <div className="title" data-wow-duration="3s"><NavLink to={"/detail/"+val?._id}>{val?.title}</NavLink></div>
 
                                                 </div>
                                             </div>
-                                            <div className="col-md-3">
+
+                                            </>))}
+                                       
+                                            {/* <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
                                                     <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
@@ -103,16 +108,16 @@ console.log({packagesDetails});
                                                     <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">MUSSOORIE TOUR PACKAGE </NavLink></div>
 
                                                 </div>
-                                            </div>
-                                            <div className="col-md-3">
+                                            </div> */}
+                                            {/* <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
                                                     <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
                                                     </div>
                                                     <div className="title " data-wow-duration="3s"><NavLink to="/detail/1">RISHIKESH TOUR PACKAGE</NavLink></div>
                                                 </div>
-                                            </div>
-                                            <div className="col-md-3">
+                                            </div> */}
+                                            {/* <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
                                                     <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
@@ -120,7 +125,7 @@ console.log({packagesDetails});
                                                     <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">HARIDWAR TOUR PACKAGE </NavLink></div>
 
                                                 </div>
-                                            </div>
+                                            </div> */}
 
                                         </div>
                                     </div>

@@ -21,8 +21,8 @@ export const Banner = () => {
                         <div className="item">
                             <NavLink to="/list/all">
                                 <div className="banner-txt zoomIn" data-wow-duration="3s">
-                                  <span className="theme-color"> DEVBHOOMI</span> TOURS OPERATORS
-                                  <h5  className="theme-color">FEEL THE BEAUTY OF HEAVEN</h5>
+                                    <span className="theme-color"> DEVBHOOMI</span> TOURS OPERATORS
+                                    <h5 className="theme-color">FEEL THE BEAUTY OF HEAVEN</h5>
                                 </div>
                                 <img src="images/slide1.jpg" alt="slide2" title="" border="0" />
                             </NavLink>
@@ -30,8 +30,8 @@ export const Banner = () => {
                         <div className="item">
                             <NavLink to="/list/all">
                                 <div className="banner-txt zoomIn" data-wow-duration="3s">
-                                <span className="theme-color"> DEVBHOOMI</span> TOURS OPERATORS
-                                <h5  className="theme-color">FEEL THE BEAUTY OF HEAVEN</h5>
+                                    <span className="theme-color"> DEVBHOOMI</span> TOURS OPERATORS
+                                    <h5 className="theme-color">FEEL THE BEAUTY OF HEAVEN</h5>
                                 </div>
                                 <img src="images/slide2.jpg" alt="slide2" title="" border="0" />
                             </NavLink>
@@ -56,39 +56,21 @@ export const Banner = () => {
                     </div>
                 </>
             }
+
             else
-                if (FilertPAth?.[0] == "detail") {
+                if (FilertPAth?.[0] == "gallery") {
                     return <>
                         <div className="bannercls">
-                            <img className="img-fluid" src={detailsimg} alt="" title="" border="0" />
+                            <img className="img-fluid" src="images/listing-banner.jpg" alt="" title="" border="0" />
                             <div className="container-fluid">
                                 <div className="banner-content">
-                                    <h2 className="banner-title text-white wow bounceInLeft">Mussoorie - Dhanaulti Tour Package
-                                    </h2>
-                                    <div className="banner-sub-title text-white wow bounceInLeft">
-                                        Mussoorie 2N, Dhanaulti 1N
-                                    </div>
-                                    <div className="banner-smalltxt text-white wow bounceInLeft">Tour and Travel Solutions</div>
+                                    <h2 className="banner-title text-white wow bounceInLeft" data-wow-duration="3s"><NavLink className="banner-title text-white wow bounceInLeft" to="/">Home</NavLink>/Our Gallery</h2>
                                 </div>
                             </div>
                         </div>
+
                     </>
                 }
-
-                else
-                    if (FilertPAth?.[0] == "gallery") {
-                        return <>
-                            <div className="bannercls">
-                                <img className="img-fluid" src="images/listing-banner.jpg" alt="" title="" border="0" />
-                                <div className="container-fluid">
-                                    <div className="banner-content">
-                                        <h2 className="banner-title text-white wow bounceInLeft" data-wow-duration="3s"><NavLink className="banner-title text-white wow bounceInLeft" to="/">Home</NavLink>/Our Gallery</h2>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </>
-                    }
         return
         <>
 
