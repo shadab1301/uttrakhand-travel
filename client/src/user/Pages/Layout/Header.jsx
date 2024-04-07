@@ -1,9 +1,12 @@
-import React from "react";
+import React ,{useContext}from "react";
 import { NavLink } from "react-router-dom";
 import SErviceData from "../Service/ServiceData.json";
-
+import { PackagesContext } from "../../../Reducer/PackagesProvider";
 const Header = () => {
     const serviceD = SErviceData?.Service;
+    // const [state,dispatch] = useContext();
+    const { state: packagesDetails, dispatch } = useContext(PackagesContext);
+console.log({packagesDetails});
 
     return (
         <>

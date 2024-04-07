@@ -73,6 +73,7 @@ exports.EnqueryList = async (req, res, next) => {
                         enquery_type: data?.enquery_type,
                         email: data?.email,
                         message: data?.message,
+                        status: data?.status,
                     }
                 }),
                 message: 'Enquery list.'
