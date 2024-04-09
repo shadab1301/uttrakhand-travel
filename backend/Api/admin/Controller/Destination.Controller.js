@@ -79,7 +79,7 @@ exports.deleteDestination = async (req, res, next) => {
      const id = req.params.id;
      const existedDestination = await Destination.findOne({ _id: id });
      if (!existedDestination) {
-       throw new ApiError("404", "Package not exist");
+       throw new ApiError("404", "Destination not exist");
      }
      const deletedDestination = await Destination.deleteOne({ _id: id });
      if (!deletedDestination) {
@@ -90,7 +90,7 @@ exports.deleteDestination = async (req, res, next) => {
      }
      return res
        .status(200)
-       .json(new ApiResponse(201, {}, "Package deleted successfully"));
+       .json(new ApiResponse(201, {}, "Destination deleted successfully"));
 
   } catch (err) {
     return res.status(500).json({

@@ -18,7 +18,6 @@ import Address from './admin/Address/Address.jsx';
 import Destination from './admin/Destination/Destination.jsx';
 import Enquiry from './admin/Enquiry/Enquiry.jsx';
 import AdminGallery from "./admin/Gallery/AdminGallery.jsx";
-import Muitable from './Table/TestTable.jsx';
 import { toast, ToastContainer } from "react-toastify";
  import "react-toastify/dist/ReactToastify.css";
 function App() {
@@ -44,7 +43,6 @@ function App() {
             <Route path="gallery" element={<AdminGallery />} />
             <Route path="address" element={<Address />} />
             <Route path="testimonial" element={<Testimonial />} />
-            <Route path="muitable" element={<Muitable />} />
           </Route>
         </Routes>
       </AuthProvider>

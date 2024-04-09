@@ -8,26 +8,75 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
+import { toast, ToastContainer } from "react-toastify";
 import { RxCrossCircled } from "react-icons/rx";
+import { AddFileController } from "../utils/fetchController/AddFileController";
 
-const AddGallery = ({ handleOpen, handleClose, isOpen, size }) => {
+const AddGallery = ({ handleOpen, handleClose, isOpen, size, loadData }) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    image: "",
   });
+  const [image, setImage] = useState(null);
+  const [IsLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name === "image") {
+      setImage(e.target.files[0]);
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    setIsLoading(true);
+    try {
+      const data = new FormData();
+      data.append("image", image);
+      data.append("title", formData.title);
+      data.append("description", formData.description);
+
+      const res = await AddFileController("/gallery", "POST", data);
+      if (res.statusCode === 200) {
+        loadData();
+        toast.success(res.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        handleClose();
+        setFormData({
+          cityName: "",
+          isIncludeInNavbar: "0",
+          isTopVisitPlace: "0",
+        });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log("Error occour in AddDestination Component");
+      console.log(error);
+      toast.error("Error occour in AddDestination Component", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -104,7 +153,7 @@ const AddGallery = ({ handleOpen, handleClose, isOpen, size }) => {
                 value={formData.image}
                 onChange={handleChange}
               />
-             
+
               <Button
                 type="submit"
                 fullWidth
