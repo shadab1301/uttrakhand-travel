@@ -1,11 +1,30 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { PackagesContext } from "../../../Reducer/PackagesProvider";
+import { RecomendedPkg } from "../RecomendedPkg/RecomendedPkg";
 
-import slide1 from "../../../../public/images/slide1.jpg";
-import slide2 from "../../../../public/images/slide2.jpg";
-import hotdeals1 from "../../../../public/images/hotdeals1.jpeg";
-import hotdeals3 from "../../../../public/images/hotdeals3.jpeg";
 const List = () => {
+    const { state: packagesDetails, dispatch } = useContext(PackagesContext);
+    const [PkgList, setPkgList] = useState([]);
+    const location = useLocation();
+    const URLPATH = location.pathname.trim().split("/");
+    const FilertPAth = URLPATH.filter(Boolean);
+    // console.log(FilertPAth);
+    console.log({ packagesDetails });
+    console.log("list", PkgList);
+    useEffect(() => {
+        if (FilertPAth?.[1] == "all") {
+            // let TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1; });
+            setPkgList(packagesDetails);
+
+        } else {
+            // let TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1; });
+            setPkgList(packagesDetails);
+
+        }
+
+    }, []);
+
     return (
         <>
 
@@ -19,211 +38,52 @@ const List = () => {
                     </nav>
                     <div className="row">
                         <div className="col-md-8">
-                            <div data-wow-duration="3s" className="fl-list-show shadow">
-                                <div className="fl-list-item">
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                            <div className="fl-img">
-                                                <img className="img-fluid" src={slide1} alt="" title="" border="0" />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-8">
-                                            <div className="list-box">
-                                                <span className="listbox-title">
-                                                    Family Holiday Pack
-                                                </span>
-                                                <div className="list-detail-inner">
-                                                    <span>3 days, 4 nights</span>
-                                                </div>
-                                                <div className="list-detail">
-                                                    <span>Destination Covered - <span className="italic">New Delhi, Mussoorie, Haridwar, Rishikesh</span></span>
-                                                </div>
-                                                <div className="detail-right">
-                                                    <div className="dt-1">On Request</div>
-                                                    {/* <div className="dt-2"><strong><i className="fa fa-rupee"></i>1180</strong></div> */}
-                                                    <div className="dt-txt">For Person twin Sharing</div>
-                                                </div>
-                                                <div className="feat-details">
-                                                    <strong>Included: </strong> Flight Facility, 5 Star Hotel Sighseeing, Transfer, Meals
-                                                </div>
-                                                <div className="list-detail">
-                                                    <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
-                                                </div>
-                                                <div className="sharelist">
-                                                    <ul className="share-btn">
-                                                        <li><NavLink to="/detail/1" className="view-btn">View Details</NavLink></li>
-                                                        <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
-                                                    </ul>
+                            {PkgList?.map((val, index) => (<>
+                                <div data-wow-duration="3s" className="fl-list-show shadow">
+                                    <div className="fl-list-item">
+                                        <div className="row">
+                                            <div className="col-md-4">
+                                                <div className="fl-img">
+                                                    <img className="img-fluid" src={val?.pkgImage} alt="" title="" border="0" />
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-wow-duration="3s" className="fl-list-show shadow">
-                                <div className="fl-list-item">
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                            <div className="fl-img">
-                                                <img className="img-fluid" src={slide2} alt="" title="" border="0" />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-8">
-                                            <div className="list-box">
-                                                <span className="listbox-title">
-                                                    Family Holiday Pack
-                                                </span>
-                                                <div className="list-detail-inner">
-                                                    <span>3 days, 4 nights</span>
-                                                </div>
-                                                <div className="list-detail">
-                                                    <span>Destination Covered - <span className="italic">New Delhi, Mussoorie, Haridwar, Rishikesh</span></span>
-                                                </div>
-                                                <div className="detail-right">
-                                                    <div className="dt-1">On Request</div>
-                                                    <div className="dt-txt">For Person twin Sharing</div>
-                                                </div>
-                                                <div className="feat-details">
-                                                    <strong>Included: </strong> Flight Facility, 5 Star Hotel Sighseeing, Transfer, Meals
-                                                </div>
-                                                <div className="list-detail">
-                                                    <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
-                                                </div>
-                                                <div className="sharelist">
-                                                    <ul className="share-btn">
-                                                        <li><NavLink to="/detail/1" className="view-btn">View Details</NavLink></li>
-                                                        <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
-                                                    </ul>
+                                            <div className="col-md-8">
+                                                <div className="list-box">
+                                                    <span className="listbox-title">
+                                                        {val?.title}
+                                                    </span>
+                                                    <div className="list-detail-inner">
+                                                        <span>{val?.numbersOfDay} days, {val?.numbersOfDay - 1} nights</span>
+                                                    </div>
+                                                    <div className="list-detail">
+                                                        <span>Destination Covered - <span className="italic">New Delhi, Mussoorie, Haridwar, Rishikesh</span></span>
+                                                    </div>
+                                                    <div className="detail-right">
+                                                        <div className="dt-1">On Request</div>
+                                                        <div className="dt-txt">For Person twin Sharing</div>
+                                                    </div>
+                                                    <div className="feat-details">
+                                                        <strong>Included: </strong> {val?.include}
+                                                    </div>
+                                                    <div className="list-detail">
+                                                        <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
+                                                    </div>
+                                                    <div className="sharelist">
+                                                        <ul className="share-btn">
+                                                            <li><NavLink to={"/detail/" + val?._id} className="view-btn">View Details</NavLink></li>
+                                                            <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div data-wow-duration="3s" className="fl-list-show shadow">
-                                <div className="fl-list-item">
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                            <div className="fl-img">
-                                                <img className="img-fluid" src={hotdeals1} alt="" title="" border="0" />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-8">
-                                            <div className="list-box">
-                                                <span className="listbox-title">
-                                                    Family Holiday Pack
-                                                </span>
-                                                <div className="list-detail-inner">
-                                                    <span>3 days, 4 nights</span>
-                                                </div>
-                                                <div className="list-detail">
-                                                    <span>Destination Covered - <span className="italic">New Delhi, Mussoorie, Haridwar, Rishikesh</span></span>
-                                                </div>
-                                                <div className="detail-right">
-                                                    <div className="dt-1">On Request</div>
-                                                    <div className="dt-txt">For Person twin Sharing</div>
-                                                </div>
-                                                <div className="feat-details">
-                                                    <strong>Included: </strong> Flight Facility, 5 Star Hotel Sighseeing, Transfer, Meals
-                                                </div>
-                                                <div className="list-detail">
-                                                    <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
-                                                </div>
-                                                <div className="sharelist">
-                                                    <ul className="share-btn">
-                                                        <li><NavLink to="/detail/1" className="view-btn">View Details</NavLink></li>
-                                                        <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-wow-duration="3s" className="fl-list-show shadow">
-                                <div className="fl-list-item">
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                            <div className="fl-img">
-                                                <img className="img-fluid" src={hotdeals3} alt="" title="" border="0" />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-8">
-                                            <div className="list-box">
-                                                <span className="listbox-title">
-                                                    Family Holiday Pack
-                                                </span>
-
-                                                <div className="list-detail-inner">
-                                                    <span>3 days, 4 nights</span>
-                                                </div>
-                                                <div className="list-detail">
-                                                    <span>Destination Covered - <span className="italic">New Delhi, Mussoorie, Haridwar, Rishikesh</span></span>
-                                                </div>
-                                                <div className="detail-right">
-                                                    <div className="dt-1">On Request</div>
-                                                    <div className="dt-txt">For Person twin Sharing</div>
-                                                </div>
-                                                <div className="feat-details">
-                                                    <strong>Included: </strong> Flight Facility, 5 Star Hotel Sighseeing, Transfer, Meals
-                                                </div>
-                                                <div className="list-detail">
-                                                    <span className="italic">Honeymoon | Adventure | Sports | Beach | Family</span>
-                                                </div>
-                                                <div className="sharelist">
-                                                    <ul className="share-btn">
-                                                        <li><NavLink to="/detail/1" className="view-btn">View Details</NavLink></li>
-                                                        <li><NavLink to="" data-toggle="modal" data-target="#Enquire" className="estimate-btn">Enquire</NavLink></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </>))}
                         </div>
-
                         <div className="col-md-4">
-                            <div className="filter-sec shadow">
-                                <div className="filter-title">
-                                    <div className="fl-title text-center">
-                                        Our Recommended Package
-                                    </div>
-                                </div>
-                                <hr />
-                                <div className="fl-checkbox">
-                                    <div className="fl-title">
-                                        <h6>Chardham Yatra Helicopter Tour - 4 N / 5 D</h6>
-                                    </div>
-                                </div>
-                                <div className="fl-checkbox">
-                                    <div className="fl-title">
-                                        <h6>Chardham Yatra Helicopter Tour - 4 N / 5 D</h6>
-                                    </div>
-                                </div>
-
-                                <div className="fl-checkbox">
-                                    <div className="fl-title">
-                                        <h6>Chardham Yatra Helicopter Tour - 4 N / 5 D</h6>
-                                    </div>
-                                </div>
-
-
-                                <div className="fl-checkbox">
-                                    <div className="fl-title">
-                                        <h6>Chardham Yatra Helicopter Tour - 4 N / 5 D</h6>
-                                    </div>
-                                </div>
-
-                                <div className="fl-checkbox">
-                                    <div className="fl-title">
-                                        <h6>Chardham Yatra Helicopter Tour - 4 N / 5 D</h6>
-                                    </div>
-                                </div>
-
-                            </div>
+                        <RecomendedPkg />
                         </div>
-
                     </div>
                 </div>
             </section>
