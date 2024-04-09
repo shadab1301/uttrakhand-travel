@@ -18,7 +18,6 @@ const Enquiry = () => {
   ]);
 
   const handleOpen = () => {
-    console.log({ handleOpen });
     setOpen(true);
   };
 
@@ -32,7 +31,7 @@ const Enquiry = () => {
       console.log(res.data);
       const formattedData = res.data.map((val, index) => {
         return {
-          id: val._id,
+          id: val.id,
           ["SN0"]: index + 1,
           ["Name"]: val.feminine + " " + val.first_name + " " + val.last_name,
           ["Mobile no"]: val.mobile_number,
@@ -42,7 +41,6 @@ const Enquiry = () => {
           // ["Status"]: val.status,
         };
       });
-      console.log({ formattedData });
       setEnquiryData(formattedData);
     } catch (error) {
       console.log("Error occour while fetching Packages");
@@ -55,23 +53,28 @@ const Enquiry = () => {
   }, []);
   return (
     <>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          p={2}
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        p={2}
+      >
+        <Typography
+          //   sx={{ flex: "1 1 100%" }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
         >
-          <Typography
-            //   sx={{ flex: "1 1 100%" }}
-            variant="h6"
-            id="tableTitle"
-            component="div"
-          >
-            Enquiry
-          </Typography>
-        </Stack>
-      <MasterTable tableData={enquiryData} column={column} table="enquiry" />
+          Enquiry
+        </Typography>
+      </Stack>
+      <MasterTable
+        loadData={loadData}
+        tableData={enquiryData}
+        column={column}
+        table="enquiry"
+      />
     </>
   );
 };

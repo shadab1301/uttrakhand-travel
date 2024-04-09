@@ -28,7 +28,7 @@ const Testimonial = () => {
       console.log(res.data);
       const formattedData = res.data.map((val, index) => {
         return {
-          id: val._id,
+          id: val.id,
           ["SN0"]: index + 1,
           ["Customer name"]: val.customer_name,
           Description: val.description,
@@ -77,6 +77,7 @@ const Testimonial = () => {
         tableData={packagesData}
         column={column}
         table="testimonial"
+        loadData={loadData}
       />
       <AddTestimonial
         isOpen={open}

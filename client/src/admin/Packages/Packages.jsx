@@ -12,7 +12,6 @@ const Packages = () => {
     const [column,setColumn]=useState(["SN0", "Title", "Description", "No of Days", "Image"])
 
   const handleOpen = () => {
-    console.log({handleOpen});
     setOpen(true);
   };
 
@@ -79,7 +78,12 @@ const Packages = () => {
           fetchData={loadData}
         />
       </>
-      <MasterTable tableData={packagesData} column={column} table="packages" />
+      <MasterTable
+        loadData={loadData}
+        tableData={packagesData}
+        column={column}
+        table="packages"
+      />
     </>
   );
 }

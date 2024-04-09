@@ -90,6 +90,7 @@ const Destination = () => {
           tableData={packagesData}
           column={column}
           table="destination"
+          loadData={loadData}
         />
       </>
     </>

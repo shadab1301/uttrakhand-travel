@@ -8,8 +8,7 @@ exports.createGallery = async (req, res, next) => {
     if (!title) {
       throw new ApiError(400, "title fields is required");
     }
-console.log({ file: req.file });
-return false
+
     const filePath = `${process.env.IMAGE_BASE_PATH}/gallery/${req.file.filename}`;
     const alreadyExistedTitle = await Gallery.findOne({ title });
      if (alreadyExistedTitle) {
