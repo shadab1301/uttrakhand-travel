@@ -249,11 +249,6 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
 
                   <TableCell>
                     <Stack direction="row" spacing={2}>
-                      <AiTwotoneEdit
-                        style={{
-                          color: "green",
-                        }}
-                      />
                       <AiOutlineDelete
                         style={{
                           color: "red",
@@ -382,11 +377,11 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
 
                   <TableCell>
                     <Stack direction="row" spacing={2}>
-                      <AiTwotoneEdit
+                      {/* <AiTwotoneEdit
                         style={{
                           color: "green",
                         }}
-                      />
+                      /> */}
                       <AiOutlineDelete
                         style={{
                           color: "red",

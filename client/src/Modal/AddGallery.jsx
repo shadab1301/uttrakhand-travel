@@ -160,7 +160,7 @@ const AddGallery = ({ handleOpen, handleClose, isOpen, size, loadData }) => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Register
+                Add
               </Button>
             </Box>
           </Box>
