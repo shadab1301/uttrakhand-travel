@@ -6,17 +6,15 @@ import { PackagesProvider } from "../../Reducer/PackagesProvider";
 import { DestinationProvider } from "../../Reducer/DestinationProvider";
 export const UserLayout = () => {
   return (
-    <> 
-      <PackagesProvider>
-        <DestinationProvider>
-        <Header />
-
-        <Banner />
-        <Outlet />
-        <Footer />
-        </DestinationProvider>
-      </PackagesProvider>
-
+    <>
+      <DestinationProvider>
+        <PackagesProvider>
+          <Header />
+          <Banner />
+          <Outlet />
+          <Footer />
+        </PackagesProvider>
+      </DestinationProvider>
     </>
   );
 };

@@ -8,10 +8,10 @@ import { DestinationContext } from "../../../Reducer/DestinationProvider";
 const Home = () => {
 
   const { state: packagesDetails, dispatch } = useContext(PackagesContext);
-  const { state: destinationDetails, dispatch: dispatchDestination } = useContext(DestinationContext);
+  const { state: state123, dispatch: dispatchDestination } = useContext(DestinationContext);
   const TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1; });
  
-  console.log("home",destinationDetails);
+  console.log("destinationDetails_home", state123);
   return (
     <>
      {/* <Banner/> */}
