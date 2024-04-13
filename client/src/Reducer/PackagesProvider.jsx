@@ -7,7 +7,7 @@ export const PackagesProvider = ({children}) =>{
         try{
             const response =   await  fetchController("/package");
             if(response?.data?.length >0) {
-                dispatch({ type: packagesDetails, payload: response.data });
+               await dispatch({ type: packagesDetails, payload: response.data });
            }
         } catch(err){
             console.log(err);
