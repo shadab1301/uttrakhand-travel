@@ -11,7 +11,6 @@ export  const InitialState = [{
 
 
 export const DestinationReducer = (state = InitialState, action) => {
-    console.log("action",action);
     switch (action.type) {
       case destinationDetails:
         return [...action.payload ];

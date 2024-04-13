@@ -3,21 +3,23 @@ import { DestinationReducer, destinationDetails, InitialState } from "./Destinat
 export const DestinationContext = createContext();
 import { fetchController } from "../utils/fetchController/fetchController"
 export const DestinationProvider = ({ children }) => {
+        const [state, dispatch] = useReducer(DestinationReducer, InitialState);
     const DestinationLsit = async () => {
         try {
             const response = await fetchController("/destination");
-            // console.log("destinationP",response);
             if (response?.data?.length > 0) {
-                dispatch({ type: destinationDetails, payload: response.data });
+               await  dispatch({ type: destinationDetails, payload: response.data });
             }
         } catch (err) {
             console.log(err);
         }
     }
     useEffect(() => { DestinationLsit(); }, []);
-    const [state, dispatch] = useReducer(DestinationReducer, InitialState);
+
+    console.log({stateFromDestinationProvider:state});
     return (<>
         <DestinationContext.Provider value={{ state, dispatch }}>
+            {console.log({state_from_dotprovider:state})}
             {children}
         </DestinationContext.Provider>
     </>);
