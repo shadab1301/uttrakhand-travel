@@ -17,7 +17,7 @@ const Home = () => {
     <>
      {/* <Banner/> */}
 
-      <section className="hot-deals">
+      {/* <section className="hot-deals">
         <section className="search-form-box"></section>
         <div className="container">
           <div className="row">
@@ -33,7 +33,7 @@ const Home = () => {
           </div>
           
         </div>
-      </section>
+      </section> */}
 
       <section className="best-places">
         <div className="container">
