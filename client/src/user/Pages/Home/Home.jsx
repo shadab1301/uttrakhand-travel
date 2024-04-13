@@ -4,11 +4,14 @@ import Testimonial from "./Testimonial";
 import Services from "../Service/Services";
 import { Banner } from "../../Layout/Banner";
 import { PackagesContext } from "../../../Reducer/PackagesProvider";
+import { DestinationContext } from "../../../Reducer/DestinationProvider";
 const Home = () => {
 
   const { state: packagesDetails, dispatch } = useContext(PackagesContext);
+  const { state: destinationDetails, dispatch: dispatchDestination } = useContext(DestinationContext);
   const TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1; });
-  // console.log(TopPkgs);
+ 
+  console.log("home",destinationDetails);
   return (
     <>
      {/* <Banner/> */}
