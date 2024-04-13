@@ -2,12 +2,17 @@ import React ,{useContext}from "react";
 import { NavLink } from "react-router-dom";
 import SErviceData from "../Service/ServiceData.json";
 import { PackagesContext } from "../../../Reducer/PackagesProvider";
+import { DestinationContext } from "../../../Reducer/DestinationProvider";
 const Header = () => {
     const serviceD = SErviceData?.Service;
     // const [state,dispatch] = useContext();
     const { state: packagesDetails, dispatch } = useContext(PackagesContext);
+    const { state: stateDestination, dispatch: dispatchDestination } = useContext(DestinationContext);
+
 const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader==1; });
-// console.log("header pkg",HeaderPkgs);
+
+const IncludeInNavbar =  stateDestination.filter((data)=>{ return data?.isIncludeInNavbar==1; });
+console.log("header",IncludeInNavbar);
     return (
         <>
             <nav id="top" className="navbar navbar-expand-md bg-dark navbar-dark custom-nav">
@@ -29,7 +34,8 @@ const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader=
                                 <div className="shadow dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="col-md-3">
+                                            {/* {IncludeInNavbar?.map(()=>(<>
+                                                <div className="col-md-3">
                                                 <div className="col-ft1"> 
                                                     <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
                                                     <ul className="ft1-list">
@@ -40,39 +46,21 @@ const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader=
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div className="col-md-3">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
-                                                    </ul>
+                                            </>))}  */}
+                                            
+                                            {IncludeInNavbar?.map((val,index)=>(<>
+                                                <div className="col-md-3">
+                                                <div className="col-ft1 wow zoomIn">
+                                                    <div className="bestplace-img">
+                                                    <NavLink to={"/list/"+val?._id}> <img className="img-fluid" src={val?.cityImage} alt="" title="" border="0" /></NavLink>
+                                                    </div>
+                                                    <div className="title" data-wow-duration="3s"><NavLink to={"/list/"+val?._id}>{val?.cityName}</NavLink></div>
+
                                                 </div>
                                             </div>
-                                            <div className="col-md-3">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+
+                                            </>))}
+                                         
                                         </div>
 
                                     </div>

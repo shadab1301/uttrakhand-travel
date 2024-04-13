@@ -8,10 +8,11 @@ import { DestinationContext } from "../../../Reducer/DestinationProvider";
 const Home = () => {
 
   const { state: packagesDetails, dispatch } = useContext(PackagesContext);
-  const { state: state123, dispatch: dispatchDestination } = useContext(DestinationContext);
+  const { state: stateDestination, dispatch: dispatchDestination } = useContext(DestinationContext);
   const TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1; });
  
-  console.log("destinationDetails_home", state123);
+  // console.log("destinationDetails_home", stateDestination);
+  const TopVisitPlace =  stateDestination.filter((data)=>{ return data?.isTopVisitPlace==1; });
   return (
     <>
      {/* <Banner/> */}
@@ -49,12 +50,14 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-3 col-sm-6">
+            {TopVisitPlace?.map((val,index)=>(
+              <>
+                <div className="col-md-3 col-sm-6">
               <div className="theme-box shadow best-places-box ">
                 <div className="bestplace-img">
                   <img
                     className="img-fluid"
-                    src="images/hotdeals1.jpeg"
+                    src={val?.cityImage}
                     alt=""
                     title=""
                     border="0"
@@ -63,7 +66,7 @@ const Home = () => {
                 <div className="theme-content">
                   <ul>
                     <li>
-                      <div className="theme-title">Dheradun</div>
+                      <div className="theme-title">{val?.cityName}</div>
                     </li>
                   </ul>
                   {/* <p>3Days, 4 NIghts </p> */}
@@ -74,7 +77,7 @@ const Home = () => {
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
                     <li>
-                      <NavLink to="/list/Dheradun" className="dt-view">
+                      <NavLink to={"/list/"+val?._id} className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -82,105 +85,11 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box ">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals2.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">Rishikesh</div>
-                    </li>
-                  </ul>
-                  {/* <p>3Days, 4 NIghts </p> */}
-                  {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
-                  <ul className="rating-sec">
-                    {/* <li>
-                                <span className="st-txt">Starting from</span>
-                                <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li> */}
-                    <li>
-                      <NavLink to="/list/Rishikesh" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box ">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals3.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">Haridwar</div>
-                    </li>
-                  </ul>
-                  {/* <p>3Days, 4 NIghts</p> */}
-                  {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
-                  <ul className="rating-sec">
-                    {/* <li>
-                                <span className="st-txt">Starting from</span>
-                                <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li> */}
-                    <li>
-                      <NavLink to="/list/Haridwar" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals1.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">Paris city Tour</div>
-                    </li>
-                  </ul>
-                  {/* <p>3Days, 4 NIghts </p> */}
-                  {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
-                  <ul className="rating-sec">
-                    {/* <li>
-                                <span className="st-txt">Starting from</span>
-                                <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li> */}
-                    <li>
-                      <NavLink to="/list/paries" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+              </>
+            ))}
+          
+
+
           </div>
         </div>
         <NavLink className="readmore-right" to="/list/all">

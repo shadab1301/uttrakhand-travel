@@ -10,8 +10,8 @@ const List = () => {
     const URLPATH = location.pathname.trim().split("/");
     const FilertPAth = URLPATH.filter(Boolean);
     // console.log(FilertPAth);
-    console.log({ packagesDetails });
-    console.log("list", PkgList);
+    // console.log({ packagesDetails });
+    // console.log("list", PkgList);
     useEffect(() => {
         if (FilertPAth?.[1] == "all") {
             // let TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1; });
