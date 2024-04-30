@@ -18,7 +18,7 @@ console.log("header",IncludeInNavbar);
             <nav id="top" className="navbar navbar-expand-md bg-dark navbar-dark custom-nav">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to="/">
-                        <img className="img-fluid" src="images/raj-travels-logo.png" alt="" title="" border="0" />
+                        <img className="img-fluid" src="images/dto_logo.svg" alt="" title="" border="0" />
                     </NavLink>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span className="navbar-toggler-icon"></span>

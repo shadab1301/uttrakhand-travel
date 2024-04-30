@@ -38,8 +38,8 @@ routes.post(
 );
 routes.get("/package", fetchPackages);
 routes.get("/package/:id", fetchPackages);
-routes.put(
-  "/package",
+routes.patch(
+  "/package/:id",
   // PackagesValidator,
   updatePackage
 );
