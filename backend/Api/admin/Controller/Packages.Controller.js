@@ -100,6 +100,13 @@ exports.fetchPackages = async (req, res, next) => {
 
 exports.updatePackage = async (req, res, next) => {
   try {
+  const pkg = req?.body;
+    const PackageUpdate = await Package.findByIdAndUpdate(
+      { _id: req?.params?.id }, 
+      pkg,
+      { new: true },
+    ).select();
+    return res.status(200).json(new ApiResponse(200, PackageUpdate, "Data updated successfully."));
   } catch (err) {
     return res.status(500).json({
       status: 500,
