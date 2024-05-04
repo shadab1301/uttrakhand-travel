@@ -26,11 +26,16 @@ const AddDestination = ({
   data = null,
   isEditing = false,
 }) => {
+  console.log("_______data______");
+  console.log({ data });
+  console.log({ AAAA: data && data["City Name"] });
+  // console.log({ data: data["City Name"] });
   const [formData, setFormData] = useState({
-    cityName: "",
+    cityName: data ? data["City Name"] : "",
     isIncludeInNavbar: "0",
     isTopVisitPlace: "0",
   });
+  const [itemTobeEdited, setItemTobeEdited] = useState(id);
   const [IsLoading, setIsLoading] = useState(false);
   const [cityImage, setCityImage] = useState(null);
   const handleChange = (e) => {
@@ -100,15 +105,17 @@ const AddDestination = ({
     }
   };
 
-  // const fetchDataFromId = async () => {
-  //   // const res = await fetchController(`/destination/${id}`, "GET");
-  //   // console.log({ res });
-  // };
+  const fetchDataFromId = async () => {
+    // const res = await fetchController(`/destination/${id}`, "GET");
+    // console.log({ res });
+  };
   useEffect(() => {
-    const prevCityName = data && data.id ? data["City Name"] : "";
-    if (id) {
-      console.log("I'm from useEffect");
-      setFormData({ ...formData, ["cityName"]: prevCityName });
+    //  debugger;
+    console.log("_______id______1111");
+    console.log({ itemTobeEdited });
+    if (data && data.id) {
+      console.log({ insideUseffect: "insideUseffect" });
+      fetchDataFromId();
     }
   }, [id]);
   return (
