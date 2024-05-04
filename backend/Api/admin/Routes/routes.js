@@ -53,11 +53,8 @@ routes.delete('/testimonial/:id',DeleteTestimonial);
 routes.post("/destination",uploadFile("destination").single("cityImage"),createDestination);
 routes.get("/destination", fetchDestination);
 routes.get("/destination/:id", fetchDestination);
-routes.put(
-  "/destination",
-  // DestinationValidator,
-  updateDestination
-);
+
+routes.patch("/destination/:id", updateDestination);
 routes.delete("/destination/:id", deleteDestination);
 
 routes.post("/address", AddAddress);
