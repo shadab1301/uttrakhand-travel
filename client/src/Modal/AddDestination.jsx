@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -21,12 +21,19 @@ const AddDestination = ({
   isOpen,
   size,
   fetchData,
+  id = null,
+  isEditing = false,
 }) => {
+
+   console.log("_______id______");
+   console.log({ id });
+  // console.log({ data: data["City Name"] });
   const [formData, setFormData] = useState({
-    cityName: "",
+    cityName:  "",
     isIncludeInNavbar: "0",
     isTopVisitPlace: "0",
   });
+  const [itemTobeEdited, setItemTobeEdited] = useState(id);
   const [IsLoading, setIsLoading] = useState(false);
   const [cityImage, setCityImage] = useState(null);
   const handleChange = (e) => {
@@ -95,6 +102,21 @@ const AddDestination = ({
       setIsLoading(false);
     }
   };
+
+const fetchDataFromId=async()=>{
+
+  const res = await fetchController(`/destination/${id}`, "GET");
+  console.log({res})
+}
+useEffect(() => {
+  //  debugger;
+  console.log("_______id______1111");
+  console.log({ itemTobeEdited });
+  if (itemTobeEdited) {
+    console.log({ insideUseffect: "insideUseffect" });
+    fetchDataFromId();
+  }
+}, [itemTobeEdited]);
   return (
     <div>
       <Modal
@@ -161,7 +183,7 @@ const AddDestination = ({
                 onChange={handleChange}
               />
 
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={
                   <Checkbox
                     // checked={antoine}
@@ -180,7 +202,7 @@ const AddDestination = ({
                   />
                 }
                 label="Is top visit place"
-              />
+              /> */}
               <Box>
                 <Button
                   type="submit"

@@ -26,7 +26,7 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
     isRecommendPackages: "0",
     isTopPackages: "0",
     isShowInHeader: "0",
-    include: "test",
+    include: "",
   });
   const [image, setImage] = useState(null);
   const [BannerImage, setBannerImage] = useState(null);
@@ -179,17 +179,17 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
                 value={formData.numbersOfDay}
                 onChange={handleChange}
               />
-              {/* <TextField
+              <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="includes"
+                id="include"
                 label="Includes"
-                name="includes"
+                name="include"
                 type="text"
-                value={formData.includes}
+                value={formData.include}
                 onChange={handleChange}
-              /> */}
+              />
               <TextField
                 margin="normal"
                 required
@@ -238,7 +238,7 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
                   onChange={handleChange}
                 />
               </FormControl>
-             
+
               <Box>
                 <Button
                   variant="contained"

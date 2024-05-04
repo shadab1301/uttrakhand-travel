@@ -47,7 +47,13 @@ exports.createDestination = async (req, res, next) => {
 
 exports.fetchDestination = async (req, res, next) => {
   try {
-    const destinations=await Destination.find()
+   let destinations
+    if(req.params.id){
+     destinations = await Destination.findOne({_id:req.params.id});
+    }else{
+      destinations=  await Destination.find();
+    }
+   
   
     if (!destinations) {
       throw new ApiError(500,"Something went wrong while fetching destinations")
