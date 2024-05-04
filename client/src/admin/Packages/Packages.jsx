@@ -9,7 +9,7 @@ import { fetchController } from '../../utils/fetchController/fetchController';
 const Packages = () => {
     const [open, setOpen] = useState(false);
     const [packagesData,setPachagesData]=useState([{}])
-    const [column,setColumn]=useState(["SN0", "Title", "Description", "No of Days", "Image"])
+    const [column,setColumn]=useState(["SN0", "Title","Includes", "Description", "No of Days", "Image"])
 
   const handleOpen = () => {
     setOpen(true);
@@ -29,6 +29,7 @@ const Packages = () => {
         Description: val.description,
         ["No of Days"]: val.numbersOfDay,
         ["Image"]: val.pkgImage,
+        ["Includes"]: val.include,
       };
      })
       setPachagesData(formattedData);

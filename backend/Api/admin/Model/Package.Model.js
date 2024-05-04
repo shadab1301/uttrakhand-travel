@@ -45,6 +45,12 @@ const packageSchema = new mongoose.Schema(
       enum: [0, 1], //0  for false, 1 for in true
       default: 0,
     },
+    destination: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Destination",
+      },
+    ],
   },
   { timestamps: true }
 );

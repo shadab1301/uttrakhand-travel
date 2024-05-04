@@ -27,10 +27,9 @@ export default function MasterTable({
   handleClickOnCheckBox,
 }) {
   const [open, setOpen] = React.useState(false);
-  const [isEditDestinationMOdalOpened, setIsEditDestinationMOdalOpened] =
-    React.useState(false);
+  const [addDesOpen, setAddDesOpen] = React.useState(false);
   const [itemToBeDeleteId, setItemToBeDeleteId] = React.useState(null);
-  const [itemToBeEditeId, setItemToBeEditeId] = React.useState(null);
+  const [itemToBeEdit, setItemToBeEdit] = React.useState(null);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -39,14 +38,12 @@ export default function MasterTable({
     setItemToBeDeleteId(null);
   };
 
-  const handleOpenEditDestinationModal = () => {
-    setIsEditDestinationMOdalOpened(true);
+  const [openDestinationModal, setopenDestinationModal] = React.useState(false);
+  const handleopenDestinationModal = () => setopenDestinationModal(true);
+  const handleCloseDestinationModal = () => {
+    setopenDestinationModal(false);
+    setItemToBeEdit(null);
   };
-  const handleCloseEditDestinationModal = () => {
-    setIsEditDestinationMOdalOpened(false);
-    setItemToBeEditeId(null);
-  };
-
   const columnsData = column.map((val, index) => {
     if (["Image", "City Image"].includes(val)) {
       return {
@@ -88,9 +85,10 @@ export default function MasterTable({
     setItemToBeDeleteId(id);
     handleOpen();
   };
+
   const handleClickOnEdit = (id) => {
-    setItemToBeEditeId(id);
-    handleOpenEditDestinationModal();
+    handleopenDestinationModal();
+    setItemToBeEdit(id);
   };
 
   const deletePackages = async () => {
@@ -212,7 +210,7 @@ export default function MasterTable({
           <TableHead>
             <TableRow>
               {columnsData.map((col, id) => (
-                <TableCell key={col.id}>{col.headerName}</TableCell>
+                <TableCell>{col.headerName}</TableCell>
               ))}
               <TableCell>Operation</TableCell>
             </TableRow>
@@ -341,7 +339,8 @@ export default function MasterTable({
                         style={{
                           color: "green",
                         }}
-                        onClick={() => handleClickOnEdit(row)}
+                        isOpen={addDesOpen}
+                        onClick={(e) => handleClickOnEdit(row.id)}
                       />
                       <AiOutlineDelete
                         style={{
@@ -440,16 +439,14 @@ export default function MasterTable({
         handleConfirmDelete={handleConfirmDelete}
         fetchData={loadData}
       />
-
       <AddDestination
-        handleOpen={handleOpenEditDestinationModal}
-        handleClose={handleCloseEditDestinationModal}
-        isOpen={isEditDestinationMOdalOpened}
+        id={itemToBeEdit}
+        isOpen={openDestinationModal}
+        handleOpen={handleopenDestinationModal}
+        handleClose={handleCloseDestinationModal}
         size={"md"}
-        // fetchData={}
-        id={itemToBeEditeId}
         isEditing={true}
-        data={itemToBeEditeId}
+        fetchData={loadData}
       />
     </>
   );
