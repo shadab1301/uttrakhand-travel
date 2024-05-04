@@ -8,24 +8,89 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { RxCrossCircled } from "react-icons/rx";
+import { AddFileController } from "../utils/fetchController/AddFileController";
+import { toast, ToastContainer } from "react-toastify";
 
-const AddTestimonial = ({ handleOpen, handleClose, isOpen, size }) => {
+const AddTestimonial = ({
+  handleOpen,
+  handleClose,
+  isOpen,
+  size,
+  fetchData,
+}) => {
   const [formData, setFormData] = useState({
-    customer_name:"", description:"", image:"",
+    customer_name: "",
+    description: "",
   });
+  const [image, setImage] = useState(null);
+    const [IsLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name === "image") {
+      setImage(e.target.files[0]);
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    setIsLoading(true);
+    try {
+      const data = new FormData();
+      data.append("image", image);
+      data.append("customer_name", formData.customer_name);
+      data.append("description", formData.description);
+
+      const res = await AddFileController("/testimonial", "POST", data);
+      if (res.status === 201) {
+        fetchData();
+        handleClose();
+        toast.success(res.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
+        setFormData({
+          title: "",
+          subTitle: "",
+          numbersOfDay: "",
+          description: "",
+          isRecommendPackages: "0",
+          isTopPackages: "0",
+          isShowInHeader: "0",
+          include: "test",
+        });
+      }
+      console.log({ res });
+    } catch (error) {
+      setIsLoading(false);
+      console.log("Error occour in Add Testimonial Component");
+      console.log(error);
+      toast.success(res.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -103,14 +168,33 @@ const AddTestimonial = ({ handleOpen, handleClose, isOpen, size }) => {
                 value={formData.image}
                 onChange={handleChange}
               />
-              <Button
+              {/* <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Submit
-              </Button>
+              </Button> */}
+
+              <Box>
+                <Button
+                  sx={{ mt: 3, mb: 2 }}
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={IsLoading}
+                  startIcon={
+                    IsLoading ? (
+                      <CircularProgress size={20} color="inherit" />
+                    ) : (
+                      ""
+                    )
+                  }
+                >
+                  {IsLoading ? "Submit" : "Submit"}
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>

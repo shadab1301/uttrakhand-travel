@@ -1,151 +1,25 @@
-import React from "react";
+import React,{useContext} from "react";
 import { NavLink } from "react-router-dom";
 import Testimonial from "./Testimonial";
 import Services from "../Service/Services";
 import { Banner } from "../../Layout/Banner";
+import { PackagesContext } from "../../../Reducer/PackagesProvider";
+import { DestinationContext } from "../../../Reducer/DestinationProvider";
 const Home = () => {
+
+  const { state: packagesDetails, dispatch } = useContext(PackagesContext);
+  const { state: stateDestination, dispatch: dispatchDestination } = useContext(DestinationContext);
+  const TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1; });
+ 
+  // console.log("destinationDetails_home", stateDestination);
+  const TopVisitPlace =  stateDestination.filter((data)=>{ return data?.isTopVisitPlace==1; });
   return (
     <>
      {/* <Banner/> */}
 
-      <section className="hot-deals">
+      {/* <section className="hot-deals">
         <section className="search-form-box"></section>
         <div className="container">
-         
-          {/* <div className="row">
-            <div className="col-md-12">
-              <div className="main-title">
-                <h1 className="text-center wow zoomIn" data-wow-duration="3s">
-                  Hot Deals this Week{" "}
-                  <sup>
-                    <i className="fa fa-star" aria-hidden="true"></i>{" "}
-                  </sup>
-                </h1>
-              </div>
-            </div>
-          </div> */}
-          {/* <section id="demos">
-            <div className="">
-              <div className="loop owl-carousel owl-theme">
-                <div className="item wow zoomIn" data-wow-duration="3s">
-                  <div className="hotdeals-box">
-                    <div className="upper-caption">
-                      <h4>NEW PROMO</h4>
-                    </div>
-                    <NavLink to="">
-                      {" "}
-                      <img
-                        src="images/hotdeals1.jpeg"
-                        alt="Chicago"
-                        className="img-fluid"
-                        title=""
-                        border="0"
-                      />
-                    </NavLink>
-                    <NavLink to="">
-                      <div className="carousel-caption">
-                        <span>Tallinn</span>
-                        <p>Brazil</p>
-                      </div>
-                    </NavLink>
-                  </div>
-                </div>
-                <div className="item wow zoomIn" data-wow-duration="3s">
-                  <div className="hotdeals-box">
-                    <div className="upper-caption">
-                      <h4>NEW PROMO</h4>
-                    </div>
-                    <NavLink to="">
-                      {" "}
-                      <img
-                        src="images/hotdeals2.jpeg"
-                        alt="Chicago"
-                        className="img-fluid"
-                        title=""
-                        border="0"
-                      />
-                    </NavLink>
-                    <NavLink to="">
-                      <div className="carousel-caption">
-                        <span>Salvador Da Bahia</span>
-                        <p>Democrac Republic of the Congo</p>
-                      </div>
-                    </NavLink>
-                  </div>
-                </div>
-                <div className="item wow zoomIn" data-wow-duration="3s">
-                  <div className="hotdeals-box">
-                    <div className="upper-caption">
-                      <h4>NEW PROMO</h4>
-                    </div>
-                    <NavLink to="">
-                      {" "}
-                      <img
-                        src="images/hotdeals3.jpeg"
-                        alt="Chicago"
-                        className="img-fluid"
-                        title=""
-                        border="0"
-                      />
-                    </NavLink>
-                    <NavLink to="">
-                      <div className="carousel-caption">
-                        <span>Lima</span>
-                        <p>Bhutan</p>
-                      </div>
-                    </NavLink>
-                  </div>
-                </div>
-                <div className="item wow zoomIn" data-wow-duration="3s">
-                  <div className="hotdeals-box">
-                    <div className="upper-caption">
-                      <h4>NEW PROMO</h4>
-                    </div>
-                    <NavLink to="">
-                      {" "}
-                      <img
-                        src="images/hotdeals1.jpeg"
-                        alt="Chicago"
-                        className="img-fluid"
-                        title=""
-                        border="0"
-                      />
-                    </NavLink>
-                    <NavLink to="">
-                      <div className="carousel-caption">
-                        <span>Tallinn</span>
-                        <p>Brazil</p>
-                      </div>
-                    </NavLink>
-                  </div>
-                </div>
-                <div className="item wow zoomIn" data-wow-duration="3s">
-                  <div className="hotdeals-box">
-                    <div className="upper-caption">
-                      <h4>NEW PROMO</h4>
-                    </div>
-                    <NavLink to="">
-                      {" "}
-                      <img
-                        src="images/hotdeals2.jpeg"
-                        alt="Chicago"
-                        className="img-fluid"
-                        title=""
-                        border="0"
-                      />
-                    </NavLink>
-                    <NavLink to="">
-                      <div className="carousel-caption">
-                        <span>Tallinn</span>
-                        <p>Brazil</p>
-                      </div>
-                    </NavLink>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section> */}
-
           <div className="row">
             <div className="col-md-12">
               <NavLink
@@ -159,7 +33,7 @@ const Home = () => {
           </div>
           
         </div>
-      </section>
+      </section> */}
 
       <section className="best-places">
         <div className="container">
@@ -176,12 +50,14 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-3 col-sm-6">
+            {TopVisitPlace?.map((val,index)=>(
+              <>
+                <div className="col-md-3 col-sm-6">
               <div className="theme-box shadow best-places-box ">
                 <div className="bestplace-img">
                   <img
                     className="img-fluid"
-                    src="images/hotdeals1.jpeg"
+                    src={val?.cityImage}
                     alt=""
                     title=""
                     border="0"
@@ -190,7 +66,7 @@ const Home = () => {
                 <div className="theme-content">
                   <ul>
                     <li>
-                      <div className="theme-title">Dheradun</div>
+                      <div className="theme-title">{val?.cityName}</div>
                     </li>
                   </ul>
                   {/* <p>3Days, 4 NIghts </p> */}
@@ -201,7 +77,7 @@ const Home = () => {
                                 <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
                             </li> */}
                     <li>
-                      <NavLink to="/list/Dheradun" className="dt-view">
+                      <NavLink to={"/list/"+val?._id} className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -209,105 +85,11 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box ">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals2.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">Rishikesh</div>
-                    </li>
-                  </ul>
-                  {/* <p>3Days, 4 NIghts </p> */}
-                  {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
-                  <ul className="rating-sec">
-                    {/* <li>
-                                <span className="st-txt">Starting from</span>
-                                <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li> */}
-                    <li>
-                      <NavLink to="/list/Rishikesh" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box ">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals3.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">Haridwar</div>
-                    </li>
-                  </ul>
-                  {/* <p>3Days, 4 NIghts</p> */}
-                  {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
-                  <ul className="rating-sec">
-                    {/* <li>
-                                <span className="st-txt">Starting from</span>
-                                <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li> */}
-                    <li>
-                      <NavLink to="/list/Haridwar" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals1.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">Paris city Tour</div>
-                    </li>
-                  </ul>
-                  {/* <p>3Days, 4 NIghts </p> */}
-                  {/* <p className="best-places-content"> <span className="blackcolor">Included:</span> Flight Facility , 5 Star HotelSightseeing , Transfers , Meals</p> */}
-                  <ul className="rating-sec">
-                    {/* <li>
-                                <span className="st-txt">Starting from</span>
-                                <br/><span className="st-price"><i className="fa fa-rupee"></i>1180</span>
-                            </li> */}
-                    <li>
-                      <NavLink to="/list/paries" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+              </>
+            ))}
+          
+
+
           </div>
         </div>
         <NavLink className="readmore-right" to="/list/all">
@@ -329,54 +111,15 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box ">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals1.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">
-                        Char Dham Yatra Tour Package
-                      </div>
-                    </li>
-                  </ul>
-                  <p>3Days, 4 NIghts</p>
-                  <p className="best-places-content">
-                    {" "}
-                    <span className="blackcolor">Included:</span> Flight
-                    Facility , 5 Star HotelSightseeing , Transfers , Meals
-                  </p>
-                  <ul className="rating-sec">
-                    <li>
-                      <span className="st-txt">Starting from</span>
-                      <br />
-                      <span className="st-price">
-                        <i className="fa fa-rupee"></i>1180
-                      </span>
-                    </li>
-                    <li>
-                      <NavLink to="/detail/1" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-6">
+
+            {TopPkgs?.map((val,index)=>(
+              <>
+               <div className="col-md-3 col-sm-6">
               <div className="theme-box shadow best-places-box">
                 <div className="bestplace-img">
                   <img
                     className="img-fluid"
-                    src="images/hotdeals2.jpeg"
+                    src={val?.pkgImage} 
                     alt=""
                     title=""
                     border="0"
@@ -386,26 +129,27 @@ const Home = () => {
                   <ul>
                     <li>
                       <div className="theme-title">
-                        Mussoorie - Dhanaulti Tour Package
+                       {val?.title}
                       </div>
                     </li>
                   </ul>
-                  <p>3Days, 4 NIghts</p>
+                  <p>{val?.numbersOfDay}Days, {val?.numbersOfDay-1}NIghts</p>
                   <p className="best-places-content">
-                    {" "}
-                    <span className="blackcolor">Included:</span> Flight
-                    Facility , 5 Star HotelSightseeing , Transfers , Meals
+                    <span className="blackcolor">Included:</span>{val?.include}
+                    {/* <span className="blackcolor">Included:</span> Flight
+                    Facility , 5 Star HotelSightseeing , Transfers , Meals */}
                   </p>
                   <ul className="rating-sec">
                     <li>
-                      <span className="st-txt">Starting from</span>
+                      <span className="st-txt">Price:</span>
                       <br />
                       <span className="st-price">
-                        <i className="fa fa-rupee"></i>1180
+                        {/* <i className="fa fa-rupee"></i> */}
+                        On Request
                       </span>
                     </li>
                     <li>
-                      <NavLink to="/detail/1" className="dt-view">
+                      <NavLink to={"/detail/"+val?._id} className="dt-view">
                         VIEW MORE
                       </NavLink>
                     </li>
@@ -413,90 +157,8 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals3.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">
-                        Complete Haridwar Package
-                      </div>
-                    </li>
-                  </ul>
-                  <p>3Days, 4 NIghts</p>
-                  <p className="best-places-content">
-                    {" "}
-                    <span className="blackcolor">Included:</span> Flight
-                    Facility , 5 Star HotelSightseeing , Transfers , Meals
-                  </p>
-                  <ul className="rating-sec">
-                    <li>
-                      <span className="st-txt">Starting from</span>
-                      <br />
-                      <span className="st-price">
-                        <i className="fa fa-rupee"></i>1180
-                      </span>
-                    </li>
-                    <li>
-                      <NavLink to="/detail/1" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-6">
-              <div className="theme-box shadow best-places-box">
-                <div className="bestplace-img">
-                  <img
-                    className="img-fluid"
-                    src="images/hotdeals1.jpeg"
-                    alt=""
-                    title=""
-                    border="0"
-                  />
-                </div>
-                <div className="theme-content">
-                  <ul>
-                    <li>
-                      <div className="theme-title">
-                        Complete Haridwar Package
-                      </div>
-                    </li>
-                  </ul>
-                  <p>3Days, 4 NIghts</p>
-                  <p className="best-places-content">
-                    {" "}
-                    <span className="blackcolor">Included:</span> Flight
-                    Facility , 5 Star HotelSightseeing , Transfers , Meals
-                  </p>
-                  <ul className="rating-sec">
-                    <li>
-                      <span className="st-txt">Starting from</span>
-                      <br />
-                      <span className="st-price">
-                        <i className="fa fa-rupee"></i>1180
-                      </span>
-                    </li>
-                    <li>
-                      <NavLink to="/detail/1" className="dt-view">
-                        VIEW MORE
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+              </>
+            ))}
           </div>
           <NavLink className="readmore-right" to="/list/all">
             See All

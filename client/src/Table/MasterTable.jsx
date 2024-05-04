@@ -9,22 +9,25 @@ import Paper from "@mui/material/Paper";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
 import { Stack } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import ConfirmDelete from "../Modal/ConfirmDelete";
+import { fetchController } from "../utils/fetchController/fetchController";
+import { toast, ToastContainer } from "react-toastify";
 
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+export default function MasterTable({ column = [], tableData = [], table = "", loadData }) {
+  const [open, setOpen] = React.useState(false);
+  const [itemToBeDeleteId, setItemToBeDeleteId] = React.useState(null);
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-export default function MasterTable({ column=[], tableData=[], table="" }) {
+  const handleClose = () => {
+    setOpen(false);
+    setItemToBeDeleteId(null);
+  };
   const columnsData = column.map((val, index) => {
-    if (val === "Image") {
+    if (["Image", "City Image"].includes(val)) {
       return {
         field: val,
         headerName: val,
@@ -40,108 +43,368 @@ export default function MasterTable({ column=[], tableData=[], table="" }) {
       return { field: val, headerName: val };
     }
   });
-  // const columns = [
-  //   { field: "id", headerName: "ID", width: 130 },
-  //   { field: "firstName", headerName: "First name", width: 130 },
-  //   { field: "lastName", headerName: "Last name", width: 130 },
-  //   {
-  //     field: "age",
-  //     headerName: "Age",
-  //     type: "number",
-  //     width: 130,
-  //   },
-  //   {
-  //     field: "fullName",
-  //     headerName: "Full name",
-  //     description: "This column has a value getter and is not sortable.",
-  //     sortable: false,
-  //     width: 160,
-  //     valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
-  //   },
-  // ];
+
+  const handleConfirmDelete = async () => {
+    if (table === "packages") {
+      await deletePackages();
+      await loadData();
+    } else if (table === "enquiry") {
+      await deleteEnquiry();
+      await loadData();
+    } else if (table === "destination") {
+      await deleteDestination();
+      await loadData();
+    } else if (table === "testimonial") {
+      await deleteTestimonial();
+      await loadData();
+    } else if (table === "gallery") {
+      await deleteGallery();
+      await loadData();
+    }
+    handleClose();
+  };
+  const handleClickOnDelete = (id) => {
+    setItemToBeDeleteId(id);
+    handleOpen();
+  };
+  const deletePackages = async () => {
+    try {
+      const res = await fetchController(
+        `/package/${itemToBeDeleteId}`,
+        "DELETE"
+      );
+      if (res.statusCode === 201 || res.statusCode === 200) {
+        toast.success(res.message, {
+          position: "top-right",
+        });
+      } else {
+        toast.error(res.message, {
+          position: "top-right",
+        });
+      }
+    } catch (error) {
+      console.log("Error occour while delete packages");
+      console.log({ error });
+    } finally {
+    }
+  };
+  const deleteEnquiry = async () => {
+    try {
+      const res = await fetchController(
+        `/enquery/${itemToBeDeleteId}`,
+        "DELETE"
+      );
+      if (res.statusCode === 201 || res.statusCode === 200) {
+        toast.success(res.message, {
+          position: "top-right",
+        });
+      } else {
+        toast.error(res.message, {
+          position: "top-right",
+        });
+      }
+    } catch (error) {
+      console.log("Error occour while delete packages");
+      console.log({ error });
+    } finally {
+    }
+  };
+  const deleteDestination = async () => {
+    try {
+      const res = await fetchController(
+        `/destination/${itemToBeDeleteId}`,
+        "DELETE"
+      );
+      if (res.statusCode === 201 || res.statusCode === 200) {
+        toast.success(res.message, {
+          position: "top-right",
+        });
+      } else {
+        toast.error(res.message, {
+          position: "top-right",
+        });
+      }
+    } catch (error) {
+      console.log("Error occour while delete packages");
+      console.log({ error });
+    } finally {
+    }
+  };
+  const deleteTestimonial = async () => {
+    try {
+      const res = await fetchController(
+        `/testimonial/${itemToBeDeleteId}`,
+        "DELETE"
+      );
+      if (
+        [200, 201].includes(res.statusCode) ||
+        [200, 201].includes(res.status)
+      ) {
+        toast.success(res.message, {
+          position: "top-right",
+        });
+      } else {
+        toast.error(res.message, {
+          position: "top-right",
+        });
+      }
+    } catch (error) {
+      console.log("Error occour while delete packages");
+      console.log({ error });
+    } finally {
+    }
+  };
+    const deleteGallery = async () => {
+      try {
+        const res = await fetchController(
+          `/gallery/${itemToBeDeleteId}`,
+          "DELETE"
+        );
+        if (
+          [200, 201].includes(res.statusCode) ||
+          [200, 201].includes(res.status)
+        ) {
+          toast.success(res.message, {
+            position: "top-right",
+          });
+        } else {
+          toast.error(res.message, {
+            position: "top-right",
+          });
+        }
+      } catch (error) {
+        console.log("Error occour while delete packages");
+        console.log({ error });
+      } finally {
+      }
+    };
+
+  // gallery ;
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            {columnsData.map((col, id) => (
-              <TableCell>{col.headerName}</TableCell>
-            ))}
-            <TableCell>Operation</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {table === "packages" &&
-            tableData.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.SN0}
-                </TableCell>
+    <>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              {columnsData.map((col, id) => (
+                <TableCell>{col.headerName}</TableCell>
+              ))}
+              <TableCell>Operation</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {table === "packages" &&
+              tableData.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.SN0}
+                  </TableCell>
 
-                <TableCell>{row.Title}</TableCell>
-                <TableCell>{row.Description}</TableCell>
-                <TableCell>{row["No of Days"]}</TableCell>
-                <TableCell>
-                  {" "}
-                  <img
-                    src={row.Image}
-                    alt="Image"
-                    style={{ width: "80px", height: "50px" }}
-                  />
-                </TableCell>
-                <TableCell>
-                  <Stack direction="row" spacing={2}>
-                    <AiTwotoneEdit
-                      style={{
-                        color: "green",
-                      }}
+                  <TableCell>{row.Title}</TableCell>
+                  <TableCell>{row.Description}</TableCell>
+                  <TableCell>{row["No of Days"]}</TableCell>
+                  <TableCell>
+                    {" "}
+                    <img
+                      src={row.Image}
+                      alt="Image"
+                      style={{ width: "80px", height: "50px" }}
                     />
-                    <AiOutlineDelete
-                      style={{
-                        color: "red",
-                      }}
-                    />
-                  </Stack>
-                </TableCell>
-              </TableRow>
-            ))}
-          {table === "enquiry" &&
-            tableData.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.SN0}
-                </TableCell>
-                <TableCell>{row["Name"]}</TableCell>
-                <TableCell>{row["Mobile no"]}</TableCell>
-                <TableCell>{row["Email"]}</TableCell>
-                <TableCell>{row["Type"]}</TableCell>
-                <TableCell>{row["Message"]}</TableCell>
+                  </TableCell>
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      <AiTwotoneEdit
+                        style={{
+                          color: "green",
+                        }}
+                      />
+                      <AiOutlineDelete
+                        style={{
+                          color: "red",
+                        }}
+                        onClick={() => handleClickOnDelete(row.id)}
+                      />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {table === "enquiry" &&
+              tableData.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.SN0}
+                  </TableCell>
+                  <TableCell>{row["Name"]}</TableCell>
+                  <TableCell>{row["Mobile no"]}</TableCell>
+                  <TableCell>{row["Email"]}</TableCell>
+                  <TableCell>{row["Type"]}</TableCell>
+                  <TableCell>{row["Message"]}</TableCell>
 
-                <TableCell>
-                  <Stack direction="row" spacing={2}>
-                    <AiTwotoneEdit
-                      style={{
-                        color: "green",
-                      }}
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      <AiOutlineDelete
+                        style={{
+                          color: "red",
+                        }}
+                        onClick={() => handleClickOnDelete(row.id)}
+                      />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {table === "destination" &&
+              tableData.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.SN0}
+                  </TableCell>
+                  <TableCell>{row["City Name"]}</TableCell>
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled
+                          defaultChecked={row["is Include in Navbar"]}
+                        />
+                      }
+                      label=""
                     />
-                    <AiOutlineDelete
-                      style={{
-                        color: "red",
-                      }}
+                  </TableCell>
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled
+                          defaultChecked={row["is Top Visit Place"]}
+                        />
+                      }
+                      label=""
                     />
-                  </Stack>
-                </TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <img
+                      src={row["City Image"]}
+                      alt="Image"
+                      style={{ width: "80px", height: "50px" }}
+                    />
+                  </TableCell>
+
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      <AiTwotoneEdit
+                        style={{
+                          color: "green",
+                        }}
+                      />
+                      <AiOutlineDelete
+                        style={{
+                          color: "red",
+                        }}
+                        onClick={() => handleClickOnDelete(row.id)}
+                      />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {table === "gallery" &&
+              tableData.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.SN0}
+                  </TableCell>
+                  <TableCell>{row["Title"]}</TableCell>
+                  <TableCell>{row["Description"]}</TableCell>
+                  <TableCell>
+                    <img
+                      src={row.Image}
+                      alt="Image"
+                      style={{ width: "80px", height: "50px" }}
+                    />
+                  </TableCell>
+                  {/*  */}
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      <AiTwotoneEdit
+                        style={{
+                          color: "green",
+                        }}
+                      />
+                      <AiOutlineDelete
+                        style={{
+                          color: "red",
+                        }}
+                        onClick={() => handleClickOnDelete(row.id)}
+                      />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+
+            {table === "testimonial" &&
+              tableData.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.SN0}
+                  </TableCell>
+                  <TableCell>{row["Customer name"]}</TableCell>
+                  <TableCell>{row["Description"]}</TableCell>
+
+                  <TableCell>
+                    {" "}
+                    <img
+                      src={row.Image}
+                      alt="Image"
+                      style={{ width: "80px", height: "50px" }}
+                    />
+                  </TableCell>
+
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      {/* <AiTwotoneEdit
+                        style={{
+                          color: "green",
+                        }}
+                      /> */}
+                      <AiOutlineDelete
+                        style={{
+                          color: "red",
+                        }}
+                        onClick={() => handleClickOnDelete(row.id)}
+                      />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {/* gallery */}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <ConfirmDelete
+        isOpen={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        size={"md"}
+        handleConfirmDelete={handleConfirmDelete}
+        // fetchData={loadData}
+      />
+    </>
   );
 }

@@ -7,6 +7,32 @@ const { validationResult } = require('express-validator');
 const Address = require("../Model/Address.Model");
 
 
+exports.AddAddress = async(req, res, next) => {
+    try {
+        const DataReq = { address, primary_number, alternate_number, email, WebUrl, map_location } = req.body;
+        DataReq._id = new mongoose.Types.ObjectId()
+        const address_res = await Address.create(DataReq);
+
+        if (address_res) {
+            return res.status(201).json({
+                status: 201,
+                _id: address_res._id,
+                message: 'Address added.'
+            });
+        } else {
+            return res.status(404).json({
+                status: 404,
+                message: 'Address  ot created. Please try again!'
+            });
+        }
+
+
+    } catch (err) {
+        return res.status(500).json({ status: 500, Error: err, message: 'Internal server Error !.' });
+
+    }
+
+}
 exports.EditAddress = async (req, res, next) => {
     try {
         let validationError = validationResult(req);
@@ -52,7 +78,7 @@ exports.EditAddress = async (req, res, next) => {
 
 exports.AddressList = async (req, res, next) => {
     try {
-        let AddressRes  = await Address.find().sort({ _id: -1 });
+        let AddressRes = await Address.find().sort({ _id: -1 });
 
         if (AddressRes?.length > 0) {
             return res.status(200).json({
@@ -66,8 +92,8 @@ exports.AddressList = async (req, res, next) => {
                         alternate_number: data?.alternate_number,
                         email: data?.email,
                         WebUrl: data?.WebUrl,
-                        map_location:data?.map_location,
-                        updated_at:data?.updated_at
+                        map_location: data?.map_location,
+                        updated_at: data?.updated_at
                     }
                 }),
                 message: 'Address list.'

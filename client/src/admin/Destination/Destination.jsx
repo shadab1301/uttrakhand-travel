@@ -9,10 +9,10 @@ const Destination = () => {
    const [packagesData, setPachagesData] = useState([{}]);
    const [column, setColumn] = useState([
      "SN0",
-     "cityName",
-     "cityImage",
-     "isIncludeInNavbar",
-     "isTopVisitPlace",
+     "City Name",
+     "City Image",
+     "is Include in Navbar",
+     "is Top Visit Place",
    ]);
 
    const handleOpen = () => {
@@ -33,10 +33,10 @@ const Destination = () => {
          return {
            id: val._id,
            ["SN0"]: index + 1,
-           Title: val.title,
-           Description: val.description,
-           ["No of Days"]: val.numbersOfDay,
-           ["Image"]: val.pkgImage,
+           ["City Name"]: val.cityName,
+           ["City Image"]: val.cityImage,
+           ["is Include in Navbar"]: val.isIncludeInNavbar,
+           ["is Top Visit Place"]: val.isTopVisitPlace,
          };
        });
        setPachagesData(formattedData);
@@ -83,12 +83,14 @@ const Destination = () => {
             handleOpen={handleOpen}
             handleClose={handleClose}
             size={"md"}
+            fetchData={loadData}
           />
         </>
         <MasterTable
           tableData={packagesData}
           column={column}
           table="destination"
+          loadData={loadData}
         />
       </>
     </>

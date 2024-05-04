@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Button, Stack, Typography } from "@mui/material";
 import MasterTable from "../../Table/MasterTable";
 import AddTestimonial from './../../Modal/AddTestimonial';
+import { fetchController } from "../../utils/fetchController/fetchController";
 
 const Testimonial = () => {
   const [open, setOpen] = useState(false);
-  const [packagesData, setPachagesData] = useState([{}]);
+  const [packagesData, setPackagesData] = useState([{}]);
   const [column, setColumn] = useState([
     "SN0",
     "Customer name",
-    "description",
-    "image",
+    "Description",
+    "Image",
   ]);
   const handleOpen = () => {
     console.log({ handleOpen });
@@ -21,24 +22,22 @@ const Testimonial = () => {
     setOpen(false);
   };
   const loadData = async () => {
-    // debugger
     try {
-      const res = await fetchController("/package", "GET");
+      const res = await fetchController("/testimonial", "GET");
 
       console.log(res.data);
       const formattedData = res.data.map((val, index) => {
         return {
-          id: val._id,
+          id: val.id,
           ["SN0"]: index + 1,
-          Title: val.title,
+          ["Customer name"]: val.customer_name,
           Description: val.description,
-          ["No of Days"]: val.numbersOfDay,
-          ["Image"]: val.pkgImage,
+          ["Image"]: val.image,
         };
       });
-      setPachagesData(formattedData);
+      setPackagesData(formattedData);
     } catch (error) {
-      console.log("Error occour while fetching Packages");
+      console.log("Error occour while fetching Testimonial");
       console.log(error);
     }
   };
@@ -78,12 +77,14 @@ const Testimonial = () => {
         tableData={packagesData}
         column={column}
         table="testimonial"
+        loadData={loadData}
       />
       <AddTestimonial
         isOpen={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
         size={"md"}
+        fetchData={loadData}
       />
     </>
   );

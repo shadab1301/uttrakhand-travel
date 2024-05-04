@@ -12,7 +12,6 @@ const Packages = () => {
     const [column,setColumn]=useState(["SN0", "Title", "Description", "No of Days", "Image"])
 
   const handleOpen = () => {
-    console.log({handleOpen});
     setOpen(true);
   };
 
@@ -22,8 +21,6 @@ const Packages = () => {
   const loadData=async()=>{
    try {
      const res =await fetchController("/package", "GET");
-  
-     console.log(res.data)
      const formattedData = res.data.map((val,index)=>{
       return {
         id: val._id,
@@ -78,9 +75,15 @@ const Packages = () => {
           handleOpen={handleOpen}
           handleClose={handleClose}
           size={"md"}
+          fetchData={loadData}
         />
       </>
-      <MasterTable tableData={packagesData} column={column} table="packages" />
+      <MasterTable
+        loadData={loadData}
+        tableData={packagesData}
+        column={column}
+        table="packages"
+      />
     </>
   );
 }

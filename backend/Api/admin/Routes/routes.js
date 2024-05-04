@@ -11,7 +11,7 @@ const { UploadFiles: uploadFile } = require("../../../Services/Common.Services")
 const {fetchGallery, deleteGallery, updateGallery, createGallery } = require("../Controller/Gallery.Controller");
 const {createPackage, fetchPackages, updatePackage, deletePackage } = require("../Controller/Packages.Controller");
 const {AddTestimonial,TestimonialList,DeleteTestimonial} = require("../Controller/Testimonial.Controller");
-const {EditAddress,AddressList} = require("../Controller/Address.Controller");
+const {EditAddress,AddressList, AddAddress} = require("../Controller/Address.Controller");
 const {AddEnquery, EnqueryList, ChangeEnqueryStatus } = require("../Controller/Enquery.Controller");
 const {fetchDestination, updateDestination, deleteDestination, createDestination } = require("../Controller/Destination.Controller");
 
@@ -20,7 +20,7 @@ routes.post("/register",uploadFile("destination").single("cityImage"),signupVali
 routes.post('/login',LoginValidation,Login);
 // Gallery
 
-routes.post("/gallery", uploadFile("gallery").single("gallery"), createGallery);
+routes.post("/gallery", uploadFile("gallery").single("image"), createGallery);
 routes.get("/gallery", fetchGallery);
 routes.get("/gallery/:id", fetchGallery);
 routes.put("/gallery", updateGallery);
@@ -30,13 +30,16 @@ routes.delete("/gallery/:id", deleteGallery);
 routes.post(
   "/package",
   // PackagesValidator,
-  uploadFile("packages").single("pkgImage"),
+  uploadFile("packages").fields([
+    { name: "pkgImage" },
+    { name: "BannerImage" },
+  ]),
   createPackage
 );
 routes.get("/package", fetchPackages);
 routes.get("/package/:id", fetchPackages);
-routes.put(
-  "/package",
+routes.patch(
+  "/package/:id",
   // PackagesValidator,
   updatePackage
 );
@@ -50,13 +53,11 @@ routes.delete('/testimonial/:id',DeleteTestimonial);
 routes.post("/destination",uploadFile("destination").single("cityImage"),createDestination);
 routes.get("/destination", fetchDestination);
 routes.get("/destination/:id", fetchDestination);
-routes.put(
-  "/destination",
-  // DestinationValidator,
-  updateDestination
-);
+
+routes.patch("/destination/:id", updateDestination);
 routes.delete("/destination/:id", deleteDestination);
 
+routes.post("/address", AddAddress);
 routes.get('/address',AddressList);
 routes.put("/address/:id",AddressValidator, EditAddress);
 

@@ -5,7 +5,18 @@ const Package = require("../Model/Package.Model");
 
 exports.createPackage = async (req, res, next) => {
   try {
-    const { title, subTitle, numbersOfDay, description } = req.body;
+    const {
+      title,
+      subTitle,
+      numbersOfDay,
+      description,
+      isRecommendPackages,
+      isTopPackages,
+      isShowInHeader,
+      include,
+    } = req.body;
+
+    // isRecommendPackages;isTopPackages;isShowInHeader;include
     // if (
     //   [title, subTitle, numbersOfDay, description].some(
     //     (val) => val?.trim() === ""
@@ -13,38 +24,50 @@ exports.createPackage = async (req, res, next) => {
     // ) {
     //   throw new ApiError("400", "All field are required.");
     // }
-  //  const isValidationError = ApiValidationMessage(req);
-  //   if (isValidationError) {
-  //     throw new ApiResponse(
-  //       409,
-  //       isValidationError,
-  //       "Please enter valid details"
-  //     );
-  //   }
+    //  const isValidationError = ApiValidationMessage(req);
+    //   if (isValidationError) {
+    //     throw new ApiResponse(
+    //       409,
+    //       isValidationError,
+    //       "Please enter valid details"
+    //     );
+    //   }
 
-
-
-    const filePath = `${process.env.IMAGE_BASE_PATH}/packages/${req.file.filename}`;
-    const package = {
-     title: title || "default",
-     subTitle: subTitle ||  "default",
-      numbersOfDay: numbersOfDay|| "default",
-      description: description|| "default",
-       pkgImage: filePath,
-    };
     
-  
+    const { pkgImage, BannerImage } = req.files;
+ 
+ 
+    const BannerImgPath = `${process.env.IMAGE_BASE_PATH}/packages/${BannerImage[0].filename}`;
+    const pkgImagePath = `${process.env.IMAGE_BASE_PATH}/packages/${pkgImage[0].filename}`;
+
+
+    // BannerImage;
+    const package = {
+      title: title || "default",
+      subTitle: subTitle || "default",
+      numbersOfDay: numbersOfDay || "default",
+      description: description || "default",
+      isRecommendPackages: isRecommendPackages,
+      isTopPackages: isTopPackages || 0,
+      isShowInHeader: isShowInHeader || 0,
+      include: include,
+      pkgImage: pkgImagePath,
+      BannerImage: BannerImgPath,
+    };
+
     const createdPackage = await Package.create(package);
 
-    if(!createdPackage){
-      throw new ApiError(500,"Something went wrong while creating new packages.")
+    if (!createdPackage) {
+      throw new ApiError(
+        500,
+        "Something went wrong while creating new packages."
+      );
     }
-     return res
-       .status(200)
-       .json(
-         new ApiResponse(200, createdPackage, "Package created successfully.")
-       );
-
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, createdPackage, "Package created successfully.")
+      );
   } catch (err) {
     return res.status(500).json({
       status: 500,
@@ -77,6 +100,13 @@ exports.fetchPackages = async (req, res, next) => {
 
 exports.updatePackage = async (req, res, next) => {
   try {
+  const pkg = req?.body;
+    const PackageUpdate = await Package.findByIdAndUpdate(
+      { _id: req?.params?.id }, 
+      pkg,
+      { new: true },
+    ).select();
+    return res.status(200).json(new ApiResponse(200, PackageUpdate, "Data updated successfully."));
   } catch (err) {
     return res.status(500).json({
       status: 500,

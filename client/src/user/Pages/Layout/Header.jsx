@@ -1,16 +1,24 @@
-import React from "react";
+import React ,{useContext}from "react";
 import { NavLink } from "react-router-dom";
 import SErviceData from "../Service/ServiceData.json";
-
+import { PackagesContext } from "../../../Reducer/PackagesProvider";
+import { DestinationContext } from "../../../Reducer/DestinationProvider";
 const Header = () => {
     const serviceD = SErviceData?.Service;
+    // const [state,dispatch] = useContext();
+    const { state: packagesDetails, dispatch } = useContext(PackagesContext);
+    const { state: stateDestination, dispatch: dispatchDestination } = useContext(DestinationContext);
 
+const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader==1; });
+
+const IncludeInNavbar =  stateDestination.filter((data)=>{ return data?.isIncludeInNavbar==1; });
+console.log("header",IncludeInNavbar);
     return (
         <>
             <nav id="top" className="navbar navbar-expand-md bg-dark navbar-dark custom-nav">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to="/">
-                        <img className="img-fluid" src="images/raj-travels-logo.png" alt="" title="" border="0" />
+                        <img className="img-fluid" src="images/dto_logo.svg" alt="" title="" border="0" />
                     </NavLink>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span className="navbar-toggler-icon"></span>
@@ -26,7 +34,8 @@ const Header = () => {
                                 <div className="shadow dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="col-md-3">
+                                            {/* {IncludeInNavbar?.map(()=>(<>
+                                                <div className="col-md-3">
                                                 <div className="col-ft1"> 
                                                     <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
                                                     <ul className="ft1-list">
@@ -37,39 +46,21 @@ const Header = () => {
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div className="col-md-3">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
-                                                    </ul>
+                                            </>))}  */}
+                                            
+                                            {IncludeInNavbar?.map((val,index)=>(<>
+                                                <div className="col-md-3">
+                                                <div className="col-ft1 wow zoomIn">
+                                                    <div className="bestplace-img">
+                                                    <NavLink to={"/list/"+val?._id}> <img className="img-fluid" src={val?.cityImage} alt="" title="" border="0" /></NavLink>
+                                                    </div>
+                                                    <div className="title" data-wow-duration="3s"><NavLink to={"/list/"+val?._id}>{val?.cityName}</NavLink></div>
+
                                                 </div>
                                             </div>
-                                            <div className="col-md-3">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3">
-                                                <div className="col-ft1">
-                                                    <div className="title wow zoomIn" data-wow-duration="3s"><NavLink className="nav-link" to="list/rishikesh">RISHIKESH</NavLink></div>
-                                                    <ul className="ft1-list">
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Ram Jhula & Janki Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Lakshman Jhula</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Neelkanth Mahadev</li>
-                                                        <li className="wow zoomIn" data-wow-duration="3s">Triveni Ghat</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+
+                                            </>))}
+                                         
                                         </div>
 
                                     </div>
@@ -83,16 +74,21 @@ const Header = () => {
                                 <div className="shadow dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="col-md-3">
+
+                                            {HeaderPkgs?.map((val,index)=>(<>
+                                                <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
-                                                    <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
+                                                    <NavLink to={"/detail/"+val?._id}> <img className="img-fluid" src={val?.pkgImage} alt="" title="" border="0" /></NavLink>
                                                     </div>
-                                                    <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">CHAR DHAM TOUR PACKAGES</NavLink></div>
+                                                    <div className="title" data-wow-duration="3s"><NavLink to={"/detail/"+val?._id}>{val?.title}</NavLink></div>
 
                                                 </div>
                                             </div>
-                                            <div className="col-md-3">
+
+                                            </>))}
+                                       
+                                            {/* <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
                                                     <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
@@ -100,16 +96,16 @@ const Header = () => {
                                                     <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">MUSSOORIE TOUR PACKAGE </NavLink></div>
 
                                                 </div>
-                                            </div>
-                                            <div className="col-md-3">
+                                            </div> */}
+                                            {/* <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
                                                     <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
                                                     </div>
                                                     <div className="title " data-wow-duration="3s"><NavLink to="/detail/1">RISHIKESH TOUR PACKAGE</NavLink></div>
                                                 </div>
-                                            </div>
-                                            <div className="col-md-3">
+                                            </div> */}
+                                            {/* <div className="col-md-3">
                                                 <div className="col-ft1 wow zoomIn">
                                                     <div className="bestplace-img">
                                                     <NavLink to="/detail/1"> <img className="img-fluid" src="images/hotdeals1.jpeg" alt="" title="" border="0" /></NavLink>
@@ -117,7 +113,7 @@ const Header = () => {
                                                     <div className="title" data-wow-duration="3s"><NavLink to="/detail/1">HARIDWAR TOUR PACKAGE </NavLink></div>
 
                                                 </div>
-                                            </div>
+                                            </div> */}
 
                                         </div>
                                     </div>
