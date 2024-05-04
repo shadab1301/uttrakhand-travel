@@ -74,7 +74,7 @@ const AddPackages = ({
      formData.include && PayloadData.append("include", formData.include);
 
      let res;
-     if (isEditing) {
+     if (!isEditing) {
        res = await AddFileController("/package", "POST", PayloadData);
      } else {
        res = await AddFileController(
