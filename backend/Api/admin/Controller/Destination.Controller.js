@@ -72,6 +72,12 @@ exports.fetchDestination = async (req, res, next) => {
 exports.updateDestination = async (req, res, next) => {
   try {
     const Udestination = req?.body;
+    console.log(req?.file?.filename);
+    if(req?.file?.filename) {
+      const filePath = `${process.env.IMAGE_BASE_PATH}/destination/${req.file.filename}`;
+      Udestination.cityImage =filePath;
+    }
+console.log(Udestination);
     const DestinationUpdate = await Destination.findByIdAndUpdate(
       { _id: req?.params?.id },
       Udestination,

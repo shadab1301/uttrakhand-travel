@@ -33,10 +33,10 @@ exports.createPackage = async (req, res, next) => {
     //     );
     //   }
 
-    
+
     const { pkgImage, BannerImage } = req.files;
- 
- 
+
+
     const BannerImgPath = `${process.env.IMAGE_BASE_PATH}/packages/${BannerImage[0].filename}`;
     const pkgImagePath = `${process.env.IMAGE_BASE_PATH}/packages/${pkgImage[0].filename}`;
 
@@ -79,16 +79,16 @@ exports.createPackage = async (req, res, next) => {
 
 exports.fetchPackages = async (req, res, next) => {
   try {
-     let package;
-     if (req.params.id) {
-       package = await Package.findOne({ _id: req.params.id });
-     } else {
-       package = await Package.find();
-     }
+    let package;
+    if (req.params.id) {
+      package = await Package.findOne({ _id: req.params.id });
+    } else {
+      package = await Package.find();
+    }
 
-     return res
-       .status(200)
-       .json(new ApiResponse(201, package, "Package fetched successfully"));
+    return res
+      .status(200)
+      .json(new ApiResponse(201, package, "Package fetched successfully"));
   } catch (err) {
     return res.status(500).json({
       status: 500,
@@ -100,9 +100,18 @@ exports.fetchPackages = async (req, res, next) => {
 
 exports.updatePackage = async (req, res, next) => {
   try {
-  const pkg = req?.body;
+    const pkg = req?.body;
+    if (req?.files?.pkgImage != undefined) {
+      const pkgImagePath = `${process.env.IMAGE_BASE_PATH}/packages/${req?.files?.pkgImage[0].filename}`;
+      pkg.pkgImage = pkgImagePath;
+    }
+
+    if (req?.files?.BannerImage != undefined) {
+      const BannerImagePath = `${process.env.IMAGE_BASE_PATH}/packages/${req?.files?.BannerImage[0].filename}`;
+      pkg.BannerImage = BannerImagePath;
+    }
     const PackageUpdate = await Package.findByIdAndUpdate(
-      { _id: req?.params?.id }, 
+      { _id: req?.params?.id },
       pkg,
       { new: true },
     ).select();
@@ -118,18 +127,18 @@ exports.updatePackage = async (req, res, next) => {
 
 exports.deletePackage = async (req, res, next) => {
   try {
-     const id = req.params.id;
-     const existedPackage = await Package.findOne({ _id: id });
-     if (!existedPackage) {
-       throw new ApiError("404", "Package not exist");
-     }
-     const deletedPackage = await Package.deleteOne({ _id: id });
-     if (!deletedPackage) {
-       throw new ApiError(500, "Something went wrong while deleting Package");
-     }
-     return res
-       .status(200)
-       .json(new ApiResponse(201, {}, "Package deleted successfully"));
+    const id = req.params.id;
+    const existedPackage = await Package.findOne({ _id: id });
+    if (!existedPackage) {
+      throw new ApiError("404", "Package not exist");
+    }
+    const deletedPackage = await Package.deleteOne({ _id: id });
+    if (!deletedPackage) {
+      throw new ApiError(500, "Something went wrong while deleting Package");
+    }
+    return res
+      .status(200)
+      .json(new ApiResponse(201, {}, "Package deleted successfully"));
   } catch (err) {
     return res.status(500).json({
       status: 500,
