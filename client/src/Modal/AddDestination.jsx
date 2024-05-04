@@ -55,14 +55,24 @@ const AddDestination = ({
     e.preventDefault();
     setIsLoading(true);
     try {
-      const data = new FormData();
-      data.append("cityImage", cityImage);
-      data.append("cityName", formData.cityName);
-      data.append("isIncludeInNavbar", formData.isIncludeInNavbar);
-      data.append("isTopVisitPlace", formData.isTopVisitPlace);
-
-      const res = await AddFileController("/destination", "POST", data);
-      if (res.statusCode === 201) {
+      const payloadData = new FormData();
+      cityImage && payloadData.append("cityImage", cityImage);
+      formData.cityName && payloadData.append("cityName", formData.cityName);
+      payloadData.append("isIncludeInNavbar", false);
+      payloadData.append("isTopVisitPlace", false);
+      let res;
+      if (!isEditing) {
+        res = await AddFileController("/destination", "POST", data);
+      } else {
+        console.log({ id: data });
+        res = await AddFileController(
+          `/destination/${data.id}`,
+          "PATCH",
+          payloadData
+        );
+      }
+      console.log({ statusCode: res.statusCode });
+      if ([200, 201].includes(res.statusCode)) {
         fetchData();
         toast.success(res.message, {
           position: "top-right",
@@ -167,7 +177,7 @@ const AddDestination = ({
               <TextField
                 accept="image/*"
                 margin="normal"
-                required
+                required={!isEditing ? true : false}
                 fullWidth
                 id="cityImage"
                 label="City Image"

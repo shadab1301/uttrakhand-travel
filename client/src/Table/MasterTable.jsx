@@ -88,8 +88,8 @@ export default function MasterTable({
     setItemToBeDeleteId(id);
     handleOpen();
   };
-  const handleClickOnEdit = (id) => {
-    setItemToBeEditeId(id);
+  const handleClickOnEdit = (data) => {
+    setItemToBeEditeId(data);
     handleOpenEditDestinationModal();
   };
 
@@ -212,7 +212,7 @@ export default function MasterTable({
           <TableHead>
             <TableRow>
               {columnsData.map((col, id) => (
-                <TableCell key={col.id}>{col.headerName}</TableCell>
+                <TableCell key={id}>{col.headerName}</TableCell>
               ))}
               <TableCell>Operation</TableCell>
             </TableRow>
@@ -309,9 +309,9 @@ export default function MasterTable({
                       control={
                         <Checkbox
                           disabled={false}
-                          name="is Include in Navbar"
+                          name="is Include In Navbar"
                           checked={
-                            row["is Include in Navbar"] === true ? true : false
+                            row["is Include In Navbar"] === true ? true : false
                           }
                           onChange={(e) => handleClickOnCheckBox(e, row.id)}
                         />
@@ -446,7 +446,7 @@ export default function MasterTable({
         handleClose={handleCloseEditDestinationModal}
         isOpen={isEditDestinationMOdalOpened}
         size={"md"}
-        // fetchData={}
+        fetchData={loadData}
         id={itemToBeEditeId}
         isEditing={true}
         data={itemToBeEditeId}
