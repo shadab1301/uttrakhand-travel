@@ -7,12 +7,13 @@ import { fetchController } from "../../utils/fetchController/fetchController";
 const Testimonial = () => {
   const [open, setOpen] = useState(false);
   const [packagesData, setPackagesData] = useState([{}]);
-  const [column, setColumn] = useState([
-    "SN0",
-    "Customer name",
-    "Description",
-    "Image",
-  ]);
+
+    const [column, setColumn] = useState([
+      { name: "sno", value: "SN0" },
+      { name: "Customer name", value: "Customer name" },
+      { name: "Description", value: "Description" },
+      { name: "Image", value: "Image" },
+    ]);
   const handleOpen = () => {
     console.log({ handleOpen });
     setOpen(true);

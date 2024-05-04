@@ -9,7 +9,20 @@ import { fetchController } from '../../utils/fetchController/fetchController';
 const Packages = () => {
     const [open, setOpen] = useState(false);
     const [packagesData,setPachagesData]=useState([{}])
-    const [column,setColumn]=useState(["SN0", "Title","Includes", "Description", "No of Days", "Image"])
+    // const [column,setColumn]=useState(["SN0", "Title","Includes", "Description", "No of Days", "Image"])
+
+
+  const [column, setColumn] = useState([
+    { name: "sno", value: "SN0" },
+    { name: "title", value: "Title" },
+    { name: "subTitle", value: "Sub Title" },
+    { name: "includes", value: "Includes" },
+    { name: "description", value: "Description" },
+    { name: "noOfDays", value: "No of Days" },
+    { name: "image", value: "Image" },
+    { name: "BannerImage", value: "Banner Image" },
+  ]);
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -26,9 +39,11 @@ const Packages = () => {
         id: val._id,
         ["SN0"]: index + 1,
         Title: val.title,
+        ["Sub Title"]: val.subTitle,
         Description: val.description,
         ["No of Days"]: val.numbersOfDay,
         ["Image"]: val.pkgImage,
+        ["Banner Image"]: val.BannerImage,
         ["Includes"]: val.include,
       };
      })
@@ -85,6 +100,9 @@ const Packages = () => {
         column={column}
         table="packages"
       />
+
+
+     
     </>
   );
 }

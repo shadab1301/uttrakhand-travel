@@ -6,15 +6,16 @@ import MasterTable from "../../Table/MasterTable";
 const Address = () => {
   const [open, setOpen] = useState(false);
   const [packagesData, setPachagesData] = useState([{}]);
-  const [column, setColumn] = useState([
-    "SNo",
-    "Primary number",
-    "Alternate Number",
-    "Email",
-    "Website url",
-    "Map"
-  ]);
 
+const [column, setColumn] = useState([
+  { name: "sno", value: "SN0" },
+  { name: "Primary_number", value: "Primary number" },
+  { name: "Alternate_number", value: "Alternate Number" },
+  { name: "Email", value: "Email" },
+  { name: "Website url", value: "Website url" },
+  { name: "Map", value: "Map" },
+  // "Status",
+]);
   const handleOpen = () => {
     console.log({ handleOpen });
     setOpen(true);
