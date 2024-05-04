@@ -117,7 +117,6 @@ const AddDestination = ({
   useEffect(() => {
     const prevCityName = data && data.id ? data["City Name"] : "";
     if (id) {
-      console.log("I'm from useEffect");
       setFormData({ ...formData, ["cityName"]: prevCityName });
     }
   }, [id]);

@@ -7,16 +7,15 @@ import { fetchController } from "../../utils/fetchController/fetchController";
 const Enquiry = () => {
   const [open, setOpen] = useState(false);
   const [enquiryData, setEnquiryData] = useState([{}]);
-  const [column, setColumn] = useState([
-    "SN0",
-    "Name",
-    "Mobile no",
-    "Email",
-    "Type",
-    "Message",
-    // "Status",
-  ]);
 
+const [column, setColumn] = useState([
+  { name: "sno", value: "SN0" },
+  { name: "Mobile_no", value: "Mobile no" },
+  { name: "Email", value: "Email" },
+  { name: "Type", value: "Type" },
+  { name: "Message", value: "Message" },
+  // "Status",
+]);
   const handleOpen = () => {
     setOpen(true);
   };
