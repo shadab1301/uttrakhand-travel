@@ -18,6 +18,9 @@ import ConfirmDelete from "../Modal/ConfirmDelete";
 import { fetchController } from "../utils/fetchController/fetchController";
 import { toast, ToastContainer } from "react-toastify";
 import AddDestination from "../Modal/AddDestination";
+import AddPackages from "../Modal/AddPackages";
+import AddGallery from "../Modal/AddGallery";
+import AddTestimonial from "../Modal/AddTestimonial";
 
 export default function MasterTable({
   column = [],
@@ -29,6 +32,12 @@ export default function MasterTable({
   const [open, setOpen] = React.useState(false);
   const [isEditDestinationMOdalOpened, setIsEditDestinationMOdalOpened] =
     React.useState(false);
+  const [isEditPackagesMOdalOpened, setIsEditPackagesMOdalOpened] =
+    React.useState(false);
+  const [isEditGalleryMOdalOpened, setIsEditGalleryMOdalOpened] =
+    React.useState(false);
+  const [isEditTestimonialMOdalOpened, setIsEditTestimonialMOdalOpened] =
+    React.useState(false);
   const [itemToBeDeleteId, setItemToBeDeleteId] = React.useState(null);
   const [itemToBeEditeId, setItemToBeEditeId] = React.useState(null);
   const handleOpen = () => {
@@ -38,7 +47,7 @@ export default function MasterTable({
     setOpen(false);
     setItemToBeDeleteId(null);
   };
-
+  // To open Edit Destination Modal
   const handleOpenEditDestinationModal = () => {
     setIsEditDestinationMOdalOpened(true);
   };
@@ -46,7 +55,32 @@ export default function MasterTable({
     setIsEditDestinationMOdalOpened(false);
     setItemToBeEditeId(null);
   };
+  //  To open Edit Packages Modal
+  const handleOpenEditPackagesModal = () => {
+    setIsEditPackagesMOdalOpened(true);
+  };
+  const handleCloseEditPackagesModal = () => {
+    setIsEditPackagesMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
+  //  To open Edit Gallery Modal
+  const handleOpenEditGalleryModal = () => {
+    setIsEditGalleryMOdalOpened(true);
+  };
+  const handleCloseEditGalleryModal = () => {
+    setIsEditGalleryMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
+  //  To open Edit Testimonial Modal
+const handleOpenEditTestimonialModal = () => {
+  setIsEditTestimonialMOdalOpened(true);
+};
+const handleCloseEditTestimonialModal = () => {
+  setIsEditTestimonialMOdalOpened(false);
+  setItemToBeEditeId(null);
+};
 
+  // Column Data
   const columnsData = column.map((val, index) => {
     if (["Image", "City Image"].includes(val)) {
       return {
@@ -88,9 +122,21 @@ export default function MasterTable({
     setItemToBeDeleteId(id);
     handleOpen();
   };
-  const handleClickOnEdit = (id) => {
-    setItemToBeEditeId(id);
-    handleOpenEditDestinationModal();
+  const handleClickOnEdit = (data) => {
+    setItemToBeEditeId(data);
+
+    if (table === "packages") {
+      handleOpenEditPackagesModal();
+    } else if (table === "enquiry") {
+      //  deleteEnquiry();
+    } else if (table === "destination") {
+      handleOpenEditDestinationModal();
+    } else if (table === "testimonial") {
+      //  handleOpenEditDestinationModal();
+      //  loadData();
+    } else if (table === "gallery") {
+      handleOpenEditGalleryModal();
+    }
   };
 
   const deletePackages = async () => {
@@ -212,7 +258,7 @@ export default function MasterTable({
           <TableHead>
             <TableRow>
               {columnsData.map((col, id) => (
-                <TableCell key={col.id}>{col.headerName}</TableCell>
+                <TableCell key={id}>{col.headerName}</TableCell>
               ))}
               <TableCell>Operation</TableCell>
             </TableRow>
@@ -227,11 +273,11 @@ export default function MasterTable({
                   <TableCell component="th" scope="row">
                     {row.SN0}
                   </TableCell>
-                  <TableCell>{row.Includes}</TableCell>
                   <TableCell>{row.Title}</TableCell>
+                  <TableCell>{row["Sub Title"]}</TableCell>
+                  <TableCell>{row.Includes}</TableCell>
                   <TableCell>{row.Description}</TableCell>
                   <TableCell>{row["No of Days"]}</TableCell>
-
                   <TableCell>
                     {" "}
                     <img
@@ -241,11 +287,21 @@ export default function MasterTable({
                     />
                   </TableCell>
                   <TableCell>
+                    {" "}
+                    <img
+                      src={row["Banner Image"]}
+                      alt="Image"
+                      style={{ width: "80px", height: "50px" }}
+                    />
+                  </TableCell>
+
+                  <TableCell>
                     <Stack direction="row" spacing={2}>
                       <AiTwotoneEdit
                         style={{
                           color: "green",
                         }}
+                        onClick={() => handleClickOnEdit(row)}
                       />
                       <AiOutlineDelete
                         style={{
@@ -309,9 +365,9 @@ export default function MasterTable({
                       control={
                         <Checkbox
                           disabled={false}
-                          name="is Include in Navbar"
+                          name="is Include In Navbar"
                           checked={
-                            row["is Include in Navbar"] === true ? true : false
+                            row["is Include In Navbar"] === true ? true : false
                           }
                           onChange={(e) => handleClickOnCheckBox(e, row.id)}
                         />
@@ -378,6 +434,7 @@ export default function MasterTable({
                         style={{
                           color: "green",
                         }}
+                        onClick={() => handleClickOnEdit(row)}
                       />
                       <AiOutlineDelete
                         style={{
@@ -446,10 +503,40 @@ export default function MasterTable({
         handleClose={handleCloseEditDestinationModal}
         isOpen={isEditDestinationMOdalOpened}
         size={"md"}
-        // fetchData={}
-        id={itemToBeEditeId}
+        fetchData={loadData}
+        id={itemToBeEditeId && itemToBeEditeId.id}
         isEditing={true}
         data={itemToBeEditeId}
+      />
+      <AddPackages
+        isOpen={isEditPackagesMOdalOpened}
+        handleOpen={handleOpenEditPackagesModal}
+        handleClose={handleCloseEditPackagesModal}
+        size={"md"}
+        fetchData={loadData}
+        isEditing={true}
+        data={itemToBeEditeId}
+        id={itemToBeEditeId && itemToBeEditeId.id}
+      />
+      <AddGallery
+        isOpen={isEditGalleryMOdalOpened}
+        handleOpen={handleOpenEditGalleryModal}
+        handleClose={handleCloseEditGalleryModal}
+        size={"md"}
+        fetchData={loadData}
+        isEditing={true}
+        data={itemToBeEditeId}
+        id={itemToBeEditeId && itemToBeEditeId.id}
+      />
+      <AddTestimonial
+        isOpen={isEditTestimonialMOdalOpened}
+        handleOpen={handleOpenEditTestimonialModal}
+        handleClose={handleCloseEditTestimonialModal}
+        size={"md"}
+        fetchData={loadData}
+        isEditing={true}
+        data={itemToBeEditeId}
+        id={itemToBeEditeId && itemToBeEditeId.id}
       />
     </>
   );

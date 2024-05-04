@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -17,15 +17,24 @@ import FormLabel from "@mui/material/FormLabel";
 import { AddFileController } from "../utils/fetchController/AddFileController";
 import { toast, ToastContainer } from "react-toastify";
 
-const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
+const AddPackages = ({
+  handleOpen,
+  handleClose,
+  isOpen,
+  size,
+  fetchData,
+  data = null,
+  id = null,
+  isEditing=false
+}) => {
   const [formData, setFormData] = useState({
     title: "",
     subTitle: "",
     numbersOfDay: "",
     description: "",
-    isRecommendPackages: "0",
-    isTopPackages: "0",
-    isShowInHeader: "0",
+    isRecommendPackages: false,
+    isTopPackages: false,
+    isShowInHeader: false,
     include: "",
   });
   const [image, setImage] = useState(null);
@@ -49,21 +58,34 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const data = new FormData();
-      data.append("pkgImage", image);
-      data.append("BannerImage", BannerImage);
-      data.append("title", formData.title);
-      data.append("subTitle", formData.subTitle);
-      data.append("numbersOfDay", formData.numbersOfDay);
-      data.append("description", formData.description);
-      data.append("isRecommendPackages", formData.isRecommendPackages);
-      data.append("isTopPackages", formData.isTopPackages);
-      data.append("isShowInHeader", formData.isShowInHeader);
-      data.append("include", formData.include);
+      const PayloadData = new FormData();
+     image && PayloadData.append("pkgImage", image);
+     BannerImage && PayloadData.append("BannerImage", BannerImage);
+      PayloadData.append("title", formData.title);
+      PayloadData.append("subTitle", formData.subTitle);
+       PayloadData.append("numbersOfDay", formData.numbersOfDay);
+       PayloadData.append("description", formData.description);
+    //  formData.isRecommendPackages &&
+    //    PayloadData.append("isRecommendPackages", formData.isRecommendPackages);
+    //  formData.isTopPackages &&
+    //    PayloadData.append("isTopPackages", formData.isTopPackages);
+    //  formData.isShowInHeader &&
+    //    PayloadData.append("isShowInHeader", formData.isShowInHeader);
+     formData.include && PayloadData.append("include", formData.include);
 
-      const res = await AddFileController("/package", "POST", data);
+     let res;
+     if (isEditing) {
+       res = await AddFileController("/package", "POST", PayloadData);
+     } else {
+       res = await AddFileController(
+         `/package/${data.id}`,
+         "PATCH",
+         PayloadData
+       );
+     }
+      
       if (res.statusCode === 200) {
-        fetchData()
+        fetchData();
         toast.success(res.message, {
           position: "top-right",
           autoClose: 5000,
@@ -106,6 +128,23 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
     }
   };
 
+  useEffect(() => {
+    if (id) {
+      const title = data && data.id ? data.Title : "";
+      const numbersOfDay = data && data.id ? data["No of Days"] : "";
+      const description = data && data.id ? data["Description"] : "";
+      const include = data && data.id ? data["Includes"] : "";
+      const subTitle = data && data.id ? data["Sub Title"] : "";
+      setFormData({
+        ...formData,
+        title,
+        description,
+        numbersOfDay,
+        include,
+        subTitle,
+      });
+    }
+  }, [id]);
   return (
     <div>
       <Modal
@@ -150,7 +189,7 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
-                required
+                required={true}
                 fullWidth
                 id="title"
                 label="Title"
@@ -170,7 +209,7 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
               />
               <TextField
                 margin="normal"
-                required
+                required={true}
                 fullWidth
                 id="numbersOfDay"
                 label="No Of Day"
@@ -181,7 +220,7 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
               />
               <TextField
                 margin="normal"
-                required
+                required={true}
                 fullWidth
                 id="include"
                 label="Includes"
@@ -192,7 +231,7 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
               />
               <TextField
                 margin="normal"
-                required
+                required={true}
                 fullWidth
                 id="description"
                 label="Description"
@@ -210,34 +249,81 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
                 name="pkgImage"
                 onChange={handleChange}
               /> */}
-              <FormControl>
-                <TextField
-                  accept="image/*"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="image"
-                  label="pkgImage"
-                  name="pkgImage"
-                  type="file"
-                  value={formData.image}
-                  onChange={handleChange}
-                />
-              </FormControl>
-              <FormControl>
-                <TextField
-                  accept="image/*"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="BannerImage"
-                  label="BannerImage"
-                  name="BannerImage"
-                  type="file"
-                  value={formData.BannerImage}
-                  onChange={handleChange}
-                />
-              </FormControl>
+
+              <Stack direction="row" spacing={2}>
+                <FormControl>
+                  <TextField
+                    accept="image/*"
+                    margin="normal"
+                    required={data ? false : true}
+                    fullWidth
+                    id="image"
+                    label="pkgImage"
+                    name="pkgImage"
+                    type="file"
+                    value={formData.image}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                {data && (
+                  <Stack
+                    direction="column"
+                    spacing={2}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    sx={{ margin: "30px 0px 20px 0px" }}
+                  >
+                    <img
+                      src={data["Image"]}
+                      style={{
+                        marginTop: "10px",
+                        height: "50px",
+                        width: "100px",
+                        display: "block",
+                      }}
+                      alt="img"
+                      srcset=""
+                    />
+                  </Stack>
+                )}
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <FormControl>
+                  <TextField
+                    accept="image/*"
+                    margin="normal"
+                    required={data ? false : true}
+                    fullWidth
+                    id="BannerImage"
+                    label="BannerImage"
+                    name="BannerImage"
+                    type="file"
+                    value={formData.BannerImage}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                {data && (
+                  <Stack
+                    direction="column"
+                    spacing={2}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    sx={{ margin: "30px 0px 20px 0px" }}
+                  >
+                    <img
+                      src={data["Banner Image"]}
+                      style={{
+                        marginTop: "10px",
+                        height: "50px",
+                        width: "100px",
+                        display: "block",
+                      }}
+                      alt="img"
+                      srcset=""
+                    />
+                  </Stack>
+                )}
+              </Stack>
 
               <Box>
                 <Button

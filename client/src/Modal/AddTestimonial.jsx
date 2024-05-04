@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -18,14 +18,18 @@ const AddTestimonial = ({
   handleClose,
   isOpen,
   size,
-  fetchData,
+  loadData,
+  data = null,
+  id = null,
+  isEditing = false,
 }) => {
+  console.log({data});
   const [formData, setFormData] = useState({
     customer_name: "",
     description: "",
   });
   const [image, setImage] = useState(null);
-    const [IsLoading, setIsLoading] = useState(false);
+  const [IsLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "image") {
@@ -49,7 +53,7 @@ const AddTestimonial = ({
 
       const res = await AddFileController("/testimonial", "POST", data);
       if (res.status === 201) {
-        fetchData();
+        loadData();
         handleClose();
         toast.success(res.message, {
           position: "top-right",
@@ -93,6 +97,20 @@ const AddTestimonial = ({
     }
   };
 
+
+
+  //  useEffect(() => {
+  //    if (id) {
+  //      const customer_name = data && data.id ? data.Title : "";
+  //      const description = data && data.id ? data["Customer name"] : "";
+
+  //      setFormData({
+  //        ...formData,
+  //        title,
+  //        description,
+  //      });
+  //    }
+  //  }, [id]);
   return (
     <div>
       <Modal

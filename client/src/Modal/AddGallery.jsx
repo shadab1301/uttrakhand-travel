@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -12,7 +12,17 @@ import { toast, ToastContainer } from "react-toastify";
 import { RxCrossCircled } from "react-icons/rx";
 import { AddFileController } from "../utils/fetchController/AddFileController";
 
-const AddGallery = ({ handleOpen, handleClose, isOpen, size, loadData }) => {
+const AddGallery = ({
+  handleOpen,
+  handleClose,
+  isOpen,
+  size,
+  loadData,
+  data = null,
+  id = null,
+  isEditing = false,
+}) => {
+  console.log({ data });
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -35,12 +45,25 @@ const AddGallery = ({ handleOpen, handleClose, isOpen, size, loadData }) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const data = new FormData();
-      data.append("image", image);
-      data.append("title", formData.title);
-      data.append("description", formData.description);
+      const payloadData = new FormData();
+      image &&  payloadData.append("image", image);
+      payloadData.append("title", formData.title);
+      payloadData.append("description", formData.description);
 
-      const res = await AddFileController("/gallery", "POST", data);
+       let res;
+       if (!isEditing) {
+         res = await AddFileController("/gallery", "POST", payloadData);
+       } else {
+         res = await AddFileController(
+           `/gallery/${data.id}`,
+           "PATCH",
+           payloadData
+         );
+       }
+
+
+
+
       if (res.statusCode === 200) {
         loadData();
         toast.success(res.message, {
@@ -78,7 +101,18 @@ const AddGallery = ({ handleOpen, handleClose, isOpen, size, loadData }) => {
       setIsLoading(false);
     }
   };
+ useEffect(() => {
+   if (id) {
+     const title = data && data.id ? data.Title : "";
+     const description = data && data.id ? data["Description"] : "";
 
+     setFormData({
+       ...formData,
+       title,
+       description,
+     });
+   }
+ }, [id]);
   return (
     <div>
       <Modal
@@ -142,18 +176,45 @@ const AddGallery = ({ handleOpen, handleClose, isOpen, size, loadData }) => {
                 value={formData.description}
                 onChange={handleChange}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="image"
-                label=""
-                name="image"
-                type="file"
-                value={formData.image}
-                onChange={handleChange}
-              />
 
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent={"space-between"}
+              >
+                <TextField
+                  margin="normal"
+                  required={!isEditing?true:false}
+                  fullWidth
+                  id="image"
+                  label=""
+                  name="image"
+                  type="file"
+                  value={formData.image}
+                  onChange={handleChange}
+                />
+                {data && (
+                  <Stack
+                    direction="column"
+                    spacing={2}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    sx={{ margin: "30px 0px 20px 0px" }}
+                  >
+                    <img
+                      src={data["Image"]}
+                      style={{
+                        marginTop: "10px",
+                        height: "50px",
+                        width: "100px",
+                        display: "block",
+                      }}
+                      alt="img"
+                      srcset=""
+                    />
+                  </Stack>
+                )}
+              </Stack>
               <Button
                 type="submit"
                 fullWidth

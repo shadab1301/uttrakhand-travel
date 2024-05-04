@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Button, Stack, Typography } from "@mui/material";
 import MasterTable from "../../Table/MasterTable";
 import { fetchController } from "../../utils/fetchController/fetchController";
-import AddGallery from './../../Modal/AddGallery';
+import AddGallery from "./../../Modal/AddGallery";
 
 const Gallery = () => {
   const [open, setOpen] = useState(false);
   const [packagesData, setPachagesData] = useState([{}]);
+
   const [column, setColumn] = useState([
-    "SN0",
-    "Title",
-    "Description",
-    "Image",
+    { name: "sno", value: "SN0" },
+    { name: "Title", value: "Title" },
+    { name: "Description", value: "Description" },
+    { name: "Image", value: "Image" },
   ]);
 
   const handleOpen = () => {
