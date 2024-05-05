@@ -21,6 +21,7 @@ import AddDestination from "../Modal/AddDestination";
 import AddPackages from "../Modal/AddPackages";
 import AddGallery from "../Modal/AddGallery";
 import AddTestimonial from "../Modal/AddTestimonial";
+import AddAddress from "../Modal/AddAddress";
 
 export default function MasterTable({
   column = [],
@@ -38,6 +39,9 @@ export default function MasterTable({
     React.useState(false);
   const [isEditTestimonialMOdalOpened, setIsEditTestimonialMOdalOpened] =
     React.useState(false);
+  const [isEditAddressMOdalOpened, setIsEditAddressMOdalOpened] =
+    React.useState(false);
+
   const [itemToBeDeleteId, setItemToBeDeleteId] = React.useState(null);
   const [itemToBeEditeId, setItemToBeEditeId] = React.useState(null);
   const handleOpen = () => {
@@ -72,13 +76,21 @@ export default function MasterTable({
     setItemToBeEditeId(null);
   };
   //  To open Edit Testimonial Modal
-const handleOpenEditTestimonialModal = () => {
-  setIsEditTestimonialMOdalOpened(true);
-};
-const handleCloseEditTestimonialModal = () => {
-  setIsEditTestimonialMOdalOpened(false);
-  setItemToBeEditeId(null);
-};
+  const handleOpenEditTestimonialModal = () => {
+    setIsEditTestimonialMOdalOpened(true);
+  };
+  const handleCloseEditTestimonialModal = () => {
+    setIsEditTestimonialMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
+  //  To open Edit Address Modal
+  const handleOpenEditAddressModal = () => {
+    setIsEditAddressMOdalOpened(true);
+  };
+  const handleCloseEditAddressModal = () => {
+    setIsEditAddressMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
 
   // Column Data
   const columnsData = column.map((val, index) => {
@@ -136,7 +148,11 @@ const handleCloseEditTestimonialModal = () => {
       //  loadData();
     } else if (table === "gallery") {
       handleOpenEditGalleryModal();
+    } else if (table === "address") {
+      handleOpenEditAddressModal();
     }
+
+    
   };
 
   const deletePackages = async () => {
@@ -446,7 +462,6 @@ const handleCloseEditTestimonialModal = () => {
                   </TableCell>
                 </TableRow>
               ))}
-
             {table === "testimonial" &&
               tableData.map((row) => (
                 <TableRow
@@ -485,6 +500,62 @@ const handleCloseEditTestimonialModal = () => {
                   </TableCell>
                 </TableRow>
               ))}
+            {table === "address" &&
+              tableData.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.SN0}
+                  </TableCell>
+                  <TableCell>{row["Primary number"]}</TableCell>
+                  <TableCell>{row.Address}</TableCell>
+
+                  <TableCell>{row.Email}</TableCell>
+                  <TableCell>
+                    <div
+                      style={{
+                        left: 0,
+                        width: "100px",
+                        height: "100px",
+                        position: "relative",
+                      }}
+                    >
+                      <iframe
+                        src={row.Map}
+                        style={{
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          position: "absolute",
+                          border: 0,
+                        }}
+                        allowfullscreen
+                      ></iframe>
+                    </div>
+                  </TableCell>
+
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      <AiTwotoneEdit
+                        style={{
+                          color: "green",
+                        }}
+                        onClick={() => handleClickOnEdit(row)}
+                      />
+                      {/* <AiOutlineDelete
+                        style={{
+                          color: "red",
+                        }}
+                        onClick={() => handleClickOnDelete(row.id)}
+                      /> */}
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {/*  */}
             {/* gallery */}
           </TableBody>
         </Table>
@@ -497,7 +568,6 @@ const handleCloseEditTestimonialModal = () => {
         handleConfirmDelete={handleConfirmDelete}
         fetchData={loadData}
       />
-
       <AddDestination
         handleOpen={handleOpenEditDestinationModal}
         handleClose={handleCloseEditDestinationModal}
@@ -532,6 +602,16 @@ const handleCloseEditTestimonialModal = () => {
         isOpen={isEditTestimonialMOdalOpened}
         handleOpen={handleOpenEditTestimonialModal}
         handleClose={handleCloseEditTestimonialModal}
+        size={"md"}
+        fetchData={loadData}
+        isEditing={true}
+        data={itemToBeEditeId}
+        id={itemToBeEditeId && itemToBeEditeId.id}
+      />
+      <AddAddress
+        isOpen={isEditAddressMOdalOpened}
+        handleOpen={handleOpenEditAddressModal}
+        handleClose={handleCloseEditAddressModal}
         size={"md"}
         fetchData={loadData}
         isEditing={true}

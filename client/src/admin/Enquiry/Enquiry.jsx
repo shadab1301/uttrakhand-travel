@@ -10,6 +10,7 @@ const Enquiry = () => {
 
 const [column, setColumn] = useState([
   { name: "sno", value: "SN0" },
+  { name: "Name", value: "Name" },
   { name: "Mobile_no", value: "Mobile no" },
   { name: "Email", value: "Email" },
   { name: "Type", value: "Type" },

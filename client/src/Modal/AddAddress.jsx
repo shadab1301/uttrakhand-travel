@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -9,8 +9,21 @@ import {
   Stack,
 } from "@mui/material";
 import { RxCrossCircled } from "react-icons/rx";
+import { toast } from "react-toastify";
+import { fetchController } from "../utils/fetchController/fetchController";
 
-const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
+const AddAddress = ({
+  handleOpen,
+  handleClose,
+  isOpen,
+  size,
+  fetchData,
+  data = null,
+  id = null,
+  isEditing = false,
+}) => {
+  console.log({id});
+    console.log({ data });
   const [formData, setFormData] = useState({
     address: "",
     map_iframe: "",
@@ -27,12 +40,83 @@ const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    try {
+      const payloadData = {
+        address: formData.address,
+        map_location: formData.map_iframe,
+        WebUrl: formData.website_url,
+        email: formData.email,
+        alternate_number: Number(formData.alternateNumber),
+        primary_number: Number(formData.primaryNumber),
+      };
+// ;
+      let res;
+      if (!isEditing) {
+        res = await fetchController("/address", "POST", payloadData);
+      } else {
+        res = await fetchController(
+          `/address/${data.id}`,
+          "PUT",
+          payloadData
+        );
+      }
+      console.log(res);
+console.log(res.status);
+      if (res.status === 200) {
+        fetchData();
+        toast.success(res.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        handleClose();
+        setFormData({
+          address: "",
+          map_iframe: "",
+          website_url: "",
+          email: "",
+          alternateNumber: "",
+          primaryNumber: "",
+        });
+      }
+    } catch (error) {
+      toast.error("Error occour in AddDestination Component", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } finally {
+      // setIsLoading(false);
+    }
   };
-
+  useEffect(() => {
+    if (id) {
+      console.log("Inside Useeefect");
+      const address = data && data.id ? data.Address : "";
+      const primaryNumber = data && data.id ? data["Primary number"] : "";
+      const email = data && data.id ? data["Email"] : "";
+      const map_iframe = data && data.id ? data["Map"] : "";
+      setFormData({
+        ...formData,
+        address,
+        primaryNumber,
+        email,
+        map_iframe,
+      });
+    }
+  }, [id]);
   return (
     <div>
       <Modal
@@ -68,7 +152,7 @@ const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
               justifyContent={"space-between"}
             >
               <Typography variant="h5" gutterBottom>
-                Add Address
+                Edit Address
               </Typography>
               <Typography sx={{ cursor: "pointer" }}>
                 <RxCrossCircled size={32} onClick={handleClose} />
@@ -155,7 +239,7 @@ const AddAddress = ({ handleOpen, handleClose, isOpen, size }) => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Add
+                Update
               </Button>
             </Box>
           </Box>
