@@ -22,7 +22,7 @@ const AddGallery = ({
   id = null,
   isEditing = false,
 }) => {
-  console.log({ data });
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
