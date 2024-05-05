@@ -293,6 +293,53 @@ export default function MasterTable({
                   <TableCell>{row["Sub Title"]}</TableCell>
                   <TableCell>{row.Includes}</TableCell>
                   <TableCell>{row.Description}</TableCell>
+
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled={false}
+                          name="is Show In Header"
+                          checked={
+                            row["is Show In Header"] == "true" ? true : false
+                          }
+                          onChange={(e) => handleClickOnCheckBox(e, row.id)}
+                        />
+                      }
+                      label=""
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled={false}
+                          name="is Top Packages"
+                          checked={
+                            row["is Top Packages"] == "true" ? true : false
+                          }
+                          onChange={(e) => handleClickOnCheckBox(e, row.id)}
+                        />
+                      }
+                      label=""
+                    />
+                  </TableCell>
+
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled={false}
+                          name="is Recommend Packages"
+                          checked={
+                            row["is Recommend Packages"] == "true" ? true : false
+                          }
+                          onChange={(e) => handleClickOnCheckBox(e, row.id)}
+                        />
+                      }
+                      label=""
+                    />
+                  </TableCell>
                   <TableCell>{row["No of Days"]}</TableCell>
                   <TableCell>
                     {" "}

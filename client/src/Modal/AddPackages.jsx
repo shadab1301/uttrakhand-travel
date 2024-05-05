@@ -202,7 +202,7 @@ const AddPackages = ({
                 required
                 fullWidth
                 id="subTitle"
-                label="subTitle Title"
+                label="Sub Title"
                 name="subTitle"
                 value={formData.subTitle}
                 onChange={handleChange}
