@@ -28,22 +28,22 @@ const packageSchema = new mongoose.Schema(
     },
     BannerImage: {
       type: String,
-      required: [true, "BannerImage should not be empty"],
+      required: [true, "Banner Image should not be empty"],
     },
     isShowInHeader: {
-      type: String,
-      enum: [0, 1], //0  for false, 1 for in true
-      default: 0,
+      type: Boolean,
+      enum: [true, false],
+      default: false,
     },
     isTopPackages: {
-      type: String,
-      enum: [0, 1], //0  for false, 1 for in true
-      default: 0,
+      type: Boolean,
+      enum: [true, false],
+      default: false,
     },
     isRecommendPackages: {
-      type: String,
-      enum: [0, 1], //0  for false, 1 for in true
-      default: 0,
+      type: Boolean,
+      enum: [true, false],
+      default: false,
     },
     destination: [
       {
