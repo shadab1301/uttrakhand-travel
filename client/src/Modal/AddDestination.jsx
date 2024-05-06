@@ -57,12 +57,15 @@ const AddDestination = ({
     try {
       const payloadData = new FormData();
       cityImage && payloadData.append("cityImage", cityImage);
-      formData.cityName && payloadData.append("cityName", formData.cityName);
+      payloadData.append("cityName", formData.cityName);
       payloadData.append("isIncludeInNavbar", false);
       payloadData.append("isTopVisitPlace", false);
+
+
+      console.log({ payload: { formData } });
       let res;
       if (!isEditing) {
-        res = await AddFileController("/destination", "POST", data);
+        res = await AddFileController("/destination", "POST", payloadData);
       } else {
         console.log({ id: data });
         res = await AddFileController(
@@ -71,8 +74,11 @@ const AddDestination = ({
           payloadData
         );
       }
-      console.log({ statusCode: res.statusCode });
-      if ([200, 201].includes(res.statusCode)) {
+      // console.log({ statusCode: res.statusCode });
+      if (
+        [200, 201].includes(res.statusCode) ||
+        [200, 201].includes(res.status)
+      ) {
         fetchData();
         toast.success(res.message, {
           position: "top-right",
