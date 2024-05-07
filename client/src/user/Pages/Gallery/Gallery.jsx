@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, json } from "react-router-dom";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
-export const Gallery = () => {
+export const GalleryAlbum = () => {
 
     const images = [
         {
