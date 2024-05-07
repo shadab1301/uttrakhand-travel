@@ -6,6 +6,7 @@ const Destination = require("../Model/Destination.Model");
 exports.createDestination = async (req, res, next) => {
   try {
     const { cityName, isIncludeInNavbar = false, isTopVisitPlace = false } = req.body;
+
     if (!cityName) {
       throw new ApiError(400, "cityName should not be empty")
     }
