@@ -82,7 +82,7 @@ exports.updateGallery = async (req, res, next) => {
       { new: true }
     ).select();
     if (!updatedDocument) { throw new ApiError(400, "Gallaery is not updated."); }
-    return res.status(200).json(new ApiResponse(200, updatedDocument, "Gallaery updated successfully."));
+    return res.status(200).json(new ApiResponse(201, updatedDocument, "Gallaery updated successfully."));
   } catch (err) {
     return res.status(500).json({
       status: 500,
