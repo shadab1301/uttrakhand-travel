@@ -23,7 +23,7 @@ routes.post('/login',LoginValidation,Login);
 routes.post("/gallery", uploadFile("gallery").single("image"), createGallery);
 routes.get("/gallery", fetchGallery);
 routes.get("/gallery/:id", fetchGallery);
-routes.put("/gallery", updateGallery);
+routes.patch("/gallery/:id", uploadFile("gallery").single("image"), updateGallery);
 routes.delete("/gallery/:id", deleteGallery);
 
 // Packages
