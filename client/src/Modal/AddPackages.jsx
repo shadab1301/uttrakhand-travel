@@ -57,18 +57,6 @@ const userSchema = z.object({
   });
 
 
-
-
-  // const [formData, setFormData] = useState({
-  //   title: "",
-  //   subTitle: "",
-  //   numbersOfDay: "",
-  //   description: "",
-  //   isRecommendPackages: false,
-  //   isTopPackages: false,
-  //   isShowInHeader: false,
-  //   include: "",
-  // });
   const [image, setImage] = useState(null);
   const [BannerImage, setBannerImage] = useState(null);
   const [fileError, setFileError] = useState(null);
