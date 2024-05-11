@@ -26,7 +26,7 @@ routes.get("/gallery/:id", fetchGallery);
 routes.patch("/gallery/:id", uploadFile("gallery").single("image"), updateGallery);
 routes.delete("/gallery/:id", deleteGallery);
 
-// Packages
+// Packagess
 routes.post(
   "/package",
   // PackagesValidator,
