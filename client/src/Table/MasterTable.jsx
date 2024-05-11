@@ -301,7 +301,10 @@ export default function MasterTable({
                           disabled={false}
                           name="is Show In Header"
                           checked={
-                            row["is Show In Header"] === true ? true : false
+                            row["is Show In Header"] === true ||
+                            row["is Show In Header"] === "true"
+                              ? true
+                              : false
                           }
                           onChange={(e) => handleClickOnCheckBox(e, row.id)}
                         />
@@ -316,7 +319,10 @@ export default function MasterTable({
                           disabled={false}
                           name="is Top Packages"
                           checked={
-                            row["is Top Packages"] === true ? true : false
+                            row["is Top Packages"] === true ||
+                            row["is Top Packages"] === "true"
+                              ? true
+                              : false
                           }
                           onChange={(e) => handleClickOnCheckBox(e, row.id)}
                         />
@@ -332,7 +338,10 @@ export default function MasterTable({
                           disabled={false}
                           name="is Recommend Packages"
                           checked={
-                            row["is Recommend Packages"] === true ? true : false
+                            row["is Recommend Packages"] === true ||
+                            row["is Top Packages"] === "true"
+                              ? true
+                              : false
                           }
                           onChange={(e) => handleClickOnCheckBox(e, row.id)}
                         />
