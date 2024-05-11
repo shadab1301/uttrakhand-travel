@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 export const fetchController = async (endPoint, method, body, isAuth=false) => {
   try {
-    const BaseUrl = "http://localhost:5000/api/v1";
+  // const BaseUrl = "http://localhost:5000/api/v1";
+  const BaseUrl ="https://api.devbhoomitouroprator.in/api/v1";
     const accessToken = localStorage.getItem("token");
     const fetchOptions = isAuth
       ? {

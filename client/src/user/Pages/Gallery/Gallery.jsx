@@ -1,8 +1,26 @@
 import React from "react";
 import { NavLink, json } from "react-router-dom";
-export const Gallery = () => {
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from "react-image-gallery";
+export const GalleryAlbum = () => {
+
+    const images = [
+        {
+            original: "https://picsum.photos/id/1018/1000/600/",
+            thumbnail: "https://picsum.photos/id/1018/250/150/",
+        },
+        {
+            original: "https://picsum.photos/id/1015/1000/600/",
+            thumbnail: "https://picsum.photos/id/1015/250/150/",
+        },
+        {
+            original: "https://picsum.photos/id/1019/1000/600/",
+            thumbnail: "https://picsum.photos/id/1019/250/150/",
+        },
+    ];
+
     return (<>
-       
+
 
         <section className="bt-place">
             <div className="container-fluid">
@@ -15,7 +33,8 @@ export const Gallery = () => {
 
 
 
-
+                            <ImageGallery items={images} thumbnailPosition="left" showBullets useWindowKeyDown
+                            />
 
                         </div>
                     </div>
