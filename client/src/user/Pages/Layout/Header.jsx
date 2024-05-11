@@ -9,9 +9,9 @@ const Header = () => {
     const { state: packagesDetails, dispatch } = useContext(PackagesContext);
     const { state: stateDestination, dispatch: dispatchDestination } = useContext(DestinationContext);
 
-const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader==1; });
+const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader==1 ||true; });
 
-const IncludeInNavbar =  stateDestination.filter((data)=>{ return data?.isIncludeInNavbar==1; });
+const IncludeInNavbar =  stateDestination.filter((data)=>{ return data?.isIncludeInNavbar==1 ||true; });
 console.log("header",IncludeInNavbar);
     return (
         <>

@@ -64,19 +64,25 @@ exports.fetchGallery = async (req, res, next) => {
 
 exports.updateGallery = async (req, res, next) => {
   try {
-    const {id,title,description}=req.body
- 
+    const {title,description}=req.body;
+    const updateGall = req?.body;
+
     if(!title){
       throw new ApiError(400,"title field is required")
     }
 
-  const filePath = `${process.env.IMAGE_BASE_PATH}/gallery/${req.file.filename}`;
+    if(req?.file?.filename) {
+      const filePath = `${process.env.IMAGE_BASE_PATH}/gallery/${req.file.filename}`;
+      updateGall.image =filePath;
+    }
+
     const updatedDocument = await Gallery.findByIdAndUpdate(
-      id,
-      { $set: { title, description, image:filePath } },
+      { _id: req?.params?.id },
+       updateGall,
       { new: true }
     ).select();
-    return res.status(200).json(new ApiResponse(201, updatedDocument, "Data updated successfully"));
+    if (!updatedDocument) { throw new ApiError(400, "Gallaery is not updated."); }
+    return res.status(200).json(new ApiResponse(201, updatedDocument, "Gallaery updated successfully."));
   } catch (err) {
     return res.status(500).json({
       status: 500,
