@@ -557,9 +557,11 @@ export default function MasterTable({
                     {row.SN0}
                   </TableCell>
                   <TableCell>{row["Primary number"]}</TableCell>
-                  <TableCell>{row.Address}</TableCell>
+                  <TableCell>{row["Alternate number"]}</TableCell>
 
+                  <TableCell>{row.Address}</TableCell>
                   <TableCell>{row.Email}</TableCell>
+                  <TableCell>{row["Website url"]}</TableCell>
                   <TableCell>
                     <div
                       style={{
@@ -583,7 +585,6 @@ export default function MasterTable({
                       ></iframe>
                     </div>
                   </TableCell>
-
                   <TableCell>
                     <Stack direction="row" spacing={2}>
                       <AiTwotoneEdit

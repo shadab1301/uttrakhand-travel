@@ -44,18 +44,17 @@ const userSchema = z.object({
     watch,
     setError,
     reset,
-    formState: { errors },
+    formState: { errors,isSubmitting },
   } = useForm({
     defaultValues: {
-      title: data && data.id ? data.Title : "",
-      subTitle: data && data.id ? data["Sub Title"] : "",
-      numbersOfDay: data && data.id ? data["No of Days"] : null,
-      description: data && data.id ? data["Description"] : "",
-      include: data && data.id ? data["Includes"] : "",
+      title:  "",
+      subTitle:  "",
+      numbersOfDay:  null,
+      description:  "",
+      include:"",
     },
     resolver: zodResolver(userSchema),
   });
-
 
 
 
@@ -189,7 +188,7 @@ const handleOnFileChange = (e) => {
   if (size >= 5 * 1024 * 1024) {
     setFileError({
       ...fileError,
-      [e.target.name]: "Maximum 10mb size are allowed to upload",
+      [e.target.name]: "Maximum 5mb size are allowed to upload",
     });
     return false;
   }
@@ -224,7 +223,6 @@ const handleOnFileChange = (e) => {
        reset(defaultVal);
     }
   }, [id]);
-  // console.log(watch("title")); 
   return (
     <div>
       <Modal
@@ -261,7 +259,7 @@ const handleOnFileChange = (e) => {
               justifyContent={"space-between"}
             >
               <Typography variant="h5" gutterBottom>
-                Add Packages
+                {isEditing ? " Edit Packages" : " Add Packages"}
               </Typography>
               <Typography sx={{ cursor: "pointer" }}>
                 <RxCrossCircled size={32} onClick={handleClose} />
@@ -440,7 +438,7 @@ const handleOnFileChange = (e) => {
                     false ? <CircularProgress size={20} color="inherit" /> : ""
                   }
                 >
-                  Submit
+                  {isEditing ? "Update" : "Submit"}
                 </Button>
               </Box>
               {errors.root && (
