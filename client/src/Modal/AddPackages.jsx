@@ -33,7 +33,7 @@ const AddPackages = ({
 const userSchema = z.object({
   title: z.string().min(3),
   subTitle: z.string().min(3),
-  numbersOfDay: z.number().positive(),
+  numbersOfDay: z.string().min(1),
   description: z.string().min(10),
   include: z.string().min(10),
 });
@@ -194,7 +194,7 @@ const handleOnFileChange = (e) => {
     if (id) {
 
       const title1 = data && data.id ? data.Title : "";
-      const numbersOfDay1 = data && data.id ? data["No of Days"] : "";
+      const numbersOfDay1 = data && data.id ? data["No of Days"] : null;
       const description1 = data && data.id ? data["Description"] : "";
       const include1 = data && data.id ? data["Includes"] : "";
       const subTitle1 = data && data.id ? data["Sub Title"] : "";

@@ -68,7 +68,9 @@ const Packages = () => {
   const handleClickOnCheckBox = async (e, id) => {
     const { name, checked } = e.target;
     console.log({ name, checked, id });
-    const countCheckedRow = packagesData.filter((val, i) => val[name] === true);
+    const countCheckedRow = packagesData.filter(
+      (val, i) => val[name] === true || val[name] === "true"
+    );
     // console.log({ countCheckedRow });
     // console.log({
     //   condition:
