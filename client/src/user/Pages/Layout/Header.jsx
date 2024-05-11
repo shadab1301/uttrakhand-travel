@@ -9,10 +9,8 @@ const Header = () => {
     const { state: packagesDetails, dispatch } = useContext(PackagesContext);
     const { state: stateDestination, dispatch: dispatchDestination } = useContext(DestinationContext);
 
-const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader==1 ||true; });
-
-const IncludeInNavbar =  stateDestination.filter((data)=>{ return data?.isIncludeInNavbar==1 ||true; });
-console.log("header",IncludeInNavbar);
+const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader==1 ||data?.isShowInHeader==true || data?.isShowInHeader=="true" || data?.isShowInHeader=='1'; });
+const IncludeInNavbar =  stateDestination.filter((data)=>{ return data?.isIncludeInNavbar==1 ||data?.isIncludeInNavbar==true || data?.isIncludeInNavbar=="true" ||data?.isIncludeInNavbar=="1" ; });
     return (
         <>
             <nav id="top" className="navbar navbar-expand-md bg-dark navbar-dark custom-nav">

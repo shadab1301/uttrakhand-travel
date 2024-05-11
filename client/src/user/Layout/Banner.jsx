@@ -35,12 +35,27 @@ export const Banner = () => {
        
         {
           url: 'images/slide1.jpg',
-          caption: 'Slide 1'
+          caption: 'Slide 1',
+          height:"400px"
         },
         {
           url: 'images/slide2.jpg',
-          caption: 'Slide 2'
+          caption: 'Slide 2',
+          height:"400px"
+
         },
+        {
+            url: 'images/slide3.jpg',
+            caption: 'Slide 3',
+          height:"400px"
+
+          },
+          {
+            url: 'images/slide4.jpg',
+            caption: 'Slide 4',
+          height:"400px"
+
+          },
       ];
     const displayMessage = () => {
         if (FilertPAth?.length === 0) {

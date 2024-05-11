@@ -5,7 +5,7 @@ import { PackagesContext } from "../../../Reducer/PackagesProvider";
 
 export const RecomendedPkg = () => {
     const { state: packagesDetails, dispatch } = useContext(PackagesContext);
-    const RecomendedPkg = packagesDetails.filter((data) => { return data?.isRecommendPackages == 1; });
+    const RecomendedPkg = packagesDetails.filter((data) => { return data?.isRecommendPackages == 1 || data?.isRecommendPackages == true || data?.isRecommendPackages == "true" || data?.isRecommendPackages == "1"; });
 
     return (<>
 
