@@ -34,6 +34,7 @@ export const GalleryAlbum = () => {
     useEffect(() => {
         getImages();
     }, []);
+    
 
     return (<>
 
