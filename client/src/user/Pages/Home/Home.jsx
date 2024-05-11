@@ -9,10 +9,9 @@ const Home = () => {
 
   const { state: packagesDetails, dispatch } = useContext(PackagesContext);
   const { state: stateDestination, dispatch: dispatchDestination } = useContext(DestinationContext);
-  const TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1; });
+  const TopPkgs = packagesDetails.filter((data)=>{ return data?.isTopPackages==1 || data?.isTopPackages==true || data?.isTopPackages=="true" || data?.isTopPackages=='1'; });
  
-  // console.log("destinationDetails_home", stateDestination);
-  const TopVisitPlace =  stateDestination.filter((data)=>{ return data?.isTopVisitPlace==1; });
+  const TopVisitPlace =  stateDestination.filter((data)=>{ return data?.isTopVisitPlace==1 || data?.isTopVisitPlace==true  ||  data?.isTopVisitPlace=="true" ||data?.isTopVisitPlace=="1"; });
   return (
     <>
      {/* <Banner/> */}
