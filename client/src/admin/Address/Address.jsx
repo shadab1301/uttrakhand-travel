@@ -11,9 +11,10 @@ const Address = () => {
 const [column, setColumn] = useState([
   { name: "sno", value: "SN0" },
   { name: "Primary_number", value: "Primary number" },
+  { name: "Alternate_number", value: "Alternate number" },
   { name: "address", value: "Address" },
   { name: "Email", value: "Email" },
-  // { name: "Website url", value: "Website url" },
+  { name: "Website url", value: "Website url" },
   { name: "Map", value: "Map" },
   // "Status",
 ]);
@@ -37,8 +38,10 @@ const [column, setColumn] = useState([
           ["Email"]: val.email,
           // ["Website url"]: val.description,
           ["Primary number"]: val.primary_number,
+          ["Alternate number"]: val.alternate_number,
           ["Address"]: val.address,
           ["Map"]: val.map_location,
+          ["Website url"]: val.WebUrl,
         };
       });
       console.log({ formattedData });

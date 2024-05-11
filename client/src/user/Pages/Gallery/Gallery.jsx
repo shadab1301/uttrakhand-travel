@@ -77,8 +77,6 @@ export const GalleryAlbum = () => {
                     </div>
 
                 </div>
-
-
             </div>
         </section> */}
 
