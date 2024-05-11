@@ -16,7 +16,6 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { AddFileController } from "../utils/fetchController/AddFileController";
 import { toast, ToastContainer } from "react-toastify";
-import {useForm} from "react-hook-form"
 
 const AddPackages = ({
   handleOpen,
@@ -26,22 +25,8 @@ const AddPackages = ({
   fetchData,
   data = null,
   id = null,
-  isEditing=false
+  isEditing = false,
 }) => {
-
-  const {
-    register,
-    handleSubmit : handleSubmitUsingHookForm,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-
-const onSubmit = (data) => {
-  console.log(data);
-}
-
-
   const [formData, setFormData] = useState({
     title: "",
     subTitle: "",
@@ -74,31 +59,31 @@ const onSubmit = (data) => {
     setIsLoading(true);
     try {
       const PayloadData = new FormData();
-     image && PayloadData.append("pkgImage", image);
-     BannerImage && PayloadData.append("BannerImage", BannerImage);
+      image && PayloadData.append("pkgImage", image);
+      BannerImage && PayloadData.append("BannerImage", BannerImage);
       PayloadData.append("title", formData.title);
       PayloadData.append("subTitle", formData.subTitle);
-       PayloadData.append("numbersOfDay", formData.numbersOfDay);
-       PayloadData.append("description", formData.description);
-    //  formData.isRecommendPackages &&
-    //    PayloadData.append("isRecommendPackages", formData.isRecommendPackages);
-    //  formData.isTopPackages &&
-    //    PayloadData.append("isTopPackages", formData.isTopPackages);
-    //  formData.isShowInHeader &&
-    //    PayloadData.append("isShowInHeader", formData.isShowInHeader);
-     formData.include && PayloadData.append("include", formData.include);
+      PayloadData.append("numbersOfDay", formData.numbersOfDay);
+      PayloadData.append("description", formData.description);
+      //  formData.isRecommendPackages &&
+      //    PayloadData.append("isRecommendPackages", formData.isRecommendPackages);
+      //  formData.isTopPackages &&
+      //    PayloadData.append("isTopPackages", formData.isTopPackages);
+      //  formData.isShowInHeader &&
+      //    PayloadData.append("isShowInHeader", formData.isShowInHeader);
+      formData.include && PayloadData.append("include", formData.include);
 
-     let res;
-     if (!isEditing) {
-       res = await AddFileController("/package", "POST", PayloadData);
-     } else {
-       res = await AddFileController(
-         `/package/${data.id}`,
-         "PATCH",
-         PayloadData
-       );
-     }
-      
+      let res;
+      if (!isEditing) {
+        res = await AddFileController("/package", "POST", PayloadData);
+      } else {
+        res = await AddFileController(
+          `/package/${data.id}`,
+          "PATCH",
+          PayloadData
+        );
+      }
+
       if (res.statusCode === 200) {
         fetchData();
         toast.success(res.message, {
@@ -160,8 +145,6 @@ const onSubmit = (data) => {
       });
     }
   }, [id]);
-
-  console.log(watch("example")); 
   return (
     <div>
       <Modal
@@ -203,73 +186,59 @@ const onSubmit = (data) => {
                 <RxCrossCircled size={32} onClick={handleClose} />
               </Typography>
             </Stack>
-            <Box
-              component="form"
-              onSubmit={handleSubmitUsingHookForm(onSubmit)}
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
-                // required={true}
+                required={true}
                 fullWidth
                 id="title"
                 label="Title"
                 name="title"
-                // value={formData.title}
-                // onChange={handleChange}
-                defaultValue=""
-                {...register("title", { required: true })}
+                value={formData.title}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
-                // required
+                required
                 fullWidth
                 id="subTitle"
                 label="Sub Title"
                 name="subTitle"
-                // value={formData.subTitle}
-                // onChange={handleChange}
-                defaultValue=""
-                {...register("subTitle", { required: true })}
+                value={formData.subTitle}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
-                // required={true}
+                required={true}
                 fullWidth
                 id="numbersOfDay"
                 label="No Of Day"
                 name="numbersOfDay"
                 type="text"
-                // value={formData.numbersOfDay}
-                // onChange={handleChange}
-                defaultValue=""
-                {...register("numbersOfDay", { required: true })}
+                value={formData.numbersOfDay}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
-                // required={true}
+                required={true}
                 fullWidth
                 id="include"
                 label="Includes"
                 name="include"
                 type="text"
-                // value={formData.include}
-                // onChange={handleChange}
-                defaultValue=""
-                {...register("include", { required: true })}
+                value={formData.include}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
-                // required={true}
+                required={true}
                 fullWidth
                 id="description"
                 label="Description"
                 name="description"
                 type="text"
-                // value={formData.description}
-                // onChange={handleChange}
-                defaultValue=""
-                {...register("description", { required: true })}
+                value={formData.description}
+                onChange={handleChange}
               />
               {/* pkgImage */}
               {/* <input
@@ -281,13 +250,87 @@ const onSubmit = (data) => {
                 onChange={handleChange}
               /> */}
 
+              <Stack direction="row" spacing={2}>
+                <FormControl>
+                  <TextField
+                    accept="image/*"
+                    margin="normal"
+                    required={data ? false : true}
+                    fullWidth
+                    id="image"
+                    label="pkgImage"
+                    name="pkgImage"
+                    type="file"
+                    value={formData.image}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                {data && (
+                  <Stack
+                    direction="column"
+                    spacing={2}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    sx={{ margin: "30px 0px 20px 0px" }}
+                  >
+                    <img
+                      src={data["Image"]}
+                      style={{
+                        marginTop: "10px",
+                        height: "50px",
+                        width: "100px",
+                        display: "block",
+                      }}
+                      alt="img"
+                      srcset=""
+                    />
+                  </Stack>
+                )}
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <FormControl>
+                  <TextField
+                    accept="image/*"
+                    margin="normal"
+                    required={data ? false : true}
+                    fullWidth
+                    id="BannerImage"
+                    label="BannerImage"
+                    name="BannerImage"
+                    type="file"
+                    value={formData.BannerImage}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                {data && (
+                  <Stack
+                    direction="column"
+                    spacing={2}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    sx={{ margin: "30px 0px 20px 0px" }}
+                  >
+                    <img
+                      src={data["Banner Image"]}
+                      style={{
+                        marginTop: "10px",
+                        height: "50px",
+                        width: "100px",
+                        display: "block",
+                      }}
+                      alt="img"
+                      srcset=""
+                    />
+                  </Stack>
+                )}
+              </Stack>
+
               <Box>
                 <Button
-                type="submit"
                   variant="contained"
                   color="primary"
                   disabled={IsLoading}
-                  // onClick={handleSubmit}
+                  onClick={handleSubmit}
                   startIcon={
                     IsLoading ? (
                       <CircularProgress size={20} color="inherit" />
