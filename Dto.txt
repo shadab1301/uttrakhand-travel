@@ -1,0 +1,12 @@
+1)home page banner images change
+2)testimonial design fix 
+3)packages is not showing in website's
+4)work on social link
+5)Gellary design create and implimenet api
+6)contact us page design fix
+==================================
+7) Form validation for all fileds with images size formatting (all forms like-> packages,destination,gallery,address,testimonial) Add and Edit form both
+8)in package section form describtion field change input to textarea.
+9)Add one filed more in package section form add/edit,destination cover (drop down multiselect filed.)
+10)add one more filed in destination form add/edit , description textarea (data type text in db)
+11)admin login impliment
