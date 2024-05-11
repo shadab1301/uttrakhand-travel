@@ -11,7 +11,9 @@ import {
 import { RxCrossCircled } from "react-icons/rx";
 import { toast } from "react-toastify";
 import { fetchController } from "../utils/fetchController/fetchController";
-
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 const AddAddress = ({
   handleOpen,
   handleClose,
@@ -22,49 +24,60 @@ const AddAddress = ({
   id = null,
   isEditing = false,
 }) => {
-  console.log({id});
-    console.log({ data });
-  const [formData, setFormData] = useState({
-    address: "",
-    map_iframe: "",
-    website_url: "",
-    email: "",
-    alternateNumber: "",
-    primaryNumber: "",
+  const userSchema = z.object({
+    address: z.string().min(3),
+    map_iframe: z.string().min(3),
+    website_url: z.string().min(10),
+    email: z.string().email(),
+    alternateNumber: z.string().min(10).max(10),
+    primaryNumber: z.string().min(10).max(10),
   });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      address: "",
+      map_iframe: "",
+      website_url: "",
+      email: "",
+      alternateNumber: null,
+      primaryNumber: null,
+    },
+    resolver: zodResolver(userSchema),
+  });
+  // const [formData, setFormData] = useState({
+  //   address: "",
+  //   map_iframe: "",
+  //   website_url: "",
+  //   email: "",
+  //   alternateNumber: "",
+  //   primaryNumber: "",
+  // });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     try {
       const payloadData = {
-        address: formData.address,
-        map_location: formData.map_iframe,
-        WebUrl: formData.website_url,
-        email: formData.email,
-        alternate_number: Number(formData.alternateNumber),
-        primary_number: Number(formData.primaryNumber),
+        address: data.address,
+        map_location: data.map_iframe,
+        WebUrl: data.website_url,
+        email: data.email,
+        alternate_number: Number(data.alternateNumber),
+        primary_number: Number(data.primaryNumber),
       };
-// ;
+
       let res;
       if (!isEditing) {
         res = await fetchController("/address", "POST", payloadData);
       } else {
-        res = await fetchController(
-          `/address/${data.id}`,
-          "PUT",
-          payloadData
-        );
+        res = await fetchController(`/address/${id}`, "PUT", payloadData);
       }
-      console.log(res);
-console.log(res.status);
-      if (res.status === 200) {
+
+      if (res.statusCode === 200 || res.status === 200) {
         fetchData();
         toast.success(res.message, {
           position: "top-right",
@@ -77,17 +90,23 @@ console.log(res.status);
           theme: "light",
         });
         handleClose();
-        setFormData({
+        reset({
           address: "",
           map_iframe: "",
           website_url: "",
           email: "",
-          alternateNumber: "",
-          primaryNumber: "",
+          alternateNumber: null,
+          primaryNumber: null,
         });
       }
+      console.log({ res });
     } catch (error) {
-      toast.error("Error occour in AddDestination Component", {
+      console.log("Error occour in AddPackages Component");
+      console.log(error);
+      setError("root", {
+        message: error.message,
+      });
+      toast.success("Something went wrong ...", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -98,23 +117,94 @@ console.log(res.status);
         theme: "light",
       });
     } finally {
-      // setIsLoading(false);
     }
   };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const payloadData = {
+  //       address: formData.address,
+  //       map_location: formData.map_iframe,
+  //       WebUrl: formData.website_url,
+  //       email: formData.email,
+  //       alternate_number: Number(formData.alternateNumber),
+  //       primary_number: Number(formData.primaryNumber),
+  //     };
+  //     // ;
+  //     let res;
+  //     if (!isEditing) {
+  //       res = await fetchController("/address", "POST", payloadData);
+  //     } else {
+  //       res = await fetchController(`/address/${data.id}`, "PUT", payloadData);
+  //     }
+  //     console.log(res);
+  //     console.log(res.status);
+  //     if (res.status === 200) {
+  //       fetchData();
+  //       toast.success(res.message, {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //       });
+  //       handleClose();
+  //       setFormData({
+  //         address: "",
+  //         map_iframe: "",
+  //         website_url: "",
+  //         email: "",
+  //         alternateNumber: "",
+  //         primaryNumber: "",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     toast.error("Error occour in AddDestination Component", {
+  //       position: "top-right",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //   } finally {
+  //     // setIsLoading(false);
+  //   }
+  // };
   useEffect(() => {
     if (id) {
       console.log("Inside Useeefect");
       const address = data && data.id ? data.Address : "";
-      const primaryNumber = data && data.id ? data["Primary number"] : "";
+      const primaryNumber = data && data.id ? data["Primary number"] : null;
       const email = data && data.id ? data["Email"] : "";
       const map_iframe = data && data.id ? data["Map"] : "";
-      setFormData({
-        ...formData,
-        address,
-        primaryNumber,
-        email,
-        map_iframe,
-      });
+      const alternateNumber = data && data.id ? data["Alternate number"] : null;
+      const website_url = data && data.id ? data["Website url"] : null;
+    
+
+       const defaultVal = {
+         address,
+         primaryNumber,
+         email,
+         map_iframe,
+         alternateNumber,
+         website_url,
+       };
+       reset(defaultVal);
     }
   }, [id]);
   return (
@@ -159,80 +249,118 @@ console.log(res.status);
               </Typography>
             </Stack>
 
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 margin="normal"
-                required
+                // required
                 fullWidth
                 id="address"
                 label="Address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
+                // name="address"
+                // value={formData.address}
+                // onChange={handleChange}
+                {...register("address", { required: true })}
               />
+              {errors.address && (
+                <div className="text-danger">{errors.address.message}</div>
+              )}
               <Stack
                 direction="row"
                 width={"100%"}
                 spacing={1}
                 justifyContent={"space-between"}
               >
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="primaryNumber"
-                  label="Primary Number"
-                  name="primaryNumber"
-                  type="number"
-                  value={formData.primaryNumber}
-                  onChange={handleChange}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="alternateNumber"
-                  label="Alternate Number"
-                  name="alternateNumber"
-                  type="number"
-                  value={formData.alternateNumber}
-                  onChange={handleChange}
-                />
+                <Stack
+                  direction="column"
+                  // width={"100%"}
+                  spacing={1}
+                  justifyContent={"space-between"}
+                >
+                  <TextField
+                    margin="normal"
+                    // required
+                    fullWidth
+                    id="primaryNumber"
+                    label="Primary Number"
+                    name="primaryNumber"
+                    type="number"
+                    // value={formData.primaryNumber}
+                    // onChange={handleChange}
+                    {...register("primaryNumber", { required: true })}
+                  />
+                  {errors.primaryNumber && (
+                    <div className="text-danger">
+                      {errors.primaryNumber.message}
+                    </div>
+                  )}
+                </Stack>
+                <Stack
+                  direction="column"
+                  // width={"100%"}
+                  spacing={1}
+                  justifyContent={"space-between"}
+                >
+                  <TextField
+                    margin="normal"
+                    fullWidth
+                    id="alternateNumber"
+                    label="Alternate Number"
+                    type="number"
+                    {...register("alternateNumber", { required: true })}
+                  />
+                  {errors.alternateNumber && (
+                    <div className="text-danger">
+                      {errors.alternateNumber.message}
+                    </div>
+                  )}
+                </Stack>
               </Stack>
 
               <TextField
                 margin="normal"
-                required
+                // required
                 fullWidth
                 id="email"
                 label="Email"
-                name="email"
+                // name="email"
                 type="email"
-                value={formData.email}
-                onChange={handleChange}
+                // value={formData.email}
+                // onChange={handleChange}
+                {...register("email", { required: true })}
               />
+              {errors.email && (
+                <div className="text-danger">{errors.email.message}</div>
+              )}
               <TextField
                 margin="normal"
-                required
+                // required
                 fullWidth
                 id="website_url"
                 label="Website Url"
-                name="website_url"
+                // name="website_url"
                 type="text"
-                value={formData.website_url}
-                onChange={handleChange}
+                // value={formData.website_url}
+                // onChange={handleChange}
+                {...register("website_url", { required: true })}
               />
+              {errors.website_url && (
+                <div className="text-danger">{errors.website_url.message}</div>
+              )}
               <TextField
                 margin="normal"
-                required
+                // required
                 fullWidth
                 id="map"
                 label="Map (Iframe)"
-                name="map_iframe"
+                // name="map_iframe"
                 type="text"
-                value={formData.map_iframe}
-                onChange={handleChange}
+                // value={formData.map_iframe}
+                // onChange={handleChange}
+                {...register("map_iframe", { required: true })}
               />
+              {errors.map_iframe && (
+                <div className="text-danger">{errors.map_iframe.message}</div>
+              )}
               <Button
                 type="submit"
                 fullWidth
@@ -241,7 +369,12 @@ console.log(res.status);
               >
                 Update
               </Button>
-            </Box>
+              {errors.root && (
+                <div className="text-danger" style={{ color: "red" }}>
+                  {errors.root.message}
+                </div>
+              )}
+            </form>
           </Box>
         </Box>
       </Modal>

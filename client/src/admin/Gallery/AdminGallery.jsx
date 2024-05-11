@@ -80,7 +80,7 @@ const Gallery = () => {
         handleOpen={handleOpen}
         handleClose={handleClose}
         size={"md"}
-        loadData={loadData}
+        fetchData={loadData}
       />
 
       <MasterTable
