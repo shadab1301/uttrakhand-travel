@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Tapestry&display=swap');
+.image-modal{
+  display: flex;
+  flex-direction: column;
+  /* margin:20px 20px 20px 20px; */
+  margin-top: 20px;
+  /* width: 400px;
+  height: 250px; */
+
+}
+span{
+  /* font-family: 'Tapestry', cursive; */
+  /* font-size: 20px; */
+  color: black;
+}
+button{
+  /* font-family: 'Tapestry', cursive; */
+  border: 1px #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  height: 30px;
+  color: #fff;
+  background-color:#08bd3ded;
+}
+button:hover{
+  color: #fff;
+  background-color: #10991a;
+  border: 1px #fff;
+}

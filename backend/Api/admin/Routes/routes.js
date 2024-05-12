@@ -23,10 +23,10 @@ routes.post('/login',LoginValidation,Login);
 routes.post("/gallery", uploadFile("gallery").single("image"), createGallery);
 routes.get("/gallery", fetchGallery);
 routes.get("/gallery/:id", fetchGallery);
-routes.put("/gallery", updateGallery);
+routes.patch("/gallery/:id", uploadFile("gallery").single("image"), updateGallery);
 routes.delete("/gallery/:id", deleteGallery);
 
-// Packages
+// Packagess
 routes.post(
   "/package",
   // PackagesValidator,
@@ -40,6 +40,10 @@ routes.get("/package", fetchPackages);
 routes.get("/package/:id", fetchPackages);
 routes.patch(
   "/package/:id",
+  uploadFile("packages").fields([
+    { name: "pkgImage" },
+    { name: "BannerImage" },
+  ]),
   // PackagesValidator,
   updatePackage
 );
@@ -54,7 +58,7 @@ routes.post("/destination",uploadFile("destination").single("cityImage"),createD
 routes.get("/destination", fetchDestination);
 routes.get("/destination/:id", fetchDestination);
 
-routes.patch("/destination/:id", updateDestination);
+routes.patch("/destination/:id",uploadFile("destination").single("cityImage"), updateDestination);
 routes.delete("/destination/:id", deleteDestination);
 
 routes.post("/address", AddAddress);

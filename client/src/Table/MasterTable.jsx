@@ -6,31 +6,98 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
-import { Stack } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import ConfirmDelete from "../Modal/ConfirmDelete";
 import { fetchController } from "../utils/fetchController/fetchController";
 import { toast, ToastContainer } from "react-toastify";
+import AddDestination from "../Modal/AddDestination";
+import AddPackages from "../Modal/AddPackages";
+import AddGallery from "../Modal/AddGallery";
+import AddTestimonial from "../Modal/AddTestimonial";
+import AddAddress from "../Modal/AddAddress";
 
-export default function MasterTable({ column = [], tableData = [], table = "", loadData }) {
+export default function MasterTable({
+  column = [],
+  tableData = [],
+  table = "",
+  loadData,
+  handleClickOnCheckBox,
+}) {
   const [open, setOpen] = React.useState(false);
+  const [isEditDestinationMOdalOpened, setIsEditDestinationMOdalOpened] =
+    React.useState(false);
+  const [isEditPackagesMOdalOpened, setIsEditPackagesMOdalOpened] =
+    React.useState(false);
+  const [isEditGalleryMOdalOpened, setIsEditGalleryMOdalOpened] =
+    React.useState(false);
+  const [isEditTestimonialMOdalOpened, setIsEditTestimonialMOdalOpened] =
+    React.useState(false);
+  const [isEditAddressMOdalOpened, setIsEditAddressMOdalOpened] =
+    React.useState(false);
+
   const [itemToBeDeleteId, setItemToBeDeleteId] = React.useState(null);
+  const [itemToBeEditeId, setItemToBeEditeId] = React.useState(null);
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
     setItemToBeDeleteId(null);
   };
+  // To open Edit Destination Modal
+  const handleOpenEditDestinationModal = () => {
+    setIsEditDestinationMOdalOpened(true);
+  };
+  const handleCloseEditDestinationModal = () => {
+    setIsEditDestinationMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
+  //  To open Edit Packages Modal
+  const handleOpenEditPackagesModal = () => {
+    setIsEditPackagesMOdalOpened(true);
+  };
+  const handleCloseEditPackagesModal = () => {
+    setIsEditPackagesMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
+  //  To open Edit Gallery Modal
+  const handleOpenEditGalleryModal = () => {
+    setIsEditGalleryMOdalOpened(true);
+  };
+  const handleCloseEditGalleryModal = () => {
+    setIsEditGalleryMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
+  //  To open Edit Testimonial Modal
+  const handleOpenEditTestimonialModal = () => {
+    setIsEditTestimonialMOdalOpened(true);
+  };
+  const handleCloseEditTestimonialModal = () => {
+    setIsEditTestimonialMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
+  //  To open Edit Address Modal
+  const handleOpenEditAddressModal = () => {
+    setIsEditAddressMOdalOpened(true);
+  };
+  const handleCloseEditAddressModal = () => {
+    setIsEditAddressMOdalOpened(false);
+    setItemToBeEditeId(null);
+  };
+
+  // Column Data
   const columnsData = column.map((val, index) => {
     if (["Image", "City Image"].includes(val)) {
       return {
-        field: val,
-        headerName: val,
+        field: val.name,
+        headerName: val.value,
         renderCell: (params) => (
           <img
             src={params.value}
@@ -40,7 +107,7 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
         ),
       };
     } else {
-      return { field: val, headerName: val };
+      return { field: val.name, headerName: val.value };
     }
   });
 
@@ -67,6 +134,27 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
     setItemToBeDeleteId(id);
     handleOpen();
   };
+  const handleClickOnEdit = (data) => {
+    setItemToBeEditeId(data);
+
+    if (table === "packages") {
+      handleOpenEditPackagesModal();
+    } else if (table === "enquiry") {
+      //  deleteEnquiry();
+    } else if (table === "destination") {
+      handleOpenEditDestinationModal();
+    } else if (table === "testimonial") {
+      //  handleOpenEditDestinationModal();
+      //  loadData();
+    } else if (table === "gallery") {
+      handleOpenEditGalleryModal();
+    } else if (table === "address") {
+      handleOpenEditAddressModal();
+    }
+
+    
+  };
+
   const deletePackages = async () => {
     try {
       const res = await fetchController(
@@ -154,32 +242,30 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
     } finally {
     }
   };
-    const deleteGallery = async () => {
-      try {
-        const res = await fetchController(
-          `/gallery/${itemToBeDeleteId}`,
-          "DELETE"
-        );
-        if (
-          [200, 201].includes(res.statusCode) ||
-          [200, 201].includes(res.status)
-        ) {
-          toast.success(res.message, {
-            position: "top-right",
-          });
-        } else {
-          toast.error(res.message, {
-            position: "top-right",
-          });
-        }
-      } catch (error) {
-        console.log("Error occour while delete packages");
-        console.log({ error });
-      } finally {
+  const deleteGallery = async () => {
+    try {
+      const res = await fetchController(
+        `/gallery/${itemToBeDeleteId}`,
+        "DELETE"
+      );
+      if (
+        [200, 201].includes(res.statusCode) ||
+        [200, 201].includes(res.status)
+      ) {
+        toast.success(res.message, {
+          position: "top-right",
+        });
+      } else {
+        toast.error(res.message, {
+          position: "top-right",
+        });
       }
-    };
-
-  // gallery ;
+    } catch (error) {
+      console.log("Error occour while delete packages");
+      console.log({ error });
+    } finally {
+    }
+  };
 
   return (
     <>
@@ -188,7 +274,7 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
           <TableHead>
             <TableRow>
               {columnsData.map((col, id) => (
-                <TableCell>{col.headerName}</TableCell>
+                <TableCell key={id}>{col.headerName}</TableCell>
               ))}
               <TableCell>Operation</TableCell>
             </TableRow>
@@ -203,9 +289,66 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
                   <TableCell component="th" scope="row">
                     {row.SN0}
                   </TableCell>
-
                   <TableCell>{row.Title}</TableCell>
+                  <TableCell>{row["Sub Title"]}</TableCell>
+                  <TableCell>{row.Includes}</TableCell>
                   <TableCell>{row.Description}</TableCell>
+
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled={false}
+                          name="is Show In Header"
+                          checked={
+                            row["is Show In Header"] === true ||
+                            row["is Show In Header"] === "true"
+                              ? true
+                              : false
+                          }
+                          onChange={(e) => handleClickOnCheckBox(e, row.id)}
+                        />
+                      }
+                      label=""
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled={false}
+                          name="is Top Packages"
+                          checked={
+                            row["is Top Packages"] === true ||
+                            row["is Top Packages"] === "true"
+                              ? true
+                              : false
+                          }
+                          onChange={(e) => handleClickOnCheckBox(e, row.id)}
+                        />
+                      }
+                      label=""
+                    />
+                  </TableCell>
+
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled={false}
+                          name="is Recommend Packages"
+                          checked={
+                            row["is Recommend Packages"] === true ||
+                            row["is Top Packages"] === "true"
+                              ? true
+                              : false
+                          }
+                          onChange={(e) => handleClickOnCheckBox(e, row.id)}
+                        />
+                      }
+                      label=""
+                    />
+                  </TableCell>
                   <TableCell>{row["No of Days"]}</TableCell>
                   <TableCell>
                     {" "}
@@ -216,11 +359,21 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
                     />
                   </TableCell>
                   <TableCell>
+                    {" "}
+                    <img
+                      src={row["Banner Image"]}
+                      alt="Image"
+                      style={{ width: "80px", height: "50px" }}
+                    />
+                  </TableCell>
+
+                  <TableCell>
                     <Stack direction="row" spacing={2}>
                       <AiTwotoneEdit
                         style={{
                           color: "green",
                         }}
+                        onClick={() => handleClickOnEdit(row)}
                       />
                       <AiOutlineDelete
                         style={{
@@ -270,33 +423,43 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
                   </TableCell>
                   <TableCell>{row["City Name"]}</TableCell>
                   <TableCell>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          disabled
-                          defaultChecked={row["is Include in Navbar"]}
-                        />
-                      }
-                      label=""
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          disabled
-                          defaultChecked={row["is Top Visit Place"]}
-                        />
-                      }
-                      label=""
-                    />
-                  </TableCell>
-                  <TableCell>
                     {" "}
                     <img
                       src={row["City Image"]}
                       alt="Image"
+                      name="City Image"
                       style={{ width: "80px", height: "50px" }}
+                    />
+                  </TableCell>
+
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled={false}
+                          name="is Include In Navbar"
+                          checked={
+                            row["is Include In Navbar"] === true ? true : false
+                          }
+                          onChange={(e) => handleClickOnCheckBox(e, row.id)}
+                        />
+                      }
+                      label=""
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          disabled={false}
+                          name="is Top Visit Place"
+                          checked={
+                            row["is Top Visit Place"] === true ? true : false
+                          }
+                          onChange={(e) => handleClickOnCheckBox(e, row.id)}
+                        />
+                      }
+                      label=""
                     />
                   </TableCell>
 
@@ -306,6 +469,7 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
                         style={{
                           color: "green",
                         }}
+                        onClick={() => handleClickOnEdit(row)}
                       />
                       <AiOutlineDelete
                         style={{
@@ -342,6 +506,7 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
                         style={{
                           color: "green",
                         }}
+                        onClick={() => handleClickOnEdit(row)}
                       />
                       <AiOutlineDelete
                         style={{
@@ -353,7 +518,6 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
                   </TableCell>
                 </TableRow>
               ))}
-
             {table === "testimonial" &&
               tableData.map((row) => (
                 <TableRow
@@ -392,18 +556,124 @@ export default function MasterTable({ column = [], tableData = [], table = "", l
                   </TableCell>
                 </TableRow>
               ))}
+            {table === "address" &&
+              tableData.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.SN0}
+                  </TableCell>
+                  <TableCell>{row["Primary number"]}</TableCell>
+                  <TableCell>{row["Alternate number"]}</TableCell>
+
+                  <TableCell>{row.Address}</TableCell>
+                  <TableCell>{row.Email}</TableCell>
+                  <TableCell>{row["Website url"]}</TableCell>
+                  <TableCell>
+                    <div
+                      style={{
+                        left: 0,
+                        width: "100px",
+                        height: "100px",
+                        position: "relative",
+                      }}
+                    >
+                      <iframe
+                        src={row.Map}
+                        style={{
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          position: "absolute",
+                          border: 0,
+                        }}
+                        allowfullscreen
+                      ></iframe>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      <AiTwotoneEdit
+                        style={{
+                          color: "green",
+                        }}
+                        onClick={() => handleClickOnEdit(row)}
+                      />
+                      {/* <AiOutlineDelete
+                        style={{
+                          color: "red",
+                        }}
+                        onClick={() => handleClickOnDelete(row.id)}
+                      /> */}
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {/*  */}
             {/* gallery */}
           </TableBody>
         </Table>
       </TableContainer>
-
       <ConfirmDelete
         isOpen={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
         size={"md"}
         handleConfirmDelete={handleConfirmDelete}
-        // fetchData={loadData}
+        fetchData={loadData}
+      />
+      <AddDestination
+        handleOpen={handleOpenEditDestinationModal}
+        handleClose={handleCloseEditDestinationModal}
+        isOpen={isEditDestinationMOdalOpened}
+        size={"md"}
+        fetchData={loadData}
+        id={itemToBeEditeId && itemToBeEditeId.id}
+        isEditing={true}
+        data={itemToBeEditeId}
+      />
+      <AddPackages
+        isOpen={isEditPackagesMOdalOpened}
+        handleOpen={handleOpenEditPackagesModal}
+        handleClose={handleCloseEditPackagesModal}
+        size={"md"}
+        fetchData={loadData}
+        isEditing={true}
+        data={itemToBeEditeId}
+        id={itemToBeEditeId && itemToBeEditeId.id}
+      />
+      <AddGallery
+        isOpen={isEditGalleryMOdalOpened}
+        handleOpen={handleOpenEditGalleryModal}
+        handleClose={handleCloseEditGalleryModal}
+        size={"md"}
+        fetchData={loadData}
+        isEditing={true}
+        data={itemToBeEditeId}
+        id={itemToBeEditeId && itemToBeEditeId.id}
+      />
+      <AddTestimonial
+        isOpen={isEditTestimonialMOdalOpened}
+        handleOpen={handleOpenEditTestimonialModal}
+        handleClose={handleCloseEditTestimonialModal}
+        size={"md"}
+        fetchData={loadData}
+        isEditing={true}
+        data={itemToBeEditeId}
+        id={itemToBeEditeId && itemToBeEditeId.id}
+      />
+      <AddAddress
+        isOpen={isEditAddressMOdalOpened}
+        handleOpen={handleOpenEditAddressModal}
+        handleClose={handleCloseEditAddressModal}
+        size={"md"}
+        fetchData={loadData}
+        isEditing={true}
+        data={itemToBeEditeId}
+        id={itemToBeEditeId && itemToBeEditeId.id}
       />
     </>
   );

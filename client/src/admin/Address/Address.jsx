@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Button, Stack, Typography } from "@mui/material";
 import AddAddress from "../../Modal/AddAddress";
 import MasterTable from "../../Table/MasterTable";
+import { fetchController } from "../../utils/fetchController/fetchController";
 
 const Address = () => {
   const [open, setOpen] = useState(false);
   const [packagesData, setPachagesData] = useState([{}]);
-  const [column, setColumn] = useState([
-    "SNo",
-    "Primary number",
-    "Alternate Number",
-    "Email",
-    "Website url",
-    "Map"
-  ]);
 
+const [column, setColumn] = useState([
+  { name: "sno", value: "SN0" },
+  { name: "Primary_number", value: "Primary number" },
+  { name: "Alternate_number", value: "Alternate number" },
+  { name: "address", value: "Address" },
+  { name: "Email", value: "Email" },
+  { name: "Website url", value: "Website url" },
+  { name: "Map", value: "Map" },
+  // "Status",
+]);
   const handleOpen = () => {
     console.log({ handleOpen });
     setOpen(true);
@@ -27,20 +30,24 @@ const Address = () => {
     try {
       const res = await fetchController("/address", "GET");
 
-      console.log(res.data);
+      console.log({address:res.data});
       const formattedData = res.data.map((val, index) => {
         return {
-          id: val._id,
+          id: val.id,
           ["SN0"]: index + 1,
-          Title: val.title,
-          Description: val.description,
-          ["No of Days"]: val.numbersOfDay,
-          ["Image"]: val.pkgImage,
+          ["Email"]: val.email,
+          // ["Website url"]: val.description,
+          ["Primary number"]: val.primary_number,
+          ["Alternate number"]: val.alternate_number,
+          ["Address"]: val.address,
+          ["Map"]: val.map_location,
+          ["Website url"]: val.WebUrl,
         };
       });
+      console.log({ formattedData });
       setPachagesData(formattedData);
     } catch (error) {
-      console.log("Error occour while fetching Packages");
+      console.log("Error occour while fetching Address");
       console.log(error);
     }
   };
@@ -72,7 +79,12 @@ const Address = () => {
         handleClose={handleClose}
         size={"md"}
       /> */}
-      <MasterTable tableData={packagesData} column={column} table="address" />
+      <MasterTable
+        tableData={packagesData}
+        column={column}
+        loadData={loadData}
+        table="address"
+      />
     </>
   );
 };

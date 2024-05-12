@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -12,46 +12,102 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { RxCrossCircled } from "react-icons/rx";
 import { AddFileController } from "../utils/fetchController/AddFileController";
 import { toast, ToastContainer } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const AddTestimonial = ({
   handleOpen,
   handleClose,
   isOpen,
   size,
-  fetchData,
+  loadData,
+  data = null,
+  id = null,
+  isEditing = false,
 }) => {
-  const [formData, setFormData] = useState({
-    customer_name: "",
-    description: "",
+
+
+ const userSchema = z.object({
+   customer_name: z.string().min(3),
+   description: z.string().min(10),
+ });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      customer_name: "",
+      description: "",
+    },
+    resolver: zodResolver(userSchema),
   });
+
+
+
+  // const [formData, setFormData] = useState({
+  //   customer_name: "",
+  //   description: "",
+  // });
   const [image, setImage] = useState(null);
-    const [IsLoading, setIsLoading] = useState(false);
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "image") {
-      setImage(e.target.files[0]);
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
-  };
+    const [fileError, setFileError] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      const data = new FormData();
-      data.append("image", image);
-      data.append("customer_name", formData.customer_name);
-      data.append("description", formData.description);
+    const onSubmit = async (data) => {
+      if (!isEditing && !image) {
+        !image &&
+          setFileError({
+            ...fileError,
+            ["image"]: "Image is required.",
+          });
 
-      const res = await AddFileController("/testimonial", "POST", data);
-      if (res.status === 201) {
-        fetchData();
-        handleClose();
-        toast.success(res.message, {
+        return false;
+      }
+      if (fileError?.image) {
+        return false;
+      }
+      try {
+        const payloadData = new FormData();
+        image && payloadData.append("image", image);
+
+        payloadData.append("customer_name", data.customer_name);
+        payloadData.append("description", data.description);
+
+
+
+
+
+        const res = await AddFileController("/testimonial", "POST", data);
+
+        if (res.status === 201) {
+          fetchData();
+          toast.success(res.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          handleClose();
+          reset({
+            title: "",
+            description: "",
+          });
+        }
+        console.log({ res });
+      } catch (error) {
+        console.log("Error occour in Add testimonial Component");
+        console.log(error);
+        setError("root", {
+          message: error.message,
+        });
+        toast.success("Something went wrong ...", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -61,38 +117,115 @@ const AddTestimonial = ({
           progress: undefined,
           theme: "light",
         });
-
-        setFormData({
-          title: "",
-          subTitle: "",
-          numbersOfDay: "",
-          description: "",
-          isRecommendPackages: "0",
-          isTopPackages: "0",
-          isShowInHeader: "0",
-          include: "test",
-        });
+      } finally {
       }
-      console.log({ res });
-    } catch (error) {
-      setIsLoading(false);
-      console.log("Error occour in Add Testimonial Component");
-      console.log(error);
-      toast.success(res.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+    };  
+
+  const handleOnFileChange = (e) => {
+    setFileError(null);
+    const size = e.target.files[0].size;
+    const name = e.target.files[0].name;
+    if (!["png", "jpg", "jpeg"].includes(name.split(".").pop().toLowerCase())) {
+      setFileError({
+        ...fileError,
+        [e.target.name]: "Only png, jpg or jpeg are allowed",
       });
-    } finally {
-      setIsLoading(false);
+      return false;
     }
+
+    if (size >= 5 * 1024 * 1024) {
+      setFileError({
+        ...fileError,
+        [e.target.name]: "Maximum 5mb size are allowed to upload",
+      });
+      return false;
+    }
+
+    setImage(e.target.files[0]);
+    setFileError(null);
   };
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   if (name === "image") {
+  //     setImage(e.target.files[0]);
+  //   } else {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       [name]: value,
+  //     }));
+  //   }
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   try {
+  //     const data = new FormData();
+  //     data.append("image", image);
+  //     data.append("customer_name", formData.customer_name);
+  //     data.append("description", formData.description);
+
+  //     const res = await AddFileController("/testimonial", "POST", data);
+  //     if (res.status === 201) {
+  //       loadData();
+  //       handleClose();
+  //       toast.success(res.message, {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //       });
+
+  //       setFormData({
+  //         title: "",
+  //         subTitle: "",
+  //         numbersOfDay: "",
+  //         description: "",
+  //         isRecommendPackages: "0",
+  //         isTopPackages: "0",
+  //         isShowInHeader: "0",
+  //         include: "test",
+  //       });
+  //     }
+  //     console.log({ res });
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     console.log("Error occour in Add Testimonial Component");
+  //     console.log(error);
+  //     toast.success(res.message, {
+  //       position: "top-right",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+
+
+  //  useEffect(() => {
+  //    if (id) {
+  //      const customer_name = data && data.id ? data.Title : "";
+  //      const description = data && data.id ? data["Customer name"] : "";
+
+  //      setFormData({
+  //        ...formData,
+  //        title,
+  //        description,
+  //      });
+  //    }
+  //  }, [id]);
   return (
     <div>
       <Modal
@@ -135,67 +268,73 @@ const AddTestimonial = ({
               </Typography>
             </Stack>
 
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
               <TextField
                 margin="normal"
-                required
                 fullWidth
                 id="customer_name"
                 label="Customer name"
-                name="customer_name"
-                value={formData.customer_name}
-                onChange={handleChange}
+                {...register("customer_name", { required: true })}
               />
+              {errors.customer_name && (
+                <span
+                  className="text-danger"
+                  style={{ padding: "0px 0px 10px 0px" }}
+                >
+                  {errors.customer_name.message}
+                </span>
+              )}
               <TextField
                 margin="normal"
-                required
                 fullWidth
                 id="description"
                 label="Description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
+                {...register("description", { required: true })}
               />
-
+              {errors.description && (
+                <span
+                  className="text-danger"
+                  style={{ padding: "0px 0px 10px 0px" }}
+                >
+                  {errors.description.message}
+                </span>
+              )}
               <TextField
                 margin="normal"
-                required
                 fullWidth
                 id="image"
                 label=""
                 name="image"
                 type="file"
-                value={formData.image}
-                onChange={handleChange}
+                onChange={handleOnFileChange}
               />
-              {/* <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Submit
-              </Button> */}
-
+              {fileError?.image && (
+                <div className="text-danger">{fileError.image}</div>
+              )}
               <Box>
                 <Button
                   sx={{ mt: 3, mb: 2 }}
                   type="submit"
                   variant="contained"
                   color="primary"
-                  disabled={IsLoading}
+                  disabled={isSubmitting}
                   startIcon={
-                    IsLoading ? (
+                    isSubmitting ? (
                       <CircularProgress size={20} color="inherit" />
                     ) : (
                       ""
                     )
                   }
                 >
-                  {IsLoading ? "Submit" : "Submit"}
+                  Submit
                 </Button>
               </Box>
-            </Box>
+              {errors.root && (
+                <div className="text-danger" style={{ color: "red" }}>
+                  {errors.root.message}
+                </div>
+              )}
+            </form>
           </Box>
         </Box>
       </Modal>

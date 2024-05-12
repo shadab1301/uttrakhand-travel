@@ -10,7 +10,7 @@ import Packages from './admin/Packages/Packages.jsx';
 import Home from './user/Pages/Home/Home.jsx';
 import { Contact } from './user/Pages/Contact/Contact.jsx';
 import { About } from './user/Pages/Contact/About.jsx';
-import { Gallery } from './user/Pages/Gallery/Gallery.jsx';
+import { GalleryAlbum } from './user/Pages/Gallery/Gallery.jsx';
 import List from './user/Pages/List/List.jsx';
 import Detail from './user/Pages/Detail/Detail.jsx';
 import Testimonial from './admin/Testimonial/Testimonial.jsx';
@@ -30,7 +30,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
-            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery" element={<GalleryAlbum />} />
             <Route path="/list/:desti" element={<List />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/login" element={<Login />} />

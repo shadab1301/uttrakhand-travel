@@ -6,6 +6,7 @@ const Destination = require("../Model/Destination.Model");
 exports.createDestination = async (req, res, next) => {
   try {
     const { cityName, isIncludeInNavbar = false, isTopVisitPlace = false } = req.body;
+
     if (!cityName) {
       throw new ApiError(400, "cityName should not be empty")
     }
@@ -47,8 +48,14 @@ exports.createDestination = async (req, res, next) => {
 
 exports.fetchDestination = async (req, res, next) => {
   try {
-    const destinations = await Destination.find()
-
+   let destinations
+    if(req.params.id){
+     destinations = await Destination.findOne({_id:req.params.id});
+    }else{
+      destinations=  await Destination.find();
+    }
+   
+  
     if (!destinations) {
       throw new ApiError(500, "Something went wrong while fetching destinations")
     }
@@ -66,6 +73,12 @@ exports.fetchDestination = async (req, res, next) => {
 exports.updateDestination = async (req, res, next) => {
   try {
     const Udestination = req?.body;
+    console.log(req?.file?.filename);
+    if(req?.file?.filename) {
+      const filePath = `${process.env.IMAGE_BASE_PATH}/destination/${req.file.filename}`;
+      Udestination.cityImage =filePath;
+    }
+// console.log(Udestination);
     const DestinationUpdate = await Destination.findByIdAndUpdate(
       { _id: req?.params?.id },
       Udestination,

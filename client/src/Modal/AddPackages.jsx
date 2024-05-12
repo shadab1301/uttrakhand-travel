@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -16,96 +16,201 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { AddFileController } from "../utils/fetchController/AddFileController";
 import { toast, ToastContainer } from "react-toastify";
+import {useForm} from "react-hook-form"
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    subTitle: "",
-    numbersOfDay: "",
-    description: "",
-    isRecommendPackages: "0",
-    isTopPackages: "0",
-    isShowInHeader: "0",
-    include: "test",
+const AddPackages = ({
+  handleOpen,
+  handleClose,
+  isOpen,
+  size,
+  fetchData,
+  data = null,
+  id = null,
+  isEditing=false
+}) => {
+const userSchema = z.object({
+  title: z.string().min(3),
+  subTitle: z.string().min(3),
+  numbersOfDay: z.string().min(1),
+  description: z.string().min(10),
+  include: z.string().min(10),
+});
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    reset,
+    formState: { errors,isSubmitting },
+  } = useForm({
+    defaultValues: {
+      title:  "",
+      subTitle:  "",
+      numbersOfDay:  null,
+      description:  "",
+      include:"",
+    },
+    resolver: zodResolver(userSchema),
   });
+
+
   const [image, setImage] = useState(null);
   const [BannerImage, setBannerImage] = useState(null);
-  const [IsLoading, setIsLoading] = useState(false);
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "pkgImage") {
-      setImage(e.target.files[0]);
-    } else if (name === "BannerImage") {
-      setBannerImage(e.target.files[0]);
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
-  };
+  const [fileError, setFileError] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      const data = new FormData();
-      data.append("pkgImage", image);
-      data.append("BannerImage", BannerImage);
-      data.append("title", formData.title);
-      data.append("subTitle", formData.subTitle);
-      data.append("numbersOfDay", formData.numbersOfDay);
-      data.append("description", formData.description);
-      data.append("isRecommendPackages", formData.isRecommendPackages);
-      data.append("isTopPackages", formData.isTopPackages);
-      data.append("isShowInHeader", formData.isShowInHeader);
-      data.append("include", formData.include);
+const onSubmit = async(data) => {
+ 
+   if (!isEditing && (!image || !BannerImage)) {
+     !image &&
+       setFileError({
+         ...fileError,
+         ["pkgImage"]: "Packages Images is required.",
+       });
 
-      const res = await AddFileController("/package", "POST", data);
-      if (res.statusCode === 200) {
-        fetchData()
-        toast.success(res.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        handleClose();
-        setFormData({
+     !BannerImage &&
+       setFileError({
+         ...fileError,
+         ["BannerImage"]: "Banner Images is required.",
+       });
+     return false;
+   }
+   if (fileError?.pkgImage || fileError?.BannerImage){
+    return false
+   }
+     try {
+       const PayloadData = new FormData();
+       image && PayloadData.append("pkgImage", image);
+       BannerImage && PayloadData.append("BannerImage", BannerImage);
+       PayloadData.append("title", data.title);
+       PayloadData.append("subTitle", data.subTitle);
+       PayloadData.append("numbersOfDay", data.numbersOfDay);
+       PayloadData.append("description", data.description);
+       //  formData.isRecommendPackages &&
+       //    PayloadData.append("isRecommendPackages", formData.isRecommendPackages);
+       //  formData.isTopPackages &&
+       //    PayloadData.append("isTopPackages", formData.isTopPackages);
+       //  formData.isShowInHeader &&
+       //    PayloadData.append("isShowInHeader", formData.isShowInHeader);
+       PayloadData.append("include", data.include);
+
+       let res;
+       if (!isEditing) {
+         res = await AddFileController("/package", "POST", PayloadData);
+       } else {
+         res = await AddFileController(
+           `/package/${id}`,
+           "PATCH",
+           PayloadData
+         );
+       }
+
+       if (res.statusCode === 200 || res.status === 200) {
+         fetchData();
+         toast.success(res.message, {
+           position: "top-right",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+           theme: "light",
+         });
+         handleClose();
+        //  setFormData({
+        //    title: "",
+        //    subTitle: "",
+        //    numbersOfDay: "",
+        //    description: "",
+        //    isRecommendPackages: "0",
+        //    isTopPackages: "0",
+        //    isShowInHeader: "0",
+        //    include: "test",
+        //  });
+         
+       
+        reset({
           title: "",
           subTitle: "",
           numbersOfDay: "",
           description: "",
-          isRecommendPackages: "0",
-          isTopPackages: "0",
-          isShowInHeader: "0",
-          include: "test",
+          include: "",
         });
-      }
-      console.log({ res });
-    } catch (error) {
-      setIsLoading(false);
-      console.log("Error occour in AddPackages Component");
-      console.log(error);
-      toast.success(res.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+       }
+       console.log({ res });
+     } catch (error) {
+       console.log("Error occour in AddPackages Component");
+       console.log(error);
+         setError("root", {
+           message: error.message,
+         });
+       toast.success("Something went wrong ...", {
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
+     } finally {
+     }
+ 
+};
+const handleOnFileChange = (e) => {
+  setFileError(null);
+  const size = e.target.files[0].size;
+  const name = e.target.files[0].name;
+  if (!["png", "jpg", "jpeg"].includes(name.split(".").pop().toLowerCase())) {
+    setFileError({
+      ...fileError,
+      [e.target.name]: "Only png, jpg or jpeg are allowed",
+    });
+    return false;
+  }
 
+  if (size >= 5 * 1024 * 1024) {
+    setFileError({
+      ...fileError,
+      [e.target.name]: "Maximum 5mb size are allowed to upload",
+    });
+    return false;
+  }
+
+  if (e.target.name === "pkgImage") {
+    setImage(e.target.files[0]);
+  } else {
+    setBannerImage(e.target.files[0]);
+  }
+
+  setFileError(null)
+  console.log({fileError});
+};
+  useEffect(() => {
+    if (id) {
+
+      const title1 = data && data.id ? data.Title : "";
+      const numbersOfDay1 = data && data.id ? data["No of Days"] : null;
+      const description1 = data && data.id ? data["Description"] : "";
+      const include1 = data && data.id ? data["Includes"] : "";
+      const subTitle1 = data && data.id ? data["Sub Title"] : "";
+
+  
+        const defaultVal={
+      title: title1,
+      subTitle:subTitle1,
+      numbersOfDay:numbersOfDay1,
+      description:description1,
+      include:include1,
+      
+    }  
+       reset(defaultVal);
+    }
+  }, [id]);
   return (
     <div>
       <Modal
@@ -125,6 +230,7 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
             p: 4,
             width: size === "sm" ? 400 : size === "md" ? 600 : 800,
             maxWidth: "100%",
+            overflow: "scroll",
           }}
         >
           <Box
@@ -141,122 +247,194 @@ const AddPackages = ({ handleOpen, handleClose, isOpen, size, fetchData }) => {
               justifyContent={"space-between"}
             >
               <Typography variant="h5" gutterBottom>
-                Add Packages
+                {isEditing ? " Edit Packages" : " Add Packages"}
               </Typography>
               <Typography sx={{ cursor: "pointer" }}>
                 <RxCrossCircled size={32} onClick={handleClose} />
               </Typography>
             </Stack>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            {/* <Box
+              component="form"
+              onSubmit={handleSubmit(onSubmit)}
+              sx={{ mt: 1 }}
+            > */}
+            <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 margin="normal"
-                required
+                // required={true}
                 fullWidth
                 id="title"
                 label="Title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
+                // value={formData.title}
+                // onChange={handleChange}
+                {...register("title", { required: true })}
               />
+              {errors.title && (
+                <div className="text-danger">{errors.title.message}</div>
+              )}
               <TextField
                 margin="normal"
-                required
+                // required
                 fullWidth
                 id="subTitle"
-                label="subTitle Title"
-                name="subTitle"
-                value={formData.subTitle}
-                onChange={handleChange}
+                label="Sub Title"
+                // value={formData.subTitle}
+                // onChange={handleChange}
+
+                {...register("subTitle", { required: true })}
               />
+              {errors.subTitle && (
+                <div className="text-danger">{errors.subTitle.message}</div>
+              )}
               <TextField
                 margin="normal"
-                required
+                // required={true}
                 fullWidth
                 id="numbersOfDay"
                 label="No Of Day"
-                name="numbersOfDay"
                 type="text"
-                value={formData.numbersOfDay}
-                onChange={handleChange}
+                // value={formData.numbersOfDay}
+                // onChange={handleChange}
+                {...register("numbersOfDay", { required: true })}
               />
-              {/* <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="includes"
-                label="Includes"
-                name="includes"
-                type="text"
-                value={formData.includes}
-                onChange={handleChange}
-              /> */}
+              {errors.numbersOfDay && (
+                <div className="text-danger">{errors.numbersOfDay.message}</div>
+              )}
               <TextField
                 margin="normal"
-                required
+                // required={true}
                 fullWidth
-                id="description"
-                label="Description"
-                name="description"
+                id="include"
+                label="Includes"
                 type="text"
-                value={formData.description}
-                onChange={handleChange}
+                // value={formData.include}
+                // onChange={handleChange}
+                {...register("include", { required: true })}
               />
-              {/* pkgImage */}
-              {/* <input
-                accept="image/*"
-                id="contained-button-file"
-                multiple
-                type="file"
-                name="pkgImage"
-                onChange={handleChange}
-              /> */}
-              <FormControl>
-                <TextField
-                  accept="image/*"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="image"
-                  label="pkgImage"
-                  name="pkgImage"
-                  type="file"
-                  value={formData.image}
-                  onChange={handleChange}
-                />
-              </FormControl>
-              <FormControl>
-                <TextField
-                  accept="image/*"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="BannerImage"
-                  label="BannerImage"
-                  name="BannerImage"
-                  type="file"
-                  value={formData.BannerImage}
-                  onChange={handleChange}
-                />
-              </FormControl>
-             
+              {errors.include && (
+                <div className="text-danger">{errors.include.message}</div>
+              )}
+              <div className="textarea-container" style={{ marginTop: "20px" }}>
+                <textarea
+                  style={{
+                    width: "100%",
+                    minHeight: "50px",
+                    padding: "5px 8px",
+                    borderRadius: "5px",
+                    border: "1px solid #D3D3D3",
+                  }} // Set minHeight to ensure it's not too small initially
+                  id="description"
+                  label="Description"
+                  placeholder="Description"
+                  onInput={(e) => {
+                    e.target.style.height = "auto"; // Reset height to auto to allow it to grow
+                    e.target.style.height = `${e.target.scrollHeight}px`; // Set height to match content
+                  }}
+                  {...register("description", { required: true })}
+                ></textarea>
+                {errors.description && (
+                  <div className="text-danger">
+                    {errors.description.message}
+                  </div>
+                )}
+              </div>
+              <Stack direction="row" spacing={2}>
+                <FormControl>
+                  <TextField
+                    accept="image/*"
+                    margin="normal"
+                    // required={data ? false : true}
+                    fullWidth
+                    id="image"
+                    label="Packages Image"
+                    name="pkgImage"
+                    type="file"
+                    // value={formData.image}
+                    onChange={handleOnFileChange}
+                  />
+                </FormControl>
+                {data && (
+                  <Stack
+                    direction="column"
+                    spacing={2}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    sx={{ margin: "30px 0px 20px 0px" }}
+                  >
+                    <img
+                      src={data["Image"]}
+                      style={{
+                        marginTop: "10px",
+                        height: "50px",
+                        width: "100px",
+                        display: "block",
+                      }}
+                      alt="img"
+                      srcset=""
+                    />
+                  </Stack>
+                )}
+              </Stack>
+              {fileError?.pkgImage && (
+                <div className="text-danger">{fileError.pkgImage}</div>
+              )}
+              <Stack direction="row" spacing={2}>
+                <FormControl>
+                  <TextField
+                    accept="image/*"
+                    margin="normal"
+                    // required={data ? false : true}
+                    fullWidth
+                    id="BannerImage"
+                    label="Banner Image"
+                    name="BannerImage"
+                    type="file"
+                    onChange={handleOnFileChange}
+                  />
+                </FormControl>
+                {data && (
+                  <Stack
+                    direction="column"
+                    spacing={2}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    sx={{ margin: "30px 0px 20px 0px" }}
+                  >
+                    <img
+                      src={data["Banner Image"]}
+                      style={{
+                        marginTop: "10px",
+                        height: "50px",
+                        width: "100px",
+                        display: "block",
+                      }}
+                      alt="img"
+                      srcset=""
+                    />
+                  </Stack>
+                )}
+              </Stack>
+              {fileError?.BannerImage && (
+                <div className="text-danger">{fileError.BannerImage}</div>
+              )}
               <Box>
                 <Button
+                  type="submit"
                   variant="contained"
                   color="primary"
-                  disabled={IsLoading}
-                  onClick={handleSubmit}
                   startIcon={
-                    IsLoading ? (
-                      <CircularProgress size={20} color="inherit" />
-                    ) : (
-                      ""
-                    )
+                    false ? <CircularProgress size={20} color="inherit" /> : ""
                   }
                 >
-                  {IsLoading ? "Submit" : "Submit"}
+                  {isEditing ? "Update" : "Submit"}
                 </Button>
               </Box>
-            </Box>
+              {errors.root && (
+                <div className="text-danger" style={{ color: "red" }}>
+                  {errors.root.message}
+                </div>
+              )}
+            </form>
           </Box>
         </Box>
       </Modal>
