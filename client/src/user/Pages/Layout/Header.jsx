@@ -1,5 +1,6 @@
 import React ,{useContext}from "react";
 import { NavLink } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 import SErviceData from "../Service/ServiceData.json";
 import { PackagesContext } from "../../../Reducer/PackagesProvider";
 import { DestinationContext } from "../../../Reducer/DestinationProvider";
@@ -13,6 +14,11 @@ const HeaderPkgs = packagesDetails.filter((data)=>{ return data?.isShowInHeader=
 const IncludeInNavbar =  stateDestination.filter((data)=>{ return data?.isIncludeInNavbar==1 ||data?.isIncludeInNavbar==true || data?.isIncludeInNavbar=="true" ||data?.isIncludeInNavbar=="1" ; });
     return (
         <>
+        <Helmet>
+        <meta name="description" content="Description of the page" />
+        <meta name="keywords" content="Devbhoomi travel, Devbhumi Uttarakhand trip, Char dham Yatra ,Best travel agency in Uttarakhand ,Cheapest travel package for char dham,
+        Mussurie tour package,Rishikesh rafting trip, Camping & rafting package, Tungnath mandir, Char dham tour package,Kedarnath badrinath tour package" />
+        </Helmet>
             <nav id="top" className="navbar navbar-expand-md bg-dark navbar-dark custom-nav">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to="/">
