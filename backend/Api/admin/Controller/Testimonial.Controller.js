@@ -23,6 +23,12 @@ exports.AddTestimonial = async (req, res, next) => {
             });
         }
         else {
+            if(!req?.file?.filename || req?.file?.filename==undefined) { 
+              return res.status(404).json({
+                status: 404,
+                message: 'Testimonial image not found.',
+            });
+            }
              const filePath = `${process.env.IMAGE_BASE_PATH}/testimonial/${req.file.filename}`;
             let obj = {
               _id: new mongoose.Types.ObjectId(),

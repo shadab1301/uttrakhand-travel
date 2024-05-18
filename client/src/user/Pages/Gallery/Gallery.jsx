@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { NavLink, json } from "react-router-dom";
 import axios from "axios";
 import './Gallery.css';
-// import "react-image-gallery/styles/css/image-gallery.css";
 // import ImageGallery from "react-image-gallery";
 import ImageModal from "./Components/ImageModal/ImageModal";
 import DetailsModal from "./Components/detailsModal/DetailsModal";
@@ -35,6 +34,7 @@ export const GalleryAlbum = () => {
     useEffect(() => {
         getImages();
     }, []);
+    
 
     return (<>
 
