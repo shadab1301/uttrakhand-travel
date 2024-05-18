@@ -3,6 +3,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import MasterTable from "../../Table/MasterTable";
 import axios from "axios";
 import { fetchController } from "../../utils/fetchController/fetchController";
+import { toast } from 'react-toastify';
 
 const Enquiry = () => {
   const [open, setOpen] = useState(false);
@@ -15,6 +16,7 @@ const [column, setColumn] = useState([
   { name: "Email", value: "Email" },
   { name: "Type", value: "Type" },
   { name: "Message", value: "Message" },
+  { name: "Status", value: "Status" },
   // "Status",
 ]);
   const handleOpen = () => {
@@ -38,7 +40,7 @@ const [column, setColumn] = useState([
           ["Email"]: val.email,
           ["Type"]: val.enquery_type,
           ["Message"]: val.message,
-          // ["Status"]: val.status,
+          ["Status"]: val.status,
         };
       });
       setEnquiryData(formattedData);
@@ -48,6 +50,23 @@ const [column, setColumn] = useState([
     }
   };
 
+  const handleClickOnDropDown = async(e,id) =>{
+const { name, value } = e.target;
+let payload = {[name]:value};
+let res = await fetchController(`//enquery/${id}`, "PUT", payload);
+      console.log(res.status);
+      if (res.status === 200) {
+        loadData()
+        toast.success(res.message, {
+          position: "top-right",
+        });
+      } else {
+        toast.error(res.message, {
+          position: "top-right",
+        });
+      }
+      
+  }
   useEffect(() => {
     loadData();
   }, []);
@@ -74,6 +93,7 @@ const [column, setColumn] = useState([
         tableData={enquiryData}
         column={column}
         table="enquiry"
+        handleClickOnDropDown={handleClickOnDropDown}
       />
     </>
   );

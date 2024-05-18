@@ -22,13 +22,17 @@ import AddPackages from "../Modal/AddPackages";
 import AddGallery from "../Modal/AddGallery";
 import AddTestimonial from "../Modal/AddTestimonial";
 import AddAddress from "../Modal/AddAddress";
-
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 export default function MasterTable({
   column = [],
   tableData = [],
   table = "",
   loadData,
   handleClickOnCheckBox,
+  handleClickOnDropDown
 }) {
   const [open, setOpen] = React.useState(false);
   const [isEditDestinationMOdalOpened, setIsEditDestinationMOdalOpened] =
@@ -44,6 +48,12 @@ export default function MasterTable({
 
   const [itemToBeDeleteId, setItemToBeDeleteId] = React.useState(null);
   const [itemToBeEditeId, setItemToBeEditeId] = React.useState(null);
+  // const [Estatus,setEstatus] = React.useState(0);
+
+//   const handleChange = (e) =>{
+// console.log(e);
+// setEstatus(e.target.value);
+//   }
   const handleOpen = () => {
     setOpen(true);
   };
@@ -399,7 +409,27 @@ export default function MasterTable({
                   <TableCell>{row["Email"]}</TableCell>
                   <TableCell>{row["Type"]}</TableCell>
                   <TableCell>{row["Message"]}</TableCell>
-
+                  <TableCell>
+                    
+                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <InputLabel id="demo-select-small-label">Status</InputLabel>
+      <Select
+        name="status"
+        labelId="demo-select-small-label"
+        id="demo-select-small"
+        value={row["Status"]}
+        label="Status"
+        onChange={(e) => handleClickOnDropDown(e, row.id)}
+      >
+        <MenuItem value="">
+          <em>Select Status</em>
+        </MenuItem>
+        <MenuItem value="0">pending</MenuItem>
+        <MenuItem value="1">progress</MenuItem>
+        <MenuItem value="2">completed</MenuItem>
+      </Select>
+    </FormControl>
+                  </TableCell>
                   <TableCell>
                     <Stack direction="row" spacing={2}>
                       <AiOutlineDelete
