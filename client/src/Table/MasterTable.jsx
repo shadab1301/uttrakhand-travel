@@ -410,8 +410,7 @@ export default function MasterTable({
                   <TableCell>{row["Type"]}</TableCell>
                   <TableCell>{row["Message"]}</TableCell>
                   <TableCell>
-                    
-                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                    {(row["Status"] !=='2') ?  <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
       <InputLabel id="demo-select-small-label">Status</InputLabel>
       <Select
         name="status"
@@ -428,7 +427,10 @@ export default function MasterTable({
         <MenuItem value="1">progress</MenuItem>
         <MenuItem value="2">completed</MenuItem>
       </Select>
-    </FormControl>
+                   </FormControl> : <>  <Button variant="contained" color="success">
+                   completed
+      </Button></>} 
+                   
                   </TableCell>
                   <TableCell>
                     <Stack direction="row" spacing={2}>

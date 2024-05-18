@@ -52,6 +52,12 @@ const [column, setColumn] = useState([
 
   const handleClickOnDropDown = async(e,id) =>{
 const { name, value } = e.target;
+if(value=='') {
+  toast.error("Please select the valid status.", {
+    position: "top-right",
+  });
+  return false;
+}
 let payload = {[name]:value};
 let res = await fetchController(`//enquery/${id}`, "PUT", payload);
       console.log(res.status);
