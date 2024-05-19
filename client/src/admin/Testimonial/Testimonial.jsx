@@ -85,7 +85,7 @@ const Testimonial = () => {
         handleOpen={handleOpen}
         handleClose={handleClose}
         size={"md"}
-        fetchData={loadData}
+        loadData={loadData}
       />
     </>
   );

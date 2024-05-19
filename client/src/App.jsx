@@ -33,7 +33,6 @@ function App() {
             <Route path="/gallery" element={<GalleryAlbum />} />
             <Route path="/list/:desti" element={<List />} />
             <Route path="/detail/:id" element={<Detail />} />
-            <Route path="/login" element={<Login />} />
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
@@ -44,6 +43,7 @@ function App() {
             <Route path="address" element={<Address />} />
             <Route path="testimonial" element={<Testimonial />} />
           </Route>
+          <Route path="/login" element={<Login />} />
         </Routes>
       </AuthProvider>
 
