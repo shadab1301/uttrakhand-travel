@@ -217,7 +217,7 @@ else if (e.target.name === "message") {
               <ul className="ft-btn-list">
                 <li>
                   {" "}
-                  <NavLink className="btn callIcon" to="tel:+91 8178918115">
+                  <NavLink className="btn callIcon" to="tel:+91 9259078099">
                     <i className="fa fa-phone" aria-hidden="true"></i> Call Us
                   </NavLink>
                 </li>
@@ -234,7 +234,7 @@ else if (e.target.name === "message") {
                 </li>
                 <li>
                   <NavLink className="btn wtsapp-icon "
-                    to="https://wa.me/8791329036?text=Hii i want to  know about your services." target="_blank">
+                    to="https://wa.me/9259078099?text=Hii i want to book a package." target="_blank">
                     <i className="fa fa-whatsapp" aria-hidden="true"></i>
                     Whatsapp
                   </NavLink>
