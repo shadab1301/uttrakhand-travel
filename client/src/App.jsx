@@ -20,6 +20,7 @@ import Enquiry from './admin/Enquiry/Enquiry.jsx';
 import AdminGallery from "./admin/Gallery/AdminGallery.jsx";
 import { toast, ToastContainer } from "react-toastify";
  import "react-toastify/dist/ReactToastify.css";
+ 
 function App() {
 
   return (
