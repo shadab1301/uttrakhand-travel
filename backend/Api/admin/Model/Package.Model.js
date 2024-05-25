@@ -51,6 +51,10 @@ const packageSchema = new mongoose.Schema(
         ref: "Destination",
       },
     ],
+    destinationCover:{
+      type: String,
+      required: [true, "destinationCover should not be empty"],
+    }
   },
   { timestamps: true }
 );
