@@ -71,6 +71,9 @@ const AddTestimonial = ({
       }
       try {
         const payloadData = new FormData();
+
+
+
         image && payloadData.append("image", image);
 
         payloadData.append("customer_name", data.customer_name);
@@ -80,10 +83,14 @@ const AddTestimonial = ({
 
 
 
-        const res = await AddFileController("/testimonial", "POST", data);
+        const res = await AddFileController(
+          "/testimonial",
+          "POST",
+          payloadData
+        );
 
         if (res.status === 201) {
-          fetchData();
+          loadData();
           toast.success(res.message, {
             position: "top-right",
             autoClose: 5000,

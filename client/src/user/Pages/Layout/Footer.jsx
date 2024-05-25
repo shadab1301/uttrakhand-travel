@@ -94,7 +94,7 @@ else if (e.target.name === "message") {
                   data-wow-duration="3s"
                 >
                   <li>
-                    <NavLink to="">
+                    <NavLink to="https://www.facebook.com/people/Devbhoomi-Tour-operators/61559106222176/" target="_blank">
                       <i className="fa fa-facebook-f"></i>
                     </NavLink>
                   </li>
