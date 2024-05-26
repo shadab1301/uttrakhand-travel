@@ -18,10 +18,10 @@ const Services = () => {
         </div>
         <div className="row">
             {serviceD.map((val,ind)=><>
-                <div className="col-md-2 col-sm-6" key={ind}>
+                <div className="col-md-3 col-sm-8" key={ind}>
                 <div className="theme-box wow zoomIn"  data-wow-duration="3s">
                     <div className="th-1" key={ind}>
-                        <img className="img-fluid theme-img" src={val?.icon} alt="" title="" border="0"/>
+                        <img className="img-fluid theme-img" src={val?.icon} width={80} height={50} alt="" title="" border="0"/>
                     </div>
                     <div className="theme-content" key={ind}>
                             <div className="theme-title2">{val?.title}</div>
