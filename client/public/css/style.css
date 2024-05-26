@@ -715,7 +715,7 @@ a.readmore {
     height: 100px;
     width: 100%;
     object-position: center center;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 
 .theme-content ul li {
