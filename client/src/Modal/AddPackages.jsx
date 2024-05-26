@@ -226,7 +226,7 @@ const AddPackages = ({
       const res = await fetchController("/destination", "GET");
 
      const options=   res.data.map((val,index)=>{
-          return { value: val.cityName, label: val.cityName };
+          return { value: val._id, label: val.cityName };
         })
 
       setDestinationData(options);

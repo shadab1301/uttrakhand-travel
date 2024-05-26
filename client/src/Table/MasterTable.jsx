@@ -301,7 +301,8 @@ export default function MasterTable({
                   <TableCell>{row["Sub Title"]}</TableCell>
                   <TableCell>{row.Includes}</TableCell>
                   <TableCell>{row.Description?.slice(0,50)}...</TableCell>
-
+                  { row["Destination Cover"]?.map(val=>{console.log(val?.cityName);})}
+                  <TableCell>{row["Destination Cover"]?.map(val=>{return `${val?.cityName}, `;})}</TableCell>
                   <TableCell>
                     <FormControlLabel
                       control={

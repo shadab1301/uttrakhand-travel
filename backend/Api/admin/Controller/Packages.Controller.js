@@ -14,8 +14,12 @@ exports.createPackage = async (req, res, next) => {
       isTopPackages,
       isShowInHeader,
       include,
+      destinationCover
     } = req.body;
 
+    
+  
+    const destinationCoverArr  = JSON.parse(destinationCover).map(obj => obj.value);
     // isRecommendPackages;isTopPackages;isShowInHeader;include
     // if (
     //   [title, subTitle, numbersOfDay, description].some(
@@ -53,8 +57,10 @@ exports.createPackage = async (req, res, next) => {
       include: include,
       pkgImage: pkgImagePath,
       BannerImage: BannerImgPath,
+      destination: destinationCoverArr||[]
     };
 
+    // console.log(package); return false;
     const createdPackage = await Package.create(package);
 
     if (!createdPackage) {
@@ -83,8 +89,29 @@ exports.fetchPackages = async (req, res, next) => {
     if (req.params.id) {
       package = await Package.findOne({ _id: req.params.id });
     } else {
-      package = await Package.find();
+      package = await Package.find()  .populate({
+        path: 'destination',
+        model: 'Destination',
+        select: '_id cityName'
+    })
+    .exec();
     }
+
+
+
+
+  //   const package = await Package.aggregate([
+  //     { $match: { _id: mongoose.Types.ObjectId(req.params.id) } }, // Convert the id string to ObjectId
+  //     {
+  //         $lookup: {
+  //             from: 'Destination', // Name of the other collection
+  //             localField: 'destination', // Field in your Package schema referencing the other collection
+  //             foreignField: '_id', // Field in the other collection to match against
+  //             as: 'destinations' // Output field containing the matching data from the other collection
+  //         }
+  //     }
+  // ]);
+
 
     return res
       .status(200)
