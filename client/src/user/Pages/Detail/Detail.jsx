@@ -45,6 +45,11 @@ console.log(DetailPkg);
                                             <div className="dt-price "><strong>Price Includes:</strong>
                                                 <span>{DetailPkg[0]?.include}</span>
                                             </div>
+
+                                            <div className="dt-price "><strong>Destination's Covered:</strong>
+                                                <span>{DetailPkg[0]?.destination?.map(val=>{return `${val?.cityName}, `;})}</span>
+                                            </div>
+                                            
                                             <div className="dt-box-1 shadow">
                                                 <div className="row">
                                                     <div className="col-md-4">

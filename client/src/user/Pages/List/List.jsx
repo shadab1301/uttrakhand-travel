@@ -56,7 +56,7 @@ const List = () => {
                                                         <span>{val?.numbersOfDay} days, {val?.numbersOfDay - 1} nights</span>
                                                     </div>
                                                     <div className="list-detail">
-                                                        <span>Destination Covered - <span className="italic">New Delhi, Mussoorie, Haridwar, Rishikesh</span></span>
+                                                        <span>Destination Covered - <span className="italic">{val?.destination?.map(val=>{return `${val?.cityName}, `;})}</span></span>
                                                     </div>
                                                     <div className="detail-right">
                                                         <div className="dt-1">On Request</div>
