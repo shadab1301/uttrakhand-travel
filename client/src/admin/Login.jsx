@@ -15,7 +15,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { fetchController } from './../utils/fetchController/fetchController';
+import { fetchController } from "./../utils/fetchController/fetchController";
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -40,13 +41,10 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
-
-
-const userSchema = z.object({
-  email: z.string().min(3),
-  password: z.string().min(5),
-});
-
+  const userSchema = z.object({
+    email: z.string().min(3),
+    password: z.string().min(5),
+  });
 
   const {
     register,
@@ -63,53 +61,33 @@ const userSchema = z.object({
     resolver: zodResolver(userSchema),
   });
   const onSubmit = async (data) => {
-    console.log({data});
-    return false
    
     try {
-      const PayloadData = {
+      const { email, password } = data;
+
+      let res = await fetchController("/login", "POST", {
         email,
-        password
-      };
-      
-       let res = await fetchController("/login Api", "POST", PayloadData);
-
-
-      if (res.statusCode === 200 || res.status === 200) {
-
-// Redirect to dashboard
-
+        password,
+      });
+      if (res?.statusCode === 200 || res?.status === 200) {
+        console.log({ res });
+        // Redirect to dashboard
         toast.success(res.message, {
           position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
         });
-        reset({
-          email: "",
-          password: "",
+      } else if (res?.status === 401 ) {
+        toast.error(res.message, {
+          position: "top-right",
         });
       }
-      console.log({ res });
     } catch (error) {
-      console.log("Error occour in AddPackages Component");
+      console.log("Error occour while login ");
       console.log(error);
       setError("root", {
         message: error.message,
       });
-      toast.success("Something went wrong ...", {
+      toast.error(error.message, {
         position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
       });
     } finally {
     }

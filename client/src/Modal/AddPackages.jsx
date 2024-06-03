@@ -44,7 +44,7 @@ const AddPackages = ({
     description: z.string().min(10),
     include: z.string().min(10),
   });
-
+console.log({ AAABBB: data });
   const {
     register,
     handleSubmit,
@@ -64,7 +64,6 @@ const AddPackages = ({
   });
   const [destinationCover, setDestinationCover] = React.useState([]);
   const [destinationData, setDestinationData] = useState([]);
-
   const [image, setImage] = useState(null);
   const [BannerImage, setBannerImage] = useState(null);
   const [fileError, setFileError] = useState(null);
@@ -102,7 +101,10 @@ const AddPackages = ({
       //  formData.isShowInHeader &&
       //    PayloadData.append("isShowInHeader", formData.isShowInHeader);
       PayloadData.append("include", data.include);
-      PayloadData.append("destinationCover", JSON.stringify(destinationCover));
+      PayloadData.append(
+        "destination",
+        JSON.stringify(destinationCover.map((val) => val.value))
+      );
 
       let res;
       if (!isEditing) {
@@ -199,6 +201,8 @@ const AddPackages = ({
       const description1 = data && data.id ? data["Description"] : "";
       const include1 = data && data.id ? data["Includes"] : "";
       const subTitle1 = data && data.id ? data["Sub Title"] : "";
+      const defaultCoverDestination =
+        data && data.id ? data["Destination"] : [];
 
       const defaultVal = {
         title: title1,
@@ -207,10 +211,11 @@ const AddPackages = ({
         description: description1,
         include: include1,
       };
+      setDestinationCover(defaultCoverDestination);
       reset(defaultVal);
     }
   }, [id]);
-
+console.log({ destinationCover });
   // const handleChangeOnMultipleSelect = (event) => {
   //   const {
   //     target: { value },
@@ -226,7 +231,7 @@ const AddPackages = ({
       const res = await fetchController("/destination", "GET");
 
      const options=   res.data.map((val,index)=>{
-          return { value: val.cityName, label: val.cityName };
+          return { value: val._id, label: val.cityName };
         })
 
       setDestinationData(options);
@@ -369,10 +374,11 @@ const AddPackages = ({
                 // defaultValue={[destinationData[2], destinationData[3]]}
                 placeholder={"Destination Cover"}
                 isMulti
-                name="colors"
+                name="destination"
                 options={destinationData}
                 className="basic-multi-select"
                 classNamePrefix="select"
+                defaultValue={destinationCover}
                 onChange={(e) => setDestinationCover(e)}
               />
             </div>

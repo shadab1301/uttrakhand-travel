@@ -82,6 +82,7 @@ exports.SignUp = async (req, res, next) => {
 
 exports.Login = async(req,res,next) =>{
 try{
+
     let validationError = validationResult(req);
     // console.log(validationError);
     if (validationError?.errors?.length > 0) {
@@ -98,6 +99,7 @@ try{
     } else {
     // login here 
     const { password, email } = req.body;
+  
     const CheckExistance = await Admin.find({ email: email });
     // console.log(CheckExistance); return false;
     if (CheckExistance?.length > 0) {

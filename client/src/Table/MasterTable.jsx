@@ -277,7 +277,7 @@ export default function MasterTable({
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{maxWidth:"50vw !impotant",overflow:"scroll",border:"1px solid red"}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -300,8 +300,8 @@ export default function MasterTable({
                   <TableCell>{row.Title}</TableCell>
                   <TableCell>{row["Sub Title"]}</TableCell>
                   <TableCell>{row.Includes}</TableCell>
-                  <TableCell>{row.Description?.slice(0,50)}...</TableCell>
-
+                  <TableCell>{row.Description?.slice(0, 50)}...</TableCell>
+                  <TableCell>{row["DestinationString"]}</TableCell>
                   <TableCell>
                     <FormControlLabel
                       control={

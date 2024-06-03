@@ -19,6 +19,7 @@ const Packages = () => {
     { name: "subTitle", value: "Sub Title" },
     { name: "includes", value: "Includes" },
     { name: "description", value: "Description" },
+    { name: "Destination", value: "Destination" },
     { name: "isShowInHeader,", value: "is Show In Header" },
     { name: "isTopPackages,", value: "is Top Packages" },
     { name: "isRecommendPackages", value: "is Recommend Packages" },
@@ -38,8 +39,17 @@ const Packages = () => {
   };
   const loadData=async()=>{
    try {
-     const res =await fetchController("/package", "GET");
-     const formattedData = res.data.map((val,index)=>{
+    //  const res =await fetchController("/package", "GET");
+    //  const destination = await fetchController("/destination","GET");
+   const res = await Promise.all([
+     fetchController("/package", "GET"),
+     fetchController("/destination", "GET"),
+   ]);
+
+// console.log("res_AAA",res)
+// return false
+
+     const formattedData = res[0].data.map((val,index)=>{
       return {
         id: val._id,
         ["SN0"]: index + 1,
@@ -53,10 +63,20 @@ const Packages = () => {
         ["is Show In Header"]: val.isShowInHeader,
         ["is Top Packages"]: val.isTopPackages,
         ["is Recommend Packages"]: val.isRecommendPackages,
+        ["Destination"]: res[1].data
+          .filter((des, i) => val.destination.includes(des._id))
+          .map((destination) => {
+            return { value: destination.cityName, label: destination.cityName };
+          }),
+        ["DestinationString"]: res[1].data
+          .filter((des, i) => val.destination.includes(des._id))
+          .map((destination) => {
+            return  destination.cityName
+          }).join(","),
       };
      })
+     console.log({ formattedData });
       setPachagesData(formattedData);
-      console.log({ formattedData });
    } catch (error) {
     console.log("Error occour while fetching Packages");
     console.log(error)
